@@ -302,7 +302,7 @@ export function HomePage() {
                 letterSpacing: "0.02em",
               }}
             >
-              tu emprendimiento digital.
+              tu negocio digital.
             </span>
           </motion.h1>
 

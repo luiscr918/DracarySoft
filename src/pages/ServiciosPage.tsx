@@ -247,7 +247,7 @@ export function ServiciosPage() {
             >
               que encienden
             </span>{" "}
-            tu emprendimiento
+            tu negocio
           </motion.h1>
 
           <motion.p

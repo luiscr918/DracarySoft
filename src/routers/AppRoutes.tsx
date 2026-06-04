@@ -4,6 +4,9 @@ import { HomePage } from "../pages/HomePage";
 import Layout from "../components/layout/Layout";
 import { ServiciosPage } from "../pages/ServiciosPage";
 import { ProyectosPage } from "../pages/ProyectosPage";
+import { BeneficiosPage } from "../pages/BeneficiosPage";
+import { NosotrosPage } from "../pages/NosotrosPage";
+import { ContactoPage } from "../pages/ContactoPage";
 
 const Placeholder = ({ title }: { title: string }) => (
   <Layout>
@@ -33,10 +36,10 @@ export const AppRoutes = () => {
       <Route path="/" element={<HomePage />} />
       <Route path="/servicios" element={<ServiciosPage />} />
       <Route path="/proyectos" element={<ProyectosPage />} />
+      <Route path="/beneficios" element={<BeneficiosPage />} />
+      <Route path="/nosotros" element={<NosotrosPage />} />
+      <Route path="/contacto" element={<ContactoPage />} />
       <Route path="/precios" element={<Placeholder title="Precios" />} />
-      <Route path="/beneficios" element={<Placeholder title="Beneficios" />} />
-      <Route path="/nosotros" element={<Placeholder title="Nosotros" />} />
-      <Route path="/contacto" element={<Placeholder title="Contacto" />} />
     </Routes>
   );
 };
