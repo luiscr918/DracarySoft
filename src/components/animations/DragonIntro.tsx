@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
-import dragonImg from "../../assets/imgs/dracaryIntro.jpg";
+import dragonImg from "/path48.png";
 
 interface DragonIntroProps {
   onComplete: () => void;
@@ -100,7 +100,6 @@ export default function DragonIntro({ onComplete }: DragonIntroProps) {
         },
         "-=0.1",
       );
-
 
       // ── 5. Texto aparece ─────────────────────────────────────────────────
       tl.to(

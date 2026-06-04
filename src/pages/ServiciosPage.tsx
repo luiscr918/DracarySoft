@@ -16,10 +16,10 @@ gsap.registerPlugin(ScrollTrigger);
 const SERVICES = [
   {
     icon: Globe,
-    title: "Páginas Web Corporativas",
+    title: "Páginas Web para emprendedores",
     tagline: "Tu vitrina digital profesional",
-    desc: "Diseñamos y desarrollamos sitios web modernos, rápidos y optimizados para SEO que generan confianza inmediata en tus visitantes y los convierten en clientes.",
-    features: ["Diseño responsivo", "Optimización SEO", "Velocidad de carga alta", "Panel de administración"],
+    desc: "Diseñamos sitios web modernos, rápidos y fáciles de administrar que ayudan a tu emprendimiento a ganar credibilidad y clientes.",
+    features: ["Diseño responsive", "Optimización SEO básica", "Carga rápida", "Gestión sencilla"],
     color: "#2E86AB",
     glow: "rgba(46,134,171,0.25)",
     gradient: "linear-gradient(135deg, rgba(46,134,171,0.12), rgba(10,15,30,0.8))",
@@ -28,9 +28,8 @@ const SERVICES = [
     icon: Zap,
     title: "Landing Pages",
     tagline: "Convierte visitas en clientes",
-    desc: "Páginas de aterrizaje diseñadas estratégicamente para maximizar conversiones. Cada elemento está pensado para guiar al visitante hacia la acción que necesitas.",
-    features: ["Copy persuasivo", "Formularios optimizados", "A/B testing", "Métricas de conversión"],
-    // ← era #E67E22 / rgba(230,126,34,...)
+    desc: "Páginas de aterrizaje diseñadas para captar leads y ventas con mensajes claros y formularios simples.",
+    features: ["Textos orientados a la acción", "Formularios efectivos", "Diseño móvil", "Medición de resultados"],
     color: "#C0392B",
     glow: "rgba(192,57,43,0.25)",
     gradient: "linear-gradient(135deg, rgba(192,57,43,0.10), rgba(10,15,30,0.8))",
@@ -38,9 +37,9 @@ const SERVICES = [
   {
     icon: Smartphone,
     title: "Aplicaciones Web",
-    tagline: "Herramientas que automatizan tu negocio",
-    desc: "Desarrollamos aplicaciones web a medida que digitalizan y optimizan los procesos internos de tu empresa, ahorrándote tiempo y reduciendo errores.",
-    features: ["React / Next.js", "Base de datos segura", "Autenticación de usuarios", "Dashboard personalizado"],
+    tagline: "Herramientas que hacen tu día a día más fácil",
+    desc: "Creamos aplicaciones web a medida para digitalizar procesos clave de tu emprendimiento y mejorar la experiencia de tus clientes.",
+    features: ["Panel de control funcional", "Formularios y automatizaciones", "Acceso seguro", "Actualizaciones prácticas"],
     color: "#5DADE2",
     glow: "rgba(93,173,226,0.25)",
     gradient: "linear-gradient(135deg, rgba(93,173,226,0.10), rgba(10,15,30,0.8))",
@@ -144,14 +143,14 @@ export function ServiciosPage() {
             <span style={{ background: "linear-gradient(135deg, #2E86AB, #5DADE2)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
               que encienden
             </span>{" "}
-            tu negocio
+            tu emprendimiento
           </motion.h1>
 
           <motion.p
             initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.25 }}
             style={{ fontFamily: "'Exo 2', sans-serif", fontSize: "1.05rem", color: "#4A5A7A", lineHeight: 1.8 }}
           >
-            Desde una página web hasta una aplicación completa, adaptamos cada solución a las necesidades reales de tu negocio.
+            Desde una página web hasta una herramienta digital accesible, adaptamos cada solución a las necesidades reales de tu emprendimiento.
           </motion.p>
         </div>
       </section>
@@ -219,7 +218,7 @@ export function ServiciosPage() {
               CÓMO TRABAJAMOS
             </p>
             <h2 style={{ fontFamily: "'Cinzel', serif", fontSize: "clamp(1.6rem, 3.5vw, 2.4rem)", fontWeight: 700, color: "#F0F4FF" }}>
-              Proceso simple y transparente
+              Proceso simple y transparente para tu emprendimiento
             </h2>
           </div>
 

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Flame } from "lucide-react";
-import logoImg from "/dracarysoftLogoAny.png";
+import logoImg from "/dracarysAlternative.svg";
 
 const NAV_LINKS = [
   { path: "/", label: "Inicio" },

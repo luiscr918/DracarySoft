@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { Flame, MailIcon } from "lucide-react";
-import logoImg from "/dracarysoftLogoAny.png";
+import logoImg from "/dracarysAlternative.svg";
 import { BsInstagram } from "react-icons/bs";
 import { LiaLinkedin } from "react-icons/lia";
 import { GiThunderBlade } from "react-icons/gi";

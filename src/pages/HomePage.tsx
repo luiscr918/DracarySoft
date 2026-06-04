@@ -250,7 +250,7 @@ export function HomePage() {
           >
             {/* ← era #E67E22 */}
             <Flame size={11} style={{ color: "#C0392B" }} />
-            SOLUCIONES DIGITALES MODERNAS
+            SOLUCIONES DIGITALES PARA EMPRENDEDORES
           </motion.div>
           {/* Logo */}
           <motion.div
@@ -260,7 +260,7 @@ export function HomePage() {
             className="flex justify-center "
           >
             <img
-              src="/dracarysoftLogo.png"
+              src="/dracarysAlternativeLogo.svg"
               alt="DracarySoft Logo"
               className="h-56 md:h-60 object-contain"
             />
@@ -302,7 +302,7 @@ export function HomePage() {
                 letterSpacing: "0.02em",
               }}
             >
-              tu negocio digital.
+              tu emprendimiento digital.
             </span>
           </motion.h1>
 
@@ -321,7 +321,7 @@ export function HomePage() {
               fontWeight: 300,
             }}
           >
-            Creamos páginas web y aplicaciones diseñadas especialmente para
+            Creamos páginas web y aplicaciones pensadas para emprendedores y
             pequeños negocios que quieren
             <span style={{ color: "#8899BB", fontWeight: 400 }}>
               {" "}
@@ -332,7 +332,7 @@ export function HomePage() {
               {" "}
               entorno digital
             </span>
-            .
+            con soluciones accesibles.
           </motion.p>
 
           {/* CTAs */}
@@ -499,7 +499,7 @@ export function HomePage() {
                   WebkitTextFillColor: "transparent",
                 }}
               >
-                generan resultados
+                impulsan tu emprendimiento
               </span>
             </h2>
           </div>
@@ -622,7 +622,7 @@ export function HomePage() {
               marginBottom: "1.25rem",
             }}
           >
-            Lleva tu negocio al siguiente nivel
+            Lleva tu emprendimiento al siguiente nivel
           </h2>
           <p
             style={{
