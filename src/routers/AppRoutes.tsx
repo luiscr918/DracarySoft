@@ -1,14 +1,14 @@
 // src/routers/AppRoutes.tsx
 import { Route, Routes } from "react-router-dom";
 import { HomePage } from "../pages/HomePage";
-import Layout from "../components/layout/Layout";
+/* import Layout from "../components/layout/Layout"; */
 import { ServiciosPage } from "../pages/ServiciosPage";
 import { ProyectosPage } from "../pages/ProyectosPage";
 import { BeneficiosPage } from "../pages/BeneficiosPage";
 import { NosotrosPage } from "../pages/NosotrosPage";
 import { ContactoPage } from "../pages/ContactoPage";
 
-const Placeholder = ({ title }: { title: string }) => (
+/* const Placeholder = ({ title }: { title: string }) => (
   <Layout>
     <div className="min-h-screen flex items-center justify-center pt-20">
       <div className="text-center">
@@ -28,7 +28,7 @@ const Placeholder = ({ title }: { title: string }) => (
       </div>
     </div>
   </Layout>
-);
+); */
 
 export const AppRoutes = () => {
   return (
@@ -39,7 +39,6 @@ export const AppRoutes = () => {
       <Route path="/beneficios" element={<BeneficiosPage />} />
       <Route path="/nosotros" element={<NosotrosPage />} />
       <Route path="/contacto" element={<ContactoPage />} />
-      <Route path="/precios" element={<Placeholder title="Precios" />} />
     </Routes>
   );
 };
