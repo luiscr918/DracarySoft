@@ -1,73 +1,83 @@
-# React + TypeScript + Vite
+# DracarySoft — Sitio web
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Descripción**
 
-Currently, two official plugins are available:
+Proyecto frontend para la presentación de DracarySoft: landing interactiva construida con React + Vite y animaciones GSAP/Framer Motion. Incluye componentes reutilizables, estilos con Tailwind y un diseño pensado para mostrar servicios, proyectos y contacto.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+**Demo local**
 
-## React Compiler
+- Requisitos: Node.js 16+ y npm o pnpm.
+- Instalar dependencias:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- Levantar en modo desarrollo:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run dev
 ```
+
+- Compilar para producción:
+
+```bash
+npm run build
+```
+
+- Previsualizar build:
+
+```bash
+npm run preview
+```
+
+**Estructura principal**
+
+- `index.html` — entrada HTML.
+- `src/` — código fuente:
+  - `main.tsx`, `App.tsx` — bootstrap y rutas.
+  - `components/` — componentes reutilizables (layout, animaciones, UI).
+  - `pages/` — páginas públicas (Home, Servicios, Contacto, etc.).
+  - `styles/tailwind.css` — estilos globales.
+  - `assets/` — imágenes y fuentes.
+
+**Tecnologías**
+
+- React + TypeScript
+- Vite
+- Tailwind CSS
+- GSAP y Framer Motion (animaciones)
+- Lucide / react-icons (iconografía)
+
+**Notas importantes / personalización**
+
+- Tipografía: el proyecto incorpora la familia `Cinzel` para la marca. Para asegurar que se cargue correctamente, añade la importación de la fuente en `index.html` (Google Fonts) o en tus estilos globales si aún no está.
+- Animación de entrada (DragonIntro): puedes ajustar su duración y comportamiento editando `src/components/animations/DragonIntro.tsx` (timeline de GSAP y duraciones).
+- Logos: los assets del logo ya incluyen fondo transparente; evita aplicar `border-radius` o `box-shadow` en los `img` si quieres mostrar la imagen tal cual.
+
+**Scripts disponibles (package.json)**
+
+- `dev` — inicia Vite en modo desarrollo.
+- `build` — genera la compilación de producción.
+- `preview` — sirve la compilación para previsualizar.
+- `lint` / `format` — (si están configurados) ejecutan lint/format.
+
+Ejemplo:
+
+```bash
+npm run dev
+```
+
+**Cómo contribuir**
+
+- Crear una rama por feature: `feature/mi-cambio`.
+- Hacer PR con descripción clara y pruebas visuales (screenshots o video corto).
+- Mantener consistencia en estilos y accesibilidad.
+
+**Contacto**
+
+Si necesitas ayuda con la personalización de animaciones, fuentes o despliegue, abre un issue o contáctame directamente.
+
+---
+
+_Generado y mantenido por el equipo DracarySoft._
