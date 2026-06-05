@@ -11,8 +11,11 @@ import {
   Zap,
   ChevronRight,
   GitBranchIcon,
+  Download,
 } from "lucide-react";
 import Layout from "../components/layout/Layout";
+import totemImg from "../assets/imgs/totem-splash.png";
+import totemAppImg from "../assets/imgs/totem-app.jpeg";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -33,82 +36,92 @@ interface Project {
   year: string;
   liveUrl?: string;
   repoUrl?: string;
+  thumbnail?: string;
+  localImage?: string;
+  apkUrl?: string;   // descarga directa de APK
 }
 
 const PROJECTS: Project[] = [
   {
     id: 1,
-    title: "Portal Corporativo",
-    client: "Negocio Local",
+    title: "GymPro — Sitio Web",
+    client: "Gimnasio Fitness",
     category: "web",
     tags: ["React", "TypeScript", "Tailwind"],
-    desc: "Sitio web corporativo con sección de servicios, blog y formulario de contacto integrado. Diseño moderno y carga ultra rápida.",
+    desc: "Sitio web para gimnasio con planes de membresía, horarios de clases, galería y formulario de contacto. Diseño moderno y carga ultra rápida.",
     color: "#2E86AB",
     glow: "rgba(46,134,171,0.3)",
     icon: Globe,
     year: "2025",
+    liveUrl: "https://gym-simulator.netlify.app/",
   },
   {
     id: 2,
-    title: "App de Gestión Interna",
-    client: "PyME Ecuatoriana",
-    category: "app",
-    tags: ["React", "Node.js", "PostgreSQL"],
-    desc: "Sistema de gestión de inventario y ventas con dashboard en tiempo real y reportes exportables a PDF.",
-    // ← era #E67E22 / rgba(230,126,34,0.3)
-    color: "#C0392B",
-    glow: "rgba(192,57,43,0.3)",
-    icon: Smartphone,
-    year: "2025",
-  },
-  {
-    id: 3,
-    title: "Landing de Lanzamiento",
-    client: "Startup Digital",
-    category: "landing",
-    tags: ["React", "Framer Motion", "GSAP"],
-    desc: "Landing page de alto impacto para el lanzamiento de un producto digital con animaciones premium y CTA optimizado.",
-    color: "#5DADE2",
-    glow: "rgba(93,173,226,0.3)",
-    icon: Zap,
-    year: "2025",
-  },
-  {
-    id: 4,
-    title: "Tienda en Línea",
-    client: "Comercio Minorista",
+    title: "Totem Restobar — Web",
+    client: "Restaurante & Bar",
     category: "web",
-    tags: ["Next.js", "Stripe", "Prisma"],
-    desc: "E-commerce completo con catálogo, carrito, pasarela de pagos y panel de administración para el propietario.",
+    tags: ["React", "Node.js", "PostgreSQL"],
+    desc: "Sitio web para restaurante con menú interactivo, sistema de reservas en línea y galería de platos. Diseño elegante y atractivo.",
     color: "#C0392B",
     glow: "rgba(192,57,43,0.3)",
     icon: Globe,
     year: "2025",
+    liveUrl: "https://totemsimulator.netlify.app/",
+    localImage: totemImg,
   },
   {
-    id: 5,
-    title: "Dashboard de Métricas",
-    client: "Agencia de Marketing",
-    category: "app",
-    tags: ["React", "Recharts", "API REST"],
-    desc: "Panel de control con visualización de métricas en tiempo real, integración con redes sociales y reportes automáticos.",
-    // ← era #F39C12 / rgba(243,156,18,0.3)
-    color: "#1B4F72",
-    glow: "rgba(27,79,114,0.3)",
-    icon: Smartphone,
-    year: "2024",
+    id: 3,
+    title: "Glow Studio — Estética",
+    client: "Centro de Estética",
+    category: "landing",
+    tags: ["React", "Framer Motion", "GSAP"],
+    desc: "Landing page para centro de estética con catálogo de servicios, reserva de citas en línea y galería de resultados. Animaciones premium.",
+    color: "#5DADE2",
+    glow: "rgba(93,173,226,0.3)",
+    icon: Zap,
+    year: "2025",
+    liveUrl: "https://estetica-simulator.netlify.app/",
   },
+  {
+    id: 4,
+    title: "Totem Restobar — App",
+    client: "Restaurante & Bar",
+    category: "app",
+    tags: ["React Native", "Node.js", "Firebase"],
+    desc: "Aplicación móvil para restaurante con menú digital, pedidos en línea, seguimiento en tiempo real y sistema de fidelización de clientes.",
+    color: "#C0392B",
+    glow: "rgba(192,57,43,0.3)",
+    icon: Smartphone,
+    year: "2025",
+    localImage: totemAppImg,
+    apkUrl: "/app-release.apk",
+  },
+
   {
     id: 6,
-    title: "Landing de Servicio",
-    client: "Profesional Independiente",
-    category: "landing",
+    title: "AutoService — Taller Web",
+    client: "Taller Automotriz",
+    category: "web",
     tags: ["React", "TypeScript", "SEO"],
-    desc: "Página de captura de leads con copywriting persuasivo, testimonios animados y formulario de agendamiento.",
+    desc: "Sitio web para taller automotriz con catálogo de servicios, agendamiento de citas, testimonios de clientes y optimización SEO local.",
     color: "#1B4F72",
     glow: "rgba(27,79,114,0.3)",
-    icon: Zap,
+    icon: Globe,
     year: "2024",
+    liveUrl: "https://taller-simulator.netlify.app/",
+  },
+  {
+    id: 7,
+    title: "U.E. Lincoln Larrea",
+    client: "Institución Educativa",
+    category: "web",
+    tags: ["WordPress", "SEO", "Responsive"],
+    desc: "Sitio web institucional para la Unidad Educativa Lincoln Larrea con información académica, noticias, galería de eventos y contacto para padres de familia.",
+    color: "#27AE60",
+    glow: "rgba(39,174,96,0.3)",
+    icon: Globe,
+    year: "2025",
+    liveUrl: "https://uelincolnlarrea.com/",
   },
 ];
 
@@ -118,6 +131,119 @@ const FILTERS: { key: Category; label: string }[] = [
   { key: "app", label: "Aplicaciones" },
   { key: "landing", label: "Landing Pages" },
 ];
+
+// ─── Thumbnail con hover overlay (Opción 1) ────────────────────────────────────
+
+function ProjectThumbnail({
+  url,
+  localImage,
+  title,
+  color,
+  isClickable,
+  isApk = false,
+}: {
+  url?: string;
+  localImage?: string;
+  title: string;
+  color: string;
+  isClickable: boolean;
+  isApk?: boolean;
+}) {
+  const [loaded, setLoaded] = useState(false);
+  const [error, setError] = useState(false);
+
+  // Si hay imagen local la usamos directamente, si no generamos screenshot vía microlink
+  const src = localImage
+    ? localImage
+    : url
+    ? `https://api.microlink.io/?url=${encodeURIComponent(url)}&screenshot=true&meta=false&embed=screenshot.url`
+    : null;
+
+  return (
+    <div
+      className="relative w-full overflow-hidden rounded-xl mb-5"
+      style={{ height: "160px" }}
+    >
+      {/* Skeleton mientras carga */}
+      {!loaded && !error && (
+        <div
+          className="absolute inset-0 animate-pulse rounded-xl"
+          style={{ background: "rgba(46,134,171,0.06)" }}
+        />
+      )}
+
+      {/* Screenshot */}
+      {!error && src && (
+        <img
+          src={src}
+          alt={`Preview de ${title}`}
+          onLoad={() => setLoaded(true)}
+          onError={() => setError(true)}
+          className="w-full h-full object-cover object-top rounded-xl transition-transform duration-500 group-hover:scale-105"
+          style={{ opacity: loaded ? 1 : 0, transition: "opacity 0.4s" }}
+        />
+      )}
+
+      {/* Fallback si falla la imagen */}
+      {error && (
+        <div
+          className="absolute inset-0 rounded-xl flex items-center justify-center"
+          style={{ background: `${color}10`, border: `1px solid ${color}20` }}
+        >
+          <span
+            style={{
+              fontFamily: "'Exo 2', sans-serif",
+              fontSize: "0.7rem",
+              color: "#2A3A5A",
+            }}
+          >
+            Preview no disponible
+          </span>
+        </div>
+      )}
+
+      {/* Overlay hover — solo si la card es clickeable */}
+      {isClickable && loaded && (
+        <div
+          className="absolute inset-0 rounded-xl flex flex-col items-center justify-center gap-2 opacity-0 group-hover:opacity-100 transition-all duration-300"
+          style={{
+            background: `linear-gradient(135deg, ${color}cc, rgba(0,0,0,0.75))`,
+          }}
+        >
+          {isApk ? <Download size={22} color="#fff" /> : <ExternalLink size={22} color="#fff" />}
+          <span
+            style={{
+              fontFamily: "'Exo 2', sans-serif",
+              fontSize: "0.78rem",
+              color: "#fff",
+              fontWeight: 600,
+              letterSpacing: "0.05em",
+            }}
+          >
+            {isApk ? "Descargar APK ↓" : "Ver proyecto →"}
+          </span>
+        </div>
+      )}
+
+      {/* Badge "Solo vista previa" si no tiene link */}
+      {!isClickable && (
+        <div
+          className="absolute top-2 right-2 px-2 py-0.5 rounded-md"
+          style={{
+            fontFamily: "'Exo 2', sans-serif",
+            fontSize: "0.6rem",
+            background: "rgba(0,0,0,0.55)",
+            color: "#4A6A8A",
+            border: "1px solid rgba(46,134,171,0.2)",
+            backdropFilter: "blur(4px)",
+          }}
+        >
+          Vista previa
+        </div>
+      )}
+    </div>
+  );
+}
 
 // ─── Card de proyecto ──────────────────────────────────────────────────────────
 
@@ -133,9 +259,15 @@ function ProjectCard({ project }: { project: Project }) {
     year,
     liveUrl,
     repoUrl,
+    thumbnail,
+    localImage,
+    apkUrl,
   } = project;
 
-  return (
+  const isClickable = Boolean(liveUrl || apkUrl);
+  const hasPreview = Boolean(liveUrl || thumbnail || localImage || apkUrl);
+
+  const cardContent = (
     <motion.div
       layout
       initial={{ opacity: 0, scale: 0.94 }}
@@ -147,18 +279,29 @@ function ProjectCard({ project }: { project: Project }) {
         background: "rgba(10,15,30,0.75)",
         border: "1px solid rgba(46,134,171,0.1)",
         backdropFilter: "blur(8px)",
+        cursor: isClickable ? "pointer" : "default",
       }}
       onMouseEnter={(e) => {
         (e.currentTarget as HTMLElement).style.borderColor = `${color}35`;
-        (e.currentTarget as HTMLElement).style.boxShadow =
-          `0 20px 48px ${glow}`;
+        (e.currentTarget as HTMLElement).style.boxShadow = `0 20px 48px ${glow}`;
       }}
       onMouseLeave={(e) => {
-        (e.currentTarget as HTMLElement).style.borderColor =
-          "rgba(46,134,171,0.1)";
+        (e.currentTarget as HTMLElement).style.borderColor = "rgba(46,134,171,0.1)";
         (e.currentTarget as HTMLElement).style.boxShadow = "none";
       }}
     >
+      {/* ── Thumbnail con overlay ── */}
+      {hasPreview && (
+        <ProjectThumbnail
+          url={liveUrl || thumbnail}
+          localImage={localImage}
+          title={title}
+          color={color}
+          isClickable={isClickable}
+          isApk={Boolean(apkUrl)}
+        />
+      )}
+
       {/* Header */}
       <div className="flex items-start justify-between mb-5">
         <div
@@ -173,6 +316,7 @@ function ProjectCard({ project }: { project: Project }) {
               href={liveUrl}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
               className="w-8 h-8 flex items-center justify-center rounded-lg transition-all duration-200 hover:scale-110"
               style={{
                 background: "rgba(46,134,171,0.1)",
@@ -185,11 +329,30 @@ function ProjectCard({ project }: { project: Project }) {
               <ExternalLink size={13} />
             </a>
           )}
+          {apkUrl && (
+            <a
+              href={apkUrl}
+              download="app-release.apk"
+              onClick={(e) => e.stopPropagation()}
+              className="w-8 h-8 flex items-center justify-center rounded-lg transition-all duration-200 hover:scale-110"
+              style={{
+                background: "rgba(192,57,43,0.1)",
+                border: "1px solid rgba(192,57,43,0.2)",
+                color: "#4A5A7A",
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = "#C0392B")}
+              onMouseLeave={(e) => (e.currentTarget.style.color = "#4A5A7A")}
+              title="Descargar APK"
+            >
+              <Download size={13} />
+            </a>
+          )}
           {repoUrl && (
             <a
               href={repoUrl}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
               className="w-8 h-8 flex items-center justify-center rounded-lg transition-all duration-200 hover:scale-110"
               style={{
                 background: "rgba(46,134,171,0.1)",
@@ -269,6 +432,35 @@ function ProjectCard({ project }: { project: Project }) {
       />
     </motion.div>
   );
+
+  // Si tiene liveUrl → abre en nueva pestaña
+  if (liveUrl) {
+    return (
+      <a
+        href={liveUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        style={{ textDecoration: "none" }}
+      >
+        {cardContent}
+      </a>
+    );
+  }
+
+  // Si tiene apkUrl → descarga directa al hacer clic en la card
+  if (apkUrl) {
+    return (
+      <a
+        href={apkUrl}
+        download="app-release.apk"
+        style={{ textDecoration: "none" }}
+      >
+        {cardContent}
+      </a>
+    );
+  }
+
+  return cardContent;
 }
 
 // ─── Componente principal ──────────────────────────────────────────────────────
@@ -287,7 +479,7 @@ export function ProyectosPage() {
       gsap.fromTo(
         headerRef.current,
         { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" },
+        { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }
       );
     }
     return () => {
@@ -319,7 +511,6 @@ export function ProyectosPage() {
           ref={headerRef}
           className="max-w-3xl mx-auto text-center relative z-10"
         >
-          {/* ← era #E67E22 */}
           <p
             style={{
               fontFamily: "'Cinzel', serif",
@@ -341,7 +532,7 @@ export function ProyectosPage() {
               marginBottom: "1.25rem",
             }}
           >
-            Proyectos que {/* ← era gradiente rojo→naranja */}
+            Proyectos que{" "}
             <span
               style={{
                 background: "linear-gradient(135deg, #C0392B, #922B21)",
@@ -377,7 +568,6 @@ export function ProyectosPage() {
                 className="px-5 py-2 rounded-full text-sm font-medium transition-all duration-300"
                 style={{
                   fontFamily: "'Exo 2', sans-serif",
-                  // ← era gradiente rojo→naranja
                   background:
                     activeFilter === key
                       ? "linear-gradient(135deg, #C0392B, #A93226)"
@@ -455,7 +645,6 @@ export function ProyectosPage() {
             border: "1px solid rgba(46,134,171,0.2)",
           }}
         >
-          {/* ← glow era naranja */}
           <div
             className="absolute inset-0 pointer-events-none"
             style={{
@@ -464,7 +653,6 @@ export function ProyectosPage() {
             }}
           />
 
-          {/* ← era #E67E22 */}
           <Flame
             size={28}
             className="mx-auto mb-4"
@@ -499,7 +687,6 @@ export function ProyectosPage() {
             className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full font-semibold text-sm transition-all duration-300 hover:scale-105"
             style={{
               fontFamily: "'Exo 2', sans-serif",
-              // ← era rojo→naranja
               background: "linear-gradient(135deg, #C0392B, #A93226)",
               color: "#fff",
               boxShadow: "0 6px 24px rgba(192,57,43,0.4)",
