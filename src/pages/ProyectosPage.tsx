@@ -11,11 +11,11 @@ import {
   Zap,
   ChevronRight,
   GitBranchIcon,
-  Download
+  Download,
 } from "lucide-react";
 import Layout from "../components/layout/Layout";
-import metricasImg from "../assets/imgs/metricas.png";
 import totemImg from "../assets/imgs/totem-splash.png";
+import totemAppImg from "../assets/imgs/totem-app.jpeg";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -67,6 +67,7 @@ const PROJECTS: Project[] = [
     icon: Globe,
     year: "2025",
     liveUrl: "https://totemsimulator.netlify.app/",
+    localImage: totemImg,
   },
   {
     id: 3,
@@ -92,23 +93,10 @@ const PROJECTS: Project[] = [
     glow: "rgba(192,57,43,0.3)",
     icon: Smartphone,
     year: "2025",
-    localImage: totemImg,
+    localImage: totemAppImg,
     apkUrl: "/app-release.apk",
   },
-  {
-    id: 5,
-    title: "AutoService — Dashboard",
-    client: "Taller Automotriz",
-    category: "app",
-    tags: ["React", "Recharts", "API REST"],
-    desc: "Panel de control para taller automotriz con gestión de órdenes de servicio, inventario de repuestos y reportes de ingresos en tiempo real.",
-    color: "#1B4F72",
-    glow: "rgba(27,79,114,0.3)",
-    icon: Smartphone,
-    year: "2024",
-    // Sin liveUrl → solo imagen local, no clickeable
-    localImage: metricasImg,
-  },
+
   {
     id: 6,
     title: "AutoService — Taller Web",
