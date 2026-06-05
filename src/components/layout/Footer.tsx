@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { Flame, MailIcon } from "lucide-react";
-import logoImg from "/dracarysAlternative.svg";
+import logoImg from "/dracarysAlternativeLogo.svg";
 import { BsInstagram } from "react-icons/bs";
 import { LiaLinkedin } from "react-icons/lia";
 import { GiThunderBlade } from "react-icons/gi";
@@ -51,8 +51,7 @@ export default function Footer() {
               <img
                 src={logoImg}
                 alt="DracarySoft"
-                className="w-10 h-10 rounded-full object-contain"
-                style={{ boxShadow: "0 0 12px rgba(46,134,171,0.4)" }}
+                className="w-10 h-10 object-contain"
               />
               <div className="flex items-baseline">
                 <span
@@ -69,7 +68,7 @@ export default function Footer() {
                 {/* ← era gradiente rojo→naranja, ahora rojo sólido */}
                 <span
                   style={{
-                    fontFamily: "'Exo 2', sans-serif",
+                    fontFamily: "'Cinzel', serif",
                     fontWeight: 700,
                     fontSize: "1.1rem",
                     color: "#C0392B",

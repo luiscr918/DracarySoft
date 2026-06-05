@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
-import dragonImg from "/path48.png";
+import dragonImg from "/dracarysAlternativeLogo.svg";
 
 interface DragonIntroProps {
   onComplete: () => void;
@@ -59,7 +59,7 @@ export default function DragonIntro({ onComplete }: DragonIntroProps) {
       tl.to(glowBlueRef.current, {
         opacity: 1,
         scale: 1,
-        duration: 1.0,
+        duration: 0.8,
         ease: "power2.out",
       });
       tl.to(
@@ -67,7 +67,7 @@ export default function DragonIntro({ onComplete }: DragonIntroProps) {
         {
           opacity: 1,
           scale: 1,
-          duration: 0.8,
+          duration: 0.5,
           ease: "power2.out",
         },
         "-=0.6",
@@ -81,24 +81,10 @@ export default function DragonIntro({ onComplete }: DragonIntroProps) {
           scale: 1,
           y: 0,
           filter: "blur(0px)",
-          duration: 1.1,
+          duration: 0.8,
           ease: "power3.out",
         },
         "-=0.5",
-      );
-
-      // ── 3. Respiración (una vez) ─────────────────────────────────────────
-      tl.to(
-        dragonRef.current,
-        {
-          scale: 1.035,
-          y: -5,
-          duration: 0.45,
-          ease: "sine.inOut",
-          yoyo: true,
-          repeat: 1,
-        },
-        "-=0.1",
       );
 
       // ── 5. Texto aparece ─────────────────────────────────────────────────
@@ -107,7 +93,7 @@ export default function DragonIntro({ onComplete }: DragonIntroProps) {
         {
           opacity: 1,
           y: 0,
-          duration: 0.35,
+          duration: 0.2,
           ease: "power2.out",
         },
         "-=0.1",
@@ -149,7 +135,7 @@ export default function DragonIntro({ onComplete }: DragonIntroProps) {
       );
 
       // ── 6. Hold ──────────────────────────────────────────────────────────
-      tl.to({}, { duration: 1.8 });
+      tl.to({}, { duration: 0.5 });
 
       // ── 7. Todo se eleva y desvanece ─────────────────────────────────────
       tl.to(
@@ -228,9 +214,8 @@ export default function DragonIntro({ onComplete }: DragonIntroProps) {
           style={{
             width: "clamp(280px, 38vw, 420px)",
             height: "clamp(280px, 38vw, 420px)",
-            objectFit: "cover",
+            objectFit: "contain",
             objectPosition: "center",
-            borderRadius: "50%",
             // Elimina el fondo gris del jpg mezclándolo con el fondo oscuro
             mixBlendMode: "screen",
             filter:
@@ -282,7 +267,7 @@ export default function DragonIntro({ onComplete }: DragonIntroProps) {
         <span
           ref={textSoftRef}
           style={{
-            fontFamily: "'Exo 2', sans-serif",
+            fontFamily: "'Cinzel', serif",
             fontSize: "clamp(2rem, 5vw, 3.4rem)",
             fontWeight: 700,
             color: "#C0392B",
@@ -299,7 +284,7 @@ export default function DragonIntro({ onComplete }: DragonIntroProps) {
       <p
         ref={taglineRef}
         style={{
-          fontFamily: "'Exo 2', sans-serif",
+          fontFamily: "'Cinzel', serif",
           fontSize: "clamp(0.65rem, 1.4vw, 0.85rem)",
           color: "#4A5A7A",
           letterSpacing: "0.3em",

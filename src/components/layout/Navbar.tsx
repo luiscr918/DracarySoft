@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Flame } from "lucide-react";
-import logoImg from "/dracarysAlternative.svg";
+import logoImg from "/dracarysAlternativeLogo.svg";
 
 const NAV_LINKS = [
   { path: "/", label: "Inicio" },
@@ -53,12 +53,11 @@ export default function Navbar() {
                 <img
                   src={logoImg}
                   alt="DracarySoft"
-                  className="w-9 h-9 rounded-full object-contain transition-transform duration-300 group-hover:scale-110"
-                  style={{ boxShadow: "0 0 12px rgba(46,134,171,0.5)" }}
+                  className="w-9 h-9 object-contain transition-transform duration-300 group-hover:scale-110"
                 />
                 {/* ← hover glow era naranja */}
                 <div
-                  className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                   style={{ boxShadow: "0 0 20px rgba(192,57,43,0.6)" }}
                 />
               </div>
@@ -77,7 +76,7 @@ export default function Navbar() {
                 {/* ← era gradiente rojo→naranja, ahora rojo sólido */}
                 <span
                   style={{
-                    fontFamily: "'Exo 2', sans-serif",
+                    fontFamily: "'Cinzel', serif",
                     fontWeight: 700,
                     fontSize: "1.15rem",
                     color: "#C0392B",
@@ -97,7 +96,7 @@ export default function Navbar() {
                   to={link.path}
                   end={link.path === "/"}
                   className="relative px-4 py-2 group"
-                  style={{ fontFamily: "'Exo 2', sans-serif" }}
+                  style={{ fontFamily: "'Cinzel', serif" }}
                 >
                   {({ isActive }) => (
                     <>
@@ -132,7 +131,7 @@ export default function Navbar() {
                 to="/contacto"
                 className="hidden md:flex items-center gap-2 px-5 py-2 rounded-full text-sm font-semibold transition-all duration-300 hover:scale-105 active:scale-95"
                 style={{
-                  fontFamily: "'Exo 2', sans-serif",
+                  fontFamily: "'Cinzel', serif",
                   // ← era rojo→naranja
                   background: "linear-gradient(135deg, #C0392B, #A93226)",
                   color: "#fff",
@@ -199,7 +198,7 @@ export default function Navbar() {
                     end={link.path === "/"}
                     className="flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200"
                     style={({ isActive }) => ({
-                      fontFamily: "'Exo 2', sans-serif",
+                      fontFamily: "'Cinzel', serif",
                       color: isActive ? "#5DADE2" : "#8899BB",
                       background: isActive
                         ? "rgba(46,134,171,0.1)"
@@ -226,7 +225,7 @@ export default function Navbar() {
                   to="/contacto"
                   className="flex items-center justify-center gap-2 w-full py-3 rounded-full font-semibold text-sm"
                   style={{
-                    fontFamily: "'Exo 2', sans-serif",
+                    fontFamily: "'Cinzel', serif",
                     // ← era rojo→naranja
                     background: "linear-gradient(135deg, #C0392B, #A93226)",
                     color: "#fff",
