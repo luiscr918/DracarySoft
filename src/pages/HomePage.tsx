@@ -187,7 +187,7 @@ export function HomePage() {
   return (
     <Layout>
       {/* ── HERO ─────────────────────────────────────────────────────────────── */}
-      <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden pt-20">
+      <section className="relative min-h-dvh flex flex-col items-center justify-center overflow-hidden pt-20">
         {/* Fondo */}
         <div
           className="absolute inset-0"
@@ -396,7 +396,6 @@ export function HomePage() {
             </NavLink>
           </motion.div>
         </div>
-
       </section>
 
       {/* ── STATS ────────────────────────────────────────────────────────────── */}
