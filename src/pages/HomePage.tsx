@@ -9,7 +9,6 @@ import {
   Smartphone,
   Zap,
   ArrowRight,
-  ChevronDown,
   Code2,
   Layers,
   TrendingUp,
@@ -398,25 +397,6 @@ export function HomePage() {
           </motion.div>
         </div>
 
-        {/* Scroll indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.4 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1"
-          style={{ color: "#2A3A5A" }}
-        >
-          <span
-            style={{
-              fontSize: "0.65rem",
-              letterSpacing: "0.2em",
-              fontFamily: "'Exo 2', sans-serif",
-            }}
-          >
-            SCROLL
-          </span>
-          <ChevronDown size={16} className="animate-bounce" />
-        </motion.div>
       </section>
 
       {/* ── STATS ────────────────────────────────────────────────────────────── */}
