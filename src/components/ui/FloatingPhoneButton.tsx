@@ -1,5 +1,5 @@
 export default function FloatingPhoneButton() {
-  const waLink = "https://wa.me/593912345678";
+  const waLink = "https://wa.me/593960550572";
 
   return (
     <a

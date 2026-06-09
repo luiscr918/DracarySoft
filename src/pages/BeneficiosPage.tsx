@@ -40,13 +40,6 @@ export function BeneficiosPage() {
   return (
     <Layout>
       <section className="relative pt-36 pb-16 px-6 overflow-hidden">
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(ellipse 80% 50% at 50% 20%, rgba(93,173,226,0.15) 0%, transparent 55%)",
-          }}
-        />
         <div className="max-w-5xl mx-auto relative z-10 text-center">
           <p
             style={{

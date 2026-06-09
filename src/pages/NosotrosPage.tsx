@@ -28,13 +28,6 @@ export function NosotrosPage() {
   return (
     <Layout>
       <section className="relative pt-36 pb-16 px-6 overflow-hidden">
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(ellipse 80% 55% at 50% 15%, rgba(192,57,43,0.12) 0%, transparent 55%)",
-          }}
-        />
         <div className="max-w-5xl mx-auto relative z-10 text-center">
           <p
             style={{
@@ -175,7 +168,7 @@ export function NosotrosPage() {
           </div>
         </div>
       </section>
-       <FloatingPhoneButton />
+      <FloatingPhoneButton />
     </Layout>
   );
 }

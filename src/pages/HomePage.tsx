@@ -57,74 +57,6 @@ const STATS = [
   { value: "5★", label: "Satisfacción del cliente", icon: Flame },
 ];
 
-const EMBER_PARTICLES = Array.from({ length: 22 }).map((_, i) => {
-  const size = Math.random() * 3 + 1.5;
-  const isBlue = i % 4 === 0;
-
-  return {
-    size,
-    isBlue,
-    left: `${Math.random() * 100}%`,
-    top: `${Math.random() * 100}%`,
-    opacity: Math.random() * 0.5 + 0.15,
-    blur: Math.random() > 0.5 ? "0.5px" : "0",
-    animation: `floatEmber ${3 + Math.random() * 5}s ease-in-out ${Math.random() * 4}s infinite`,
-  };
-});
-
-// ─── Partículas de brasa ───────────────────────────────────────────────────────
-
-function EmberParticles() {
-  return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {EMBER_PARTICLES.map((particle, i) => (
-        <div
-          key={i}
-          className="absolute rounded-full"
-          style={{
-            width: `${particle.size}px`,
-            height: `${particle.size}px`,
-            // ← era #F39C12 / #E67E22 — ahora solo rojo y azul
-            background: particle.isBlue
-              ? "#5DADE2"
-              : i % 2 === 0
-                ? "#C0392B"
-                : "#922B21",
-            left: particle.left,
-            top: particle.top,
-            opacity: particle.opacity,
-            filter: `blur(${particle.blur})`,
-            animation: particle.animation,
-          }}
-        />
-      ))}
-      <style>{`
-        @keyframes floatEmber {
-          0%, 100% { transform: translateY(0) translateX(0) scale(1); opacity: 0.3; }
-          50%       { transform: translateY(-25px) translateX(8px) scale(1.3); opacity: 0.7; }
-        }
-      `}</style>
-    </div>
-  );
-}
-
-// ─── Rejilla de circuitos ──────────────────────────────────────────────────────
-
-function CircuitGrid() {
-  return (
-    <div
-      className="absolute inset-0 pointer-events-none opacity-[0.04]"
-      style={{
-        backgroundImage: `
-          linear-gradient(rgba(46,134,171,1) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(46,134,171,1) 1px, transparent 1px)
-        `,
-        backgroundSize: "60px 60px",
-      }}
-    />
-  );
-}
-
 // ─── Componente principal ──────────────────────────────────────────────────────
 
 export function HomePage() {
@@ -189,47 +121,7 @@ export function HomePage() {
     <Layout>
       {/* ── HERO ─────────────────────────────────────────────────────────────── */}
       <section className="relative min-h-dvh flex flex-col items-center justify-center overflow-hidden pt-20">
-        {/* Fondo */}
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(ellipse 80% 60% at 50% 40%, rgba(27,79,114,0.18) 0%, #050B14 70%)",
-          }}
-        />
-        {/* ← glow era rgba(230,126,34,0.07) — ahora rojo */}
-        <div
-          className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-150 h-100 pointer-events-none"
-          style={{
-            background:
-              "radial-gradient(ellipse, rgba(192,57,43,0.07) 0%, transparent 65%)",
-            filter: "blur(30px)",
-          }}
-        />
-
-        <CircuitGrid />
-        <EmberParticles />
-
-        {/* Línea decorativa izquierda */}
-        <div className="absolute left-8 top-1/2 -translate-y-1/2 hidden lg:flex flex-col items-center gap-3 opacity-30">
-          <div
-            className="w-px h-20"
-            style={{
-              background: "linear-gradient(180deg, transparent, #2E86AB)",
-            }}
-          />
-          {/* ← era #E67E22 */}
-          <div
-            className="w-1.5 h-1.5 rounded-full"
-            style={{ background: "#C0392B" }}
-          />
-          <div
-            className="w-px h-20"
-            style={{
-              background: "linear-gradient(180deg, #2E86AB, transparent)",
-            }}
-          />
-        </div>
+        {/* Solo el video de fondo, sin capas adicionales */}
 
         {/* Contenido hero */}
         <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
@@ -560,25 +452,7 @@ export function HomePage() {
       </section>
 
       {/* ── CTA FINAL ────────────────────────────────────────────────────────── */}
-      <section
-        ref={ctaSectionRef}
-        className="relative py-24 px-6 overflow-hidden"
-      >
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background:
-              "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(192,57,43,0.08) 0%, transparent 70%)",
-          }}
-        />
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background:
-              "radial-gradient(ellipse 50% 50% at 50% 50%, rgba(27,79,114,0.1) 0%, transparent 70%)",
-          }}
-        />
-
+      <section ref={ctaSectionRef} className="relative py-24 px-6">
         <div className="max-w-2xl mx-auto text-center relative z-10">
           {/* ← era #E67E22 */}
           <p
@@ -640,7 +514,7 @@ export function HomePage() {
           </NavLink>
         </div>
       </section>
-       <FloatingPhoneButton />
+      <FloatingPhoneButton />
     </Layout>
   );
 }

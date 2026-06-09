@@ -192,22 +192,6 @@ export function ServiciosPage() {
     <Layout>
       {/* ── HERO ──────────────────────────────────────────────────────────── */}
       <section className="relative pt-36 pb-20 px-6 overflow-hidden">
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(ellipse 70% 50% at 50% 0%, rgba(46,134,171,0.12) 0%, transparent 70%)",
-          }}
-        />
-        <div
-          className="absolute inset-0 pointer-events-none opacity-[0.035]"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgba(46,134,171,1) 1px, transparent 1px), linear-gradient(90deg, rgba(46,134,171,1) 1px, transparent 1px)",
-            backgroundSize: "60px 60px",
-          }}
-        />
-
         <div className="max-w-3xl mx-auto text-center relative z-10">
           {/* ← era #E67E22 */}
           <motion.p
