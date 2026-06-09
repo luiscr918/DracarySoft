@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Target, Sparkles, ShieldCheck } from "lucide-react";
 import Layout from "../components/layout/Layout";
+import FloatingPhoneButton from "../components/ui/FloatingPhoneButton";
 
 const VALUES = [
   {
@@ -174,6 +175,7 @@ export function NosotrosPage() {
           </div>
         </div>
       </section>
+       <FloatingPhoneButton />
     </Layout>
   );
 }

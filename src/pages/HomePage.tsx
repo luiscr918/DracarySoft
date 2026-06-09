@@ -14,6 +14,7 @@ import {
   TrendingUp,
 } from "lucide-react";
 import Layout from "../components/layout/Layout";
+import FloatingPhoneButton from "../components/ui/FloatingPhoneButton";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -639,6 +640,7 @@ export function HomePage() {
           </NavLink>
         </div>
       </section>
+       <FloatingPhoneButton />
     </Layout>
   );
 }

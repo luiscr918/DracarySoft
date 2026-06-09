@@ -16,6 +16,7 @@ import {
 import Layout from "../components/layout/Layout";
 import totemImg from "../assets/imgs/totem-splash.png";
 import totemAppImg from "../assets/imgs/totem-app.jpeg";
+import FloatingPhoneButton from "../components/ui/FloatingPhoneButton";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -705,6 +706,7 @@ export function ProyectosPage() {
           </NavLink>
         </div>
       </section>
+       <FloatingPhoneButton />
     </Layout>
   );
 }
