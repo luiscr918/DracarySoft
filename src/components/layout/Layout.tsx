@@ -1,8 +1,10 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import bgVideo from "../../assets/vids/bg1.mp4";
+import bgImage from "../../assets/imgs/fonditoDracarys.jpg";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -10,10 +12,17 @@ interface LayoutProps {
 
 export default function Layout({ children }: LayoutProps) {
   const location = useLocation();
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "instant" });
   }, [location.pathname]);
+
+  useEffect(() => {
+    if (videoRef.current && window.innerWidth >= 768) {
+      videoRef.current.play().catch(() => {});
+    }
+  }, []);
 
   return (
     <div
@@ -24,12 +33,27 @@ export default function Layout({ children }: LayoutProps) {
         position: "relative",
       }}
     >
-      {/* ── VIDEO DE FONDO ─────────────────────────────────────────────── */}
+      {/* ── FONDO MÓVIL: imagen estática ───────────────────────────────── */}
+      <div
+        style={{
+          position: "fixed",
+          inset: 0,
+          backgroundImage: `url(${bgImage})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          zIndex: 0,
+          opacity: 0.8,
+          pointerEvents: "none",
+        }}
+      />
+
+      {/* ── FONDO DESKTOP: video ───────────────────────────────────────── */}
       <video
-        autoPlay
+        ref={videoRef}
         loop
         muted
         playsInline
+        preload="none"
         style={{
           position: "fixed",
           top: 0,
@@ -37,28 +61,29 @@ export default function Layout({ children }: LayoutProps) {
           width: "100%",
           height: "100%",
           objectFit: "cover",
-          zIndex: 0,
-          opacity: 0.8, // ajusta entre 0.1 – 0.3 a tu gusto
+          zIndex: 1,
+          opacity: 0.8,
           pointerEvents: "none",
+          display: window.innerWidth >= 768 ? "block" : "none",
         }}
       >
-        <source src="/bg1.mp4" type="video/mp4" />
+        <source src={bgVideo} type="video/mp4" />
       </video>
 
-      {/* Capa oscura encima del video para mantener legibilidad */}
+      {/* ── OVERLAY gradiente ──────────────────────────────────────────── */}
       <div
         style={{
           position: "fixed",
           inset: 0,
           background:
             "linear-gradient(to bottom, rgba(5,11,20,0.55) 0%, rgba(5,11,20,0.35) 50%, rgba(5,11,20,0.75) 100%)",
-          zIndex: 1,
+          zIndex: 2,
           pointerEvents: "none",
         }}
       />
 
       {/* ── CONTENIDO ──────────────────────────────────────────────────── */}
-      <div style={{ position: "relative", zIndex: 2 }}>
+      <div style={{ position: "relative", zIndex: 3 }}>
         <Navbar />
 
         <AnimatePresence mode="wait">
