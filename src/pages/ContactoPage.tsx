@@ -9,6 +9,7 @@ import { Mail, MapPin, CheckCircle, AlertCircle } from "lucide-react";
 import emailjs from "@emailjs/browser";
 import Layout from "../components/layout/Layout";
 import FloatingPhoneButton from "../components/ui/FloatingPhoneButton";
+import { BsInstagram, BsTiktok, BsFacebook } from "react-icons/bs";
 
 const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
 const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
@@ -274,6 +275,30 @@ export function ContactoPage() {
                   label: "Email",
                   value: "dracarysoft@gmail.com",
                   href: "mailto:dracarysoft@gmail.com",
+                },
+                {
+                  icon: BsInstagram,
+                  color: "#E1306C",
+                  bg: "rgba(225,48,108,0.15)",
+                  label: "Instagram",
+                  value: "@dracarysoft",
+                  href: "https://www.instagram.com/dracarysoft/",
+                },
+                {
+                  icon: BsTiktok,
+                  color: "#F0F4FF",
+                  bg: "rgba(240,244,255,0.1)",
+                  label: "TikTok",
+                  value: "@dracary.soft",
+                  href: "https://www.tiktok.com/@dracary.soft?is_from_webapp=1&sender_device=pc",
+                },
+                {
+                  icon: BsFacebook,
+                  color: "#1877F2",
+                  bg: "rgba(24,119,242,0.15)",
+                  label: "Facebook",
+                  value: "DracarySoft Dev",
+                  href: "https://www.facebook.com/profile.php?id=61590517209271",
                 },
                 {
                   icon: MapPin,

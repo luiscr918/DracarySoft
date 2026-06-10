@@ -1,9 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { Flame, MailIcon } from "lucide-react";
 import logoImg from "/dracarysAlternativeLogo.svg";
-import { BsInstagram } from "react-icons/bs";
-import { LiaLinkedin } from "react-icons/lia";
-import { GiThunderBlade } from "react-icons/gi";
+import { BsInstagram, BsTiktok, BsFacebook } from "react-icons/bs";
 
 const LINKS_COL1 = [
   { path: "/servicios", label: "Servicios" },
@@ -17,10 +15,22 @@ const LINKS_COL2 = [
 ];
 
 const SOCIAL = [
-  { icon: GiThunderBlade, href: "#", label: "GitHub" },
-  { icon: BsInstagram, href: "#", label: "Instagram" },
-  { icon: LiaLinkedin, href: "#", label: "LinkedIn" },
-  { icon: MailIcon, href: "#", label: "Email" },
+  {
+    icon: BsInstagram,
+    href: "https://www.instagram.com/dracarysoft/",
+    label: "Instagram",
+  },
+  {
+    icon: BsTiktok,
+    href: "https://www.tiktok.com/@dracary.soft?is_from_webapp=1&sender_device=pc",
+    label: "TikTok",
+  },
+  {
+    icon: BsFacebook,
+    href: "https://www.facebook.com/profile.php?id=61590517209271",
+    label: "Facebook",
+  },
+  { icon: MailIcon, href: "mailto:dracarysoft@gmail.com", label: "Email" },
 ];
 
 export default function Footer() {
@@ -98,6 +108,7 @@ export default function Footer() {
                 <a
                   key={label}
                   href={href}
+                  target="_blank"
                   aria-label={label}
                   className="w-9 h-9 flex items-center justify-center rounded-lg transition-all duration-200 hover:scale-110"
                   style={{

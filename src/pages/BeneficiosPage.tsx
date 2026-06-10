@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Globe, ShieldCheck, Clock, TrendingUp, Sparkles } from "lucide-react";
 import Layout from "../components/layout/Layout";
+import FloatingPhoneButton from "../components/ui/FloatingPhoneButton";
 
 const BENEFITS = [
   {
@@ -39,13 +40,6 @@ export function BeneficiosPage() {
   return (
     <Layout>
       <section className="relative pt-36 pb-16 px-6 overflow-hidden">
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(ellipse 80% 50% at 50% 20%, rgba(93,173,226,0.15) 0%, transparent 55%)",
-          }}
-        />
         <div className="max-w-5xl mx-auto relative z-10 text-center">
           <p
             style={{
@@ -149,6 +143,7 @@ export function BeneficiosPage() {
           ))}
         </div>
       </section>
+      <FloatingPhoneButton />
     </Layout>
   );
 }
