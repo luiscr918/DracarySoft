@@ -40,20 +40,30 @@ export default function Footer() {
     <footer
       className="relative mt-24 overflow-hidden"
       style={{
-        background: "linear-gradient(180deg, #050B14 0%, #0A0F1E 100%)",
-        borderTop: "1px solid rgba(46,134,171,0.12)",
+        // Base sólida levemente más clara que el body (#050B14)
+        // para que el "glass" se distinga del fondo de página
+        background:
+          "linear-gradient(180deg, rgba(13,22,38,0.35) 0%, rgba(8,15,28,0.35) 100%)",
+        backdropFilter: "blur(10px)",
+
+        // Bevel superior luminoso (la línea de "cristal")
+        borderTop: "1px solid rgba(255,255,255,0.10)",
+
+        // Sombra interior que simula profundidad del vidrio
+        boxShadow:
+          "inset 0 1px 0 rgba(255,255,255,0.07), inset 0 0 80px rgba(46,134,171,0.04)",
       }}
     >
-      {/* Glow top ← era naranja */}
+      {/* Capa 1: tinte de vidrio — simula el "frosted" con gradiente */}
       <div
-        className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-px"
+        className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "linear-gradient(90deg, transparent, rgba(192,57,43,0.4), transparent)",
+            "linear-gradient(145deg, rgba(255,255,255,0.03) 0%, rgba(93,173,226,0.02) 50%, rgba(255,255,255,0.01) 100%)",
         }}
       />
 
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
           {/* Brand */}
           <div className="md:col-span-2">
@@ -75,7 +85,6 @@ export default function Footer() {
                 >
                   DRACARY
                 </span>
-                {/* ← era gradiente rojo→naranja, ahora rojo sólido */}
                 <span
                   style={{
                     fontFamily: "'Cinzel', serif",
@@ -102,7 +111,7 @@ export default function Footer() {
               que buscan crecer en el entorno digital.
             </p>
 
-            {/* Social */}
+            {/* Social — iconos con micro glass (funciona porque hay contraste vs fondo del footer) */}
             <div className="flex gap-3 mt-6">
               {SOCIAL.map(({ icon: Icon, href, label }) => (
                 <a
@@ -110,25 +119,29 @@ export default function Footer() {
                   href={href}
                   target="_blank"
                   aria-label={label}
-                  className="w-9 h-9 flex items-center justify-center rounded-lg transition-all duration-200 hover:scale-110"
+                  className="w-9 h-9 flex items-center justify-center rounded-lg transition-all duration-300 hover:scale-110"
                   style={{
-                    background: "rgba(46,134,171,0.08)",
-                    border: "1px solid rgba(46,134,171,0.2)",
+                    background: "rgba(255,255,255,0.06)",
+                    border: "1px solid rgba(255,255,255,0.12)",
+                    boxShadow:
+                      "inset 0 1px 0 rgba(255,255,255,0.1), inset 0 -1px 0 rgba(0,0,0,0.1)",
                     color: "#4A5A7A",
                   }}
                   onMouseEnter={(e) => {
-                    (e.currentTarget as HTMLElement).style.color = "#5DADE2";
-                    (e.currentTarget as HTMLElement).style.borderColor =
-                      "rgba(93,173,226,0.4)";
-                    (e.currentTarget as HTMLElement).style.background =
-                      "rgba(46,134,171,0.15)";
+                    const el = e.currentTarget as HTMLElement;
+                    el.style.color = "#5DADE2";
+                    el.style.borderColor = "rgba(93,173,226,0.4)";
+                    el.style.background = "rgba(93,173,226,0.12)";
+                    el.style.boxShadow =
+                      "inset 0 1px 0 rgba(255,255,255,0.18), 0 0 14px rgba(93,173,226,0.25)";
                   }}
                   onMouseLeave={(e) => {
-                    (e.currentTarget as HTMLElement).style.color = "#4A5A7A";
-                    (e.currentTarget as HTMLElement).style.borderColor =
-                      "rgba(46,134,171,0.2)";
-                    (e.currentTarget as HTMLElement).style.background =
-                      "rgba(46,134,171,0.08)";
+                    const el = e.currentTarget as HTMLElement;
+                    el.style.color = "#4A5A7A";
+                    el.style.borderColor = "rgba(255,255,255,0.12)";
+                    el.style.background = "rgba(255,255,255,0.06)";
+                    el.style.boxShadow =
+                      "inset 0 1px 0 rgba(255,255,255,0.1), inset 0 -1px 0 rgba(0,0,0,0.1)";
                   }}
                 >
                   <Icon size={15} />
@@ -203,7 +216,9 @@ export default function Footer() {
         {/* Bottom bar */}
         <div
           className="mt-12 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3"
-          style={{ borderTop: "1px solid rgba(46,134,171,0.1)" }}
+          style={{
+            borderTop: "1px solid rgba(255,255,255,0.06)",
+          }}
         >
           <p
             style={{
@@ -223,7 +238,6 @@ export default function Footer() {
             }}
           >
             <span>Hecho en Ecuador</span>
-            {/* ← era #E67E22 */}
             <Flame size={12} style={{ color: "#C0392B" }} />
           </div>
         </div>
