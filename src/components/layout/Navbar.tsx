@@ -12,10 +12,149 @@ const NAV_LINKS = [
   { path: "/nosotros", label: "Nosotros" },
 ];
 
+// ─── Liquid Glass CSS (inyectado una sola vez) ───────────────────────────────
+const LIQUID_GLASS_STYLES = `
+  @keyframes liquidSpecular {
+    0%   { transform: translateX(-120%) skewX(-20deg); }
+    100% { transform: translateX(220%)  skewX(-20deg); }
+  }
+
+  .liquid-glass-nav {
+    /* Capa de vidrio */
+    background: rgba(255, 255, 255, 0.045) !important;
+    backdrop-filter: blur(28px) saturate(180%) brightness(1.08) !important;
+    -webkit-backdrop-filter: blur(28px) saturate(180%) brightness(1.08) !important;
+
+    /* Borde luminoso superior (bevel) */
+    border-top: 1px solid rgba(255, 255, 255, 0.18) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+    border-left: none !important;
+    border-right: none !important;
+
+    /* Sombra interna + externa para profundidad */
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.12),
+      inset 0 -1px 0 rgba(0,0,0,0.08),
+      0 8px 32px rgba(0,0,0,0.45),
+      0 2px 8px rgba(0,0,0,0.3) !important;
+  }
+
+  /* Reflejo especular que cruza la navbar */
+  .liquid-glass-nav::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      105deg,
+      transparent 20%,
+      rgba(255,255,255,0.04) 40%,
+      rgba(255,255,255,0.09) 50%,
+      rgba(255,255,255,0.04) 60%,
+      transparent 80%
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Rim light (bevel inferior sutil) */
+  .liquid-glass-nav::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(93,173,226,0.15) 30%,
+      rgba(255,255,255,0.08) 50%,
+      rgba(93,173,226,0.15) 70%,
+      transparent
+    );
+    pointer-events: none;
+  }
+
+  /* Liquid glass para el menú mobile */
+  .liquid-glass-mobile {
+    background: rgba(5, 11, 20, 0.55) !important;
+    backdrop-filter: blur(32px) saturate(200%) brightness(1.05) !important;
+    -webkit-backdrop-filter: blur(32px) saturate(200%) brightness(1.05) !important;
+    border-bottom: 1px solid rgba(255,255,255,0.08) !important;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.1),
+      0 20px 60px rgba(0,0,0,0.7) !important;
+  }
+
+  /* Botón hamburguesa con micro glass */
+  .liquid-glass-btn {
+    background: rgba(255,255,255,0.06) !important;
+    backdrop-filter: blur(12px) saturate(150%) !important;
+    -webkit-backdrop-filter: blur(12px) saturate(150%) !important;
+    border: 1px solid rgba(255,255,255,0.12) !important;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.1) !important;
+    transition: all 0.2s ease !important;
+  }
+  .liquid-glass-btn:hover {
+    background: rgba(192,57,43,0.12) !important;
+    border-color: rgba(192,57,43,0.3) !important;
+  }
+
+  /* CTA pill con glass + gradiente rojo */
+  .liquid-glass-cta {
+    background: linear-gradient(
+      135deg,
+      rgba(192,57,43,0.85),
+      rgba(169,50,38,0.9)
+    ) !important;
+    backdrop-filter: blur(12px) saturate(150%) !important;
+    -webkit-backdrop-filter: blur(12px) saturate(150%) !important;
+    border: 1px solid rgba(255,255,255,0.15) !important;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.2),
+      0 4px 16px rgba(192,57,43,0.4),
+      0 1px 4px rgba(0,0,0,0.3) !important;
+    position: relative;
+    overflow: hidden;
+  }
+  .liquid-glass-cta::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 50%;
+    background: linear-gradient(
+      180deg,
+      rgba(255,255,255,0.12),
+      transparent
+    );
+    border-radius: inherit;
+    pointer-events: none;
+  }
+  .liquid-glass-cta:hover {
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.25),
+      0 4px 24px rgba(192,57,43,0.65),
+      0 1px 6px rgba(0,0,0,0.4) !important;
+  }
+`;
+
+let stylesInjected = false;
+function injectStyles() {
+  if (stylesInjected) return;
+  const style = document.createElement("style");
+  style.textContent = LIQUID_GLASS_STYLES;
+  document.head.appendChild(style);
+  stylesInjected = true;
+}
+
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
+
+  useEffect(() => {
+    injectStyles();
+  }, []);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -24,7 +163,8 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
-    setMenuOpen(false);
+    const frame = window.requestAnimationFrame(() => setMenuOpen(false));
+    return () => window.cancelAnimationFrame(frame);
   }, [location]);
 
   return (
@@ -33,20 +173,20 @@ export default function Navbar() {
         initial={{ y: -80, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-        className="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+          scrolled ? "liquid-glass-nav" : ""
+        }`}
         style={{
+          // Estado sin scroll: gradiente sutil, sin glass todavía
           background: scrolled
-            ? "rgba(5,11,20,0.92)"
-            : "linear-gradient(180deg, rgba(5,11,20,0.8) 0%, transparent 100%)",
-          backdropFilter: scrolled ? "blur(16px)" : "none",
-          borderBottom: scrolled
-            ? "1px solid rgba(46,134,171,0.15)"
-            : "1px solid transparent",
-          boxShadow: scrolled ? "0 4px 32px rgba(0,0,0,0.5)" : "none",
+            ? undefined // la clase CSS lo maneja
+            : "linear-gradient(180deg, rgba(5,11,20,0.7) 0%, transparent 100%)",
+          borderBottom: scrolled ? undefined : "1px solid transparent",
         }}
       >
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
           <div className="flex items-center justify-between h-16 md:h-20">
+
             {/* Logo */}
             <NavLink to="/" className="flex items-center gap-3 group">
               <div className="relative">
@@ -55,9 +195,8 @@ export default function Navbar() {
                   alt="DracarySoft"
                   className="w-9 h-9 object-contain transition-transform duration-300 group-hover:scale-110"
                 />
-                {/* ← hover glow era naranja */}
                 <div
-                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full"
                   style={{ boxShadow: "0 0 20px rgba(192,57,43,0.6)" }}
                 />
               </div>
@@ -73,7 +212,6 @@ export default function Navbar() {
                 >
                   DRACARY
                 </span>
-                {/* ← era gradiente rojo→naranja, ahora rojo sólido */}
                 <span
                   style={{
                     fontFamily: "'Cinzel', serif",
@@ -106,18 +244,16 @@ export default function Navbar() {
                       >
                         {link.label}
                       </span>
-                      {/* ← underline era rojo→naranja, ahora rojo oscuro */}
                       <span
                         className="absolute bottom-0 left-1/2 -translate-x-1/2 h-px transition-all duration-300"
                         style={{
                           width: isActive ? "70%" : "0%",
-                          background:
-                            "linear-gradient(90deg, #C0392B, #A93226)",
+                          background: "linear-gradient(90deg, #C0392B, #A93226)",
                         }}
                       />
                       <span
                         className="absolute inset-0 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-200"
-                        style={{ background: "rgba(46,134,171,0.06)" }}
+                        style={{ background: "rgba(255,255,255,0.04)" }}
                       />
                     </>
                   )}
@@ -129,22 +265,11 @@ export default function Navbar() {
             <div className="flex items-center gap-4">
               <NavLink
                 to="/contacto"
-                className="hidden md:flex items-center gap-2 px-5 py-2 rounded-full text-sm font-semibold transition-all duration-300 hover:scale-105 active:scale-95"
+                className="liquid-glass-cta hidden md:flex items-center gap-2 px-5 py-2 rounded-full text-sm font-semibold transition-all duration-300 hover:scale-105 active:scale-95"
                 style={{
                   fontFamily: "'Cinzel', serif",
-                  // ← era rojo→naranja
-                  background: "linear-gradient(135deg, #C0392B, #A93226)",
                   color: "#fff",
-                  boxShadow: "0 4px 16px rgba(192,57,43,0.35)",
                 }}
-                onMouseEnter={(e) =>
-                  (e.currentTarget.style.boxShadow =
-                    "0 4px 24px rgba(192,57,43,0.6)")
-                }
-                onMouseLeave={(e) =>
-                  (e.currentTarget.style.boxShadow =
-                    "0 4px 16px rgba(192,57,43,0.35)")
-                }
               >
                 <Flame size={14} />
                 Contáctanos
@@ -152,14 +277,8 @@ export default function Navbar() {
 
               <button
                 onClick={() => setMenuOpen((v) => !v)}
-                className="md:hidden w-10 h-10 flex items-center justify-center rounded-lg transition-colors duration-200"
-                style={{
-                  background: menuOpen
-                    ? "rgba(192,57,43,0.15)"
-                    : "rgba(46,134,171,0.1)",
-                  border: "1px solid rgba(46,134,171,0.2)",
-                  color: "#5DADE2",
-                }}
+                className="liquid-glass-btn md:hidden w-10 h-10 flex items-center justify-center rounded-lg"
+                style={{ color: "#5DADE2" }}
                 aria-label="Menú"
               >
                 {menuOpen ? <X size={20} /> : <Menu size={20} />}
@@ -177,13 +296,7 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.25, ease: "easeOut" }}
-            className="fixed top-16 left-0 right-0 z-40 md:hidden"
-            style={{
-              background: "rgba(5,11,20,0.97)",
-              backdropFilter: "blur(20px)",
-              borderBottom: "1px solid rgba(46,134,171,0.2)",
-              boxShadow: "0 20px 40px rgba(0,0,0,0.6)",
-            }}
+            className="liquid-glass-mobile fixed top-16 left-0 right-0 z-40 md:hidden"
           >
             <div className="flex flex-col px-6 py-4 gap-1">
               {NAV_LINKS.map((link, i) => (
@@ -201,9 +314,8 @@ export default function Navbar() {
                       fontFamily: "'Cinzel', serif",
                       color: isActive ? "#5DADE2" : "#8899BB",
                       background: isActive
-                        ? "rgba(46,134,171,0.1)"
+                        ? "rgba(255,255,255,0.05)"
                         : "transparent",
-                      // ← era #E67E22
                       borderLeft: isActive
                         ? "2px solid #C0392B"
                         : "2px solid transparent",
@@ -219,15 +331,13 @@ export default function Navbar() {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.35 }}
                 className="mt-3 pt-3"
-                style={{ borderTop: "1px solid rgba(46,134,171,0.15)" }}
+                style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}
               >
                 <NavLink
                   to="/contacto"
-                  className="flex items-center justify-center gap-2 w-full py-3 rounded-full font-semibold text-sm"
+                  className="liquid-glass-cta flex items-center justify-center gap-2 w-full py-3 rounded-full font-semibold text-sm"
                   style={{
                     fontFamily: "'Cinzel', serif",
-                    // ← era rojo→naranja
-                    background: "linear-gradient(135deg, #C0392B, #A93226)",
                     color: "#fff",
                   }}
                 >

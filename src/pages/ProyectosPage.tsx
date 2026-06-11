@@ -39,7 +39,7 @@ interface Project {
   repoUrl?: string;
   thumbnail?: string;
   localImage?: string;
-  apkUrl?: string;   // descarga directa de APK
+  apkUrl?: string; // descarga directa de APK
 }
 
 const PROJECTS: Project[] = [
@@ -48,7 +48,7 @@ const PROJECTS: Project[] = [
     title: "GymPro — Sitio Web",
     client: "Gimnasio Fitness",
     category: "web",
-    tags: ["Angular", "TypeScript", "Tailwind","Firebase"],
+    tags: ["Angular", "TypeScript", "Tailwind", "Firebase"],
     desc: "Sitio web para gimnasio con planes de membresía, horarios de clases, galería y formulario de contacto. Diseño moderno y carga ultra rápida.",
     color: "#2E86AB",
     glow: "rgba(46,134,171,0.3)",
@@ -103,7 +103,7 @@ const PROJECTS: Project[] = [
     title: "AutoService — Taller Web",
     client: "Taller Automotriz",
     category: "web",
-    tags: ["React", "TypeScript", "SEO","Firebase"],
+    tags: ["React", "TypeScript", "SEO", "Firebase"],
     desc: "Sitio web para taller automotriz con catálogo de servicios, agendamiento de citas, testimonios de clientes y optimización SEO local.",
     color: "#1B4F72",
     glow: "rgba(27,79,114,0.3)",
@@ -157,8 +157,8 @@ function ProjectThumbnail({
   const src = localImage
     ? localImage
     : url
-    ? `https://api.microlink.io/?url=${encodeURIComponent(url)}&screenshot=true&meta=false&embed=screenshot.url`
-    : null;
+      ? `https://api.microlink.io/?url=${encodeURIComponent(url)}&screenshot=true&meta=false&embed=screenshot.url`
+      : null;
 
   return (
     <div
@@ -211,7 +211,11 @@ function ProjectThumbnail({
             background: `linear-gradient(135deg, ${color}cc, rgba(0,0,0,0.75))`,
           }}
         >
-          {isApk ? <Download size={22} color="#fff" /> : <ExternalLink size={22} color="#fff" />}
+          {isApk ? (
+            <Download size={22} color="#fff" />
+          ) : (
+            <ExternalLink size={22} color="#fff" />
+          )}
           <span
             style={{
               fontFamily: "'Exo 2', sans-serif",
@@ -284,10 +288,12 @@ function ProjectCard({ project }: { project: Project }) {
       }}
       onMouseEnter={(e) => {
         (e.currentTarget as HTMLElement).style.borderColor = `${color}35`;
-        (e.currentTarget as HTMLElement).style.boxShadow = `0 20px 48px ${glow}`;
+        (e.currentTarget as HTMLElement).style.boxShadow =
+          `0 20px 48px ${glow}`;
       }}
       onMouseLeave={(e) => {
-        (e.currentTarget as HTMLElement).style.borderColor = "rgba(46,134,171,0.1)";
+        (e.currentTarget as HTMLElement).style.borderColor =
+          "rgba(46,134,171,0.1)";
         (e.currentTarget as HTMLElement).style.boxShadow = "none";
       }}
     >
@@ -480,7 +486,7 @@ export function ProyectosPage() {
       gsap.fromTo(
         headerRef.current,
         { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }
+        { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" },
       );
     }
     return () => {
@@ -499,14 +505,7 @@ export function ProyectosPage() {
               "radial-gradient(ellipse 70% 50% at 50% 0%, rgba(192,57,43,0.1) 0%, transparent 70%)",
           }}
         />
-        <div
-          className="absolute inset-0 pointer-events-none opacity-[0.035]"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgba(46,134,171,1) 1px, transparent 1px), linear-gradient(90deg, rgba(46,134,171,1) 1px, transparent 1px)",
-            backgroundSize: "60px 60px",
-          }}
-        />
+       
 
         <div
           ref={headerRef}
@@ -706,7 +705,7 @@ export function ProyectosPage() {
           </NavLink>
         </div>
       </section>
-       <FloatingPhoneButton />
+      <FloatingPhoneButton />
     </Layout>
   );
 }

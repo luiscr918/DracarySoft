@@ -76,7 +76,7 @@ export default function Layout({ children }: LayoutProps) {
           position: "fixed",
           inset: 0,
           background:
-            "linear-gradient(to bottom, rgba(5,11,20,0.55) 0%, rgba(5,11,20,0.35) 50%, rgba(5,11,20,0.75) 100%)",
+            "linear-gradient(to bottom, rgba(5,11,20,0.55) 0%, rgba(5,11,20,0.35) 50%, rgba(5,11,20,0.45) 100%)",
           zIndex: 2,
           pointerEvents: "none",
         }}
