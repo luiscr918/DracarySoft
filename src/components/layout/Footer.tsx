@@ -63,15 +63,6 @@ export default function Footer() {
         }}
       />
 
-      {/* Capa 3: glow azul difuso en la parte inferior (reflejo de página) */}
-      <div
-        className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(ellipse 60% 100% at 50% 100%, rgba(46,134,171,0.06) 0%, transparent 100%)",
-        }}
-      />
-
       <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
           {/* Brand */}
