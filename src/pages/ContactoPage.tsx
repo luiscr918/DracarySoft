@@ -297,8 +297,8 @@ export function ContactoPage() {
                   color: "#1877F2",
                   bg: "rgba(24,119,242,0.15)",
                   label: "Facebook",
-                  value: "DracarySoft Dev",
-                  href: "https://www.facebook.com/profile.php?id=61590517209271",
+                  value: "DracarySoft",
+                  href: "https://www.facebook.com/profile.php?id=61590437895340",
                 },
                 {
                   icon: MapPin,
