@@ -27,7 +27,7 @@ const SOCIAL = [
   },
   {
     icon: BsFacebook,
-    href: "https://www.facebook.com/profile.php?id=61590517209271",
+    href: "https://www.facebook.com/profile.php?id=61590437895340",
     label: "Facebook",
   },
   { icon: MailIcon, href: "mailto:dracarysoft@gmail.com", label: "Email" },
