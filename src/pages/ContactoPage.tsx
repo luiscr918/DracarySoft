@@ -10,6 +10,7 @@ import emailjs from "@emailjs/browser";
 import Layout from "../components/layout/Layout";
 import FloatingPhoneButton from "../components/ui/FloatingPhoneButton";
 import { BsInstagram, BsTiktok, BsFacebook } from "react-icons/bs";
+import { SEO } from "../components/seo/SEO";
 
 const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
 const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
@@ -53,6 +54,7 @@ export function ContactoPage() {
 
   return (
     <Layout>
+      <SEO title="Contacto" description="Contáctanos para recibir una cotización personalizada para tu proyecto digital sin compromiso." url="/contacto" />
       <section className="relative pt-36 pb-24 px-6 overflow-hidden">
         <div
           className="absolute inset-0"

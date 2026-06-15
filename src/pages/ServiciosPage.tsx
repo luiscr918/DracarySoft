@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import Layout from "../components/layout/Layout";
 import FloatingPhoneButton from "../components/ui/FloatingPhoneButton";
+import { SEO } from "../components/seo/SEO";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -369,6 +370,7 @@ export function ServiciosPage() {
 
   return (
     <Layout>
+      <SEO title="Servicios" description="Soluciones digitales: páginas web, aplicaciones web, landing pages y presencia digital para emprendedores." url="/servicios" />
       {/* ── HERO ──────────────────────────────────────────────────────────── */}
       <section className="relative pt-36 pb-20 px-6 overflow-hidden">
         <div className="max-w-3xl mx-auto text-center relative z-10">

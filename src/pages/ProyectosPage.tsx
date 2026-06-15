@@ -17,6 +17,7 @@ import Layout from "../components/layout/Layout";
 import totemImg from "../assets/imgs/totem-splash.png";
 import totemAppImg from "../assets/imgs/totem-app.jpeg";
 import FloatingPhoneButton from "../components/ui/FloatingPhoneButton";
+import { SEO } from "../components/seo/SEO";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -176,6 +177,7 @@ function ProjectThumbnail({
       {/* Screenshot */}
       {!error && src && (
         <img
+          loading="lazy"
           src={src}
           alt={`Preview de ${title}`}
           onLoad={() => setLoaded(true)}
@@ -496,6 +498,7 @@ export function ProyectosPage() {
 
   return (
     <Layout>
+      <SEO title="Proyectos" description="Portafolio de proyectos digitales: páginas web, aplicaciones web y landing pages creadas por DracarySoft." url="/proyectos" />
       {/* ── HERO ──────────────────────────────────────────────────────────── */}
       <section className="relative pt-36 pb-16 px-6 overflow-hidden">
         <div
@@ -565,6 +568,7 @@ export function ProyectosPage() {
               <button
                 key={key}
                 onClick={() => setActiveFilter(key)}
+                aria-pressed={activeFilter === key}
                 className="px-5 py-2 rounded-full text-sm font-medium transition-all duration-300"
                 style={{
                   fontFamily: "'Exo 2', sans-serif",

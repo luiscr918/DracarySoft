@@ -6,6 +6,10 @@ import Footer from "./Footer";
 import bgVideo from "../../assets/vids/bg1.mp4";
 import bgImage from "../../assets/imgs/fonditoDracarys.jpg";
 
+const prefersReducedMotion = () =>
+  typeof window !== "undefined" &&
+  window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
 interface LayoutProps {
   children: React.ReactNode;
 }
@@ -13,16 +17,17 @@ interface LayoutProps {
 export default function Layout({ children }: LayoutProps) {
   const location = useLocation();
   const videoRef = useRef<HTMLVideoElement>(null);
+  const isReduced = prefersReducedMotion();
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "instant" });
   }, [location.pathname]);
 
   useEffect(() => {
-    if (videoRef.current && window.innerWidth >= 768) {
+    if (videoRef.current && window.innerWidth >= 768 && !isReduced) {
       videoRef.current.play().catch(() => {});
     }
-  }, []);
+  }, [isReduced]);
 
   return (
     <div
@@ -89,10 +94,10 @@ export default function Layout({ children }: LayoutProps) {
         <AnimatePresence mode="wait">
           <motion.main
             key={location.pathname}
-            initial={{ opacity: 0, y: 16 }}
+            initial={isReduced ? { opacity: 1 } : { opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+            exit={isReduced ? { opacity: 1 } : { opacity: 0, y: -8 }}
+            transition={isReduced ? { duration: 0 } : { duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
           >
             {children}
           </motion.main>

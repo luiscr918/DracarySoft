@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Target, Sparkles, ShieldCheck } from "lucide-react";
 import Layout from "../components/layout/Layout";
 import FloatingPhoneButton from "../components/ui/FloatingPhoneButton";
+import { SEO } from "../components/seo/SEO";
 
 const VALUES = [
   {
@@ -27,6 +28,7 @@ const VALUES = [
 export function NosotrosPage() {
   return (
     <Layout>
+      <SEO title="Nosotros" description="Conoce a DracarySoft: agencia digital enfocada en emprendedores y pequeños negocios. Misión, visión y valores." url="/nosotros" />
       <section className="relative pt-36 pb-16 px-6 overflow-hidden">
         <div className="max-w-5xl mx-auto relative z-10 text-center">
           <p
@@ -105,8 +107,9 @@ export function NosotrosPage() {
               eficientes.
             </p>
             <img
+              loading="lazy"
               src="/nosotrosImg.jpg"
-              alt="dracarys help us"
+              alt="DracarySoft equipo de trabajo"
               style={{
                 width: "100%",
                 borderRadius: "16px",

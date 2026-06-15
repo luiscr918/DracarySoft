@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
 
 <head>
   <meta charset="UTF-8" />
@@ -7,6 +7,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link href="/src/styles/tailwind.css" rel="stylesheet">
   <title>DracarySoft</title>
+  <meta name="description" content="DracarySoft — Agencia digital especializada en páginas web, aplicaciones web, landing pages y presencia digital para pequeños negocios. Transformamos tu idea en realidad digital." />
+  <meta property="og:title" content="DracarySoft — Transformamos tu negocio en digital" />
+  <meta property="og:description" content="Agencia digital especializada en páginas web, aplicaciones web, landing pages y presencia digital para pequeños negocios." />
+  <meta property="og:image" content="/dracarysAlternativeLogo.svg" />
+  <meta property="og:url" content="https://dracarysoft.com" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="DracarySoft — Transformamos tu negocio en digital" />
+  <meta name="twitter:description" content="Agencia digital especializada en páginas web, aplicaciones web, landing pages y presencia digital para pequeños negocios." />
+  <meta name="twitter:image" content="/dracarysAlternativeLogo.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -47,8 +57,28 @@
       color: #F0F4FF;
     }
 
+    *:focus-visible {
+      outline: 2px solid #5DADE2;
+      outline-offset: 2px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
     html {
       scroll-behavior: smooth;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
     }
 
     body {

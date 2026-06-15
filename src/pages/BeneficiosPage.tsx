@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Globe, ShieldCheck, Clock, TrendingUp, Sparkles } from "lucide-react";
 import Layout from "../components/layout/Layout";
 import FloatingPhoneButton from "../components/ui/FloatingPhoneButton";
+import { SEO } from "../components/seo/SEO";
 
 const BENEFITS = [
   {
@@ -39,6 +40,7 @@ const BENEFITS = [
 export function BeneficiosPage() {
   return (
     <Layout>
+      <SEO title="Beneficios" description="Beneficios de tener presencia digital: credibilidad, disponibilidad 24/7, alcance global y más para tu negocio." url="/beneficios" />
       <section className="relative pt-36 pb-16 px-6 overflow-hidden">
         <div className="max-w-5xl mx-auto relative z-10 text-center">
           <p
@@ -53,6 +55,7 @@ export function BeneficiosPage() {
             BENEFICIOS PARA NEGOCIOS
           </p>
           <img
+            loading="lazy"
             src="/dracarysAlternative.svg"
             alt="DracarySoft"
             style={{
