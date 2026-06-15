@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import Layout from "../components/layout/Layout";
 import FloatingPhoneButton from "../components/ui/FloatingPhoneButton";
+import { SEO } from "../components/seo/SEO";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -119,6 +120,7 @@ export function HomePage() {
 
   return (
     <Layout>
+      <SEO title="Inicio" url="/" />
       {/* ── HERO ─────────────────────────────────────────────────────────────── */}
       <section className="relative min-h-dvh flex flex-col items-center justify-center overflow-hidden pt-20">
         {/* Solo el video de fondo, sin capas adicionales */}

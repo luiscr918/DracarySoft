@@ -6,7 +6,7 @@ import { BsInstagram, BsTiktok, BsFacebook } from "react-icons/bs";
 const LINKS_COL1 = [
   { path: "/servicios", label: "Servicios" },
   { path: "/proyectos", label: "Proyectos" },
-  { path: "/precios", label: "Precios" },
+  { path: "/contacto", label: "Contacto" },
 ];
 const LINKS_COL2 = [
   { path: "/beneficios", label: "Beneficios" },
@@ -69,6 +69,7 @@ export default function Footer() {
           <div className="md:col-span-2">
             <div className="flex items-center gap-3 mb-4">
               <img
+                loading="lazy"
                 src={logoImg}
                 alt="DracarySoft"
                 className="w-10 h-10 object-contain"

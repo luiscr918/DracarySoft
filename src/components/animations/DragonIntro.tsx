@@ -2,6 +2,9 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import dragonImg from "/dracarysAlternativeLogo.svg";
 
+const prefersReducedMotion = () =>
+  window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
 interface DragonIntroProps {
   onComplete: () => void;
 }
@@ -19,6 +22,11 @@ export default function DragonIntro({ onComplete }: DragonIntroProps) {
   const overlayRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (prefersReducedMotion()) {
+      onComplete();
+      return;
+    }
+
     const ctx = gsap.context(() => {
       // ── Estado inicial ──────────────────────────────────────────────────
       gsap.set(dragonRef.current, {
@@ -211,6 +219,7 @@ export default function DragonIntro({ onComplete }: DragonIntroProps) {
           ref={dragonRef}
           src={dragonImg}
           alt="DracarySoft dragon"
+          fetchPriority="high"
           style={{
             width: "clamp(280px, 38vw, 420px)",
             height: "clamp(280px, 38vw, 420px)",

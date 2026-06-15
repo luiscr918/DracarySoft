@@ -39,6 +39,7 @@ export default function FloatingPhoneButton() {
 
           {/* Icono */}
           <img
+            loading="lazy"
             src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
             alt="WhatsApp"
             width={32}
