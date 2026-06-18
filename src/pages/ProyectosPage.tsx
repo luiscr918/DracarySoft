@@ -46,16 +46,16 @@ interface Project {
 const PROJECTS: Project[] = [
   {
     id: 1,
-    title: "GymPro — Sitio Web",
-    client: "Gimnasio Fitness",
+    title: "U.E. Lincoln Larrea",
+    client: "Institución Educativa",
     category: "web",
-    tags: ["Angular", "TypeScript", "Tailwind", "Firebase"],
-    desc: "Sitio web para gimnasio con planes de membresía, horarios de clases, galería y formulario de contacto. Diseño moderno y carga ultra rápida.",
-    color: "#2E86AB",
-    glow: "rgba(46,134,171,0.3)",
+    tags: ["React", "SEO", "Responsive"],
+    desc: "Sitio web institucional para la Unidad Educativa Lincoln Larrea con información académica, noticias, galería de eventos y contacto para padres de familia.",
+    color: "#27AE60",
+    glow: "rgba(39,174,96,0.3)",
     icon: Globe,
     year: "2025",
-    liveUrl: "https://gym-simulator.netlify.app/",
+    liveUrl: "https://uelincolnlarrea.com/",
   },
   {
     id: 2,
@@ -112,18 +112,19 @@ const PROJECTS: Project[] = [
     year: "2024",
     liveUrl: "https://taller-simulator.netlify.app/",
   },
+
   {
     id: 7,
-    title: "U.E. Lincoln Larrea",
-    client: "Institución Educativa",
+    title: "GymPro — Sitio Web",
+    client: "Gimnasio Fitness",
     category: "web",
-    tags: ["React", "SEO", "Responsive"],
-    desc: "Sitio web institucional para la Unidad Educativa Lincoln Larrea con información académica, noticias, galería de eventos y contacto para padres de familia.",
-    color: "#27AE60",
-    glow: "rgba(39,174,96,0.3)",
+    tags: ["Angular", "TypeScript", "Tailwind", "Firebase"],
+    desc: "Sitio web para gimnasio con planes de membresía, horarios de clases, galería y formulario de contacto. Diseño moderno y carga ultra rápida.",
+    color: "#2E86AB",
+    glow: "rgba(46,134,171,0.3)",
     icon: Globe,
     year: "2025",
-    liveUrl: "https://uelincolnlarrea.com/",
+    liveUrl: "https://gym-simulator.netlify.app/",
   },
 ];
 
@@ -498,7 +499,11 @@ export function ProyectosPage() {
 
   return (
     <Layout>
-      <SEO title="Proyectos" description="Portafolio de proyectos digitales: páginas web, aplicaciones web y landing pages creadas por DracarySoft." url="/proyectos" />
+      <SEO
+        title="Proyectos"
+        description="Portafolio de proyectos digitales: páginas web, aplicaciones web y landing pages creadas por DracarySoft."
+        url="/proyectos"
+      />
       {/* ── HERO ──────────────────────────────────────────────────────────── */}
       <section className="relative pt-36 pb-16 px-6 overflow-hidden">
         <div
@@ -508,7 +513,6 @@ export function ProyectosPage() {
               "radial-gradient(ellipse 70% 50% at 50% 0%, rgba(192,57,43,0.1) 0%, transparent 70%)",
           }}
         />
-       
 
         <div
           ref={headerRef}
