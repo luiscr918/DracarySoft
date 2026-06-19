@@ -5,12 +5,12 @@ import {
   type MouseEvent,
 } from "react";
 import { motion } from "framer-motion";
-import { Mail, MapPin, CheckCircle, AlertCircle } from "lucide-react";
+import { MapPin, CheckCircle, AlertCircle } from "lucide-react";
 import emailjs from "@emailjs/browser";
 import Layout from "../components/layout/Layout";
 import FloatingPhoneButton from "../components/ui/FloatingPhoneButton";
-import { BsInstagram, BsTiktok, BsFacebook } from "react-icons/bs";
 import { SEO } from "../components/seo/SEO";
+import { SOCIAL_LINKS } from "../constants/social";
 
 const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
 const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
@@ -51,6 +51,29 @@ export function ContactoPage() {
   const handleLinkLeave = (e: MouseEvent<HTMLAnchorElement>) => {
     e.currentTarget.style.textShadow = "0 0 8px rgba(0,229,255,0.4)";
   };
+
+  const CONTACT_COLORS: Record<string, { color: string; bg: string }> = {
+    Instagram: { color: "#E1306C", bg: "rgba(225,48,108,0.15)" },
+    TikTok: { color: "#F0F4FF", bg: "rgba(240,244,255,0.1)" },
+    Facebook: { color: "#1877F2", bg: "rgba(24,119,242,0.15)" },
+    GitHub: { color: "#F0F4FF", bg: "rgba(240,244,255,0.1)" },
+    Email: { color: "#5DADE2", bg: "rgba(93,173,226,0.15)" },
+  };
+
+  const CONTACT_INFO = [
+    ...SOCIAL_LINKS.map((link) => ({
+      ...link,
+      ...CONTACT_COLORS[link.label],
+    })),
+    {
+      icon: MapPin,
+      color: "#2E86AB" as const,
+      bg: "rgba(46,134,171,0.15)" as const,
+      label: "Ubicación",
+      value: "Quito, Ecuador (servicios remotos disponibles)",
+      href: "https://www.google.com/maps/search/?api=1&query=Quito%2C+Ecuador",
+    },
+  ];
 
   return (
     <Layout>
@@ -268,49 +291,8 @@ export function ContactoPage() {
               botón flotante en la esquina inferior derecha.
             </p>
 
-            <div className="space-y-6">
-              {[
-                {
-                  icon: Mail,
-                  color: "#5DADE2",
-                  bg: "rgba(93,173,226,0.15)",
-                  label: "Email",
-                  value: "dracarysoft@gmail.com",
-                  href: "mailto:dracarysoft@gmail.com",
-                },
-                {
-                  icon: BsInstagram,
-                  color: "#E1306C",
-                  bg: "rgba(225,48,108,0.15)",
-                  label: "Instagram",
-                  value: "@dracarysoft",
-                  href: "https://www.instagram.com/dracarysoft/",
-                },
-                {
-                  icon: BsTiktok,
-                  color: "#F0F4FF",
-                  bg: "rgba(240,244,255,0.1)",
-                  label: "TikTok",
-                  value: "@dracary.soft",
-                  href: "https://www.tiktok.com/@dracary.soft?is_from_webapp=1&sender_device=pc",
-                },
-                {
-                  icon: BsFacebook,
-                  color: "#1877F2",
-                  bg: "rgba(24,119,242,0.15)",
-                  label: "Facebook",
-                  value: "DracarySoft",
-                  href: "https://www.facebook.com/profile.php?id=61590437895340",
-                },
-                {
-                  icon: MapPin,
-                  color: "#2E86AB",
-                  bg: "rgba(46,134,171,0.15)",
-                  label: "Ubicación",
-                  value: "Quito, Ecuador (servicios remotos disponibles)",
-                  href: "https://www.google.com/maps/search/?api=1&query=Quito%2C+Ecuador",
-                },
-              ].map(({ icon: Icon, color, bg, label, value, href }) => (
+<div className="space-y-6">
+              {CONTACT_INFO.map(({ icon: Icon, color, bg, label, value, href }) => (
                 <div key={label} className="flex items-start gap-4">
                   <div
                     className="w-12 h-12 rounded-2xl flex items-center justify-center"
