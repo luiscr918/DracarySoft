@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
-import { Flame, MailIcon } from "lucide-react";
+import { Flame } from "lucide-react";
 import logoImg from "/dracarysAlternativeLogo.svg";
-import { BsInstagram, BsTiktok, BsFacebook } from "react-icons/bs";
+import { SOCIAL_LINKS } from "../../constants/social";
 
 const LINKS_COL1 = [
   { path: "/servicios", label: "Servicios" },
@@ -14,24 +14,7 @@ const LINKS_COL2 = [
   { path: "/contacto", label: "Contacto" },
 ];
 
-const SOCIAL = [
-  {
-    icon: BsInstagram,
-    href: "https://www.instagram.com/dracarysoft/",
-    label: "Instagram",
-  },
-  {
-    icon: BsTiktok,
-    href: "https://www.tiktok.com/@dracary.soft?is_from_webapp=1&sender_device=pc",
-    label: "TikTok",
-  },
-  {
-    icon: BsFacebook,
-    href: "https://www.facebook.com/profile.php?id=61590437895340",
-    label: "Facebook",
-  },
-  { icon: MailIcon, href: "mailto:dracarysoft@gmail.com", label: "Email" },
-];
+
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -114,7 +97,7 @@ export default function Footer() {
 
             {/* Social — iconos con micro glass (funciona porque hay contraste vs fondo del footer) */}
             <div className="flex gap-3 mt-6">
-              {SOCIAL.map(({ icon: Icon, href, label }) => (
+              {SOCIAL_LINKS.map(({ icon: Icon, href, label }) => (
                 <a
                   key={label}
                   href={href}
