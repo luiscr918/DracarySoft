@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import type { KeyboardEvent } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { gsap } from "gsap";
 import { NavLink } from "react-router-dom";
@@ -11,10 +12,17 @@ import {
   ChevronRight,
   GitBranchIcon,
   Download,
+  Factory,
 } from "lucide-react";
 import Layout from "../components/layout/Layout";
 import totemImg from "../assets/imgs/totem-splash.png";
 import totemAppImg from "../assets/imgs/totem-app.jpeg";
+import newInoxImg from "../assets/imgs/projects/new-inox.jpg";
+import extremeBullImg from "../assets/imgs/projects/extreme-bull.jpg";
+import lincolnImg from "../assets/imgs/projects/lincoln.jpg";
+import glowStudioImg from "../assets/imgs/projects/glow-studio.jpg";
+import autoserviceImg from "../assets/imgs/projects/autoservice.jpg";
+import gymproImg from "../assets/imgs/projects/gympro.jpg";
 import FloatingPhoneButton from "../components/ui/FloatingPhoneButton";
 import { SEO } from "../components/seo/SEO";
 
@@ -43,6 +51,34 @@ interface Project {
 const PROJECTS: Project[] = [
   {
     id: 1,
+    title: "New Inox — Ingeniería Industrial",
+    client: "Fabricación en acero inoxidable",
+    category: "web",
+    tags: ["React", "TypeScript", "Tailwind", "SEO"],
+    desc: "Sitio web corporativo para New Inox: diseño, fabricación y mantenimiento de equipos en acero inoxidable para los sectores industrial, alimentario, químico, farmacéutico y cervecería. Proyectos personalizados con enfoque en durabilidad, eficiencia y estándares de calidad.",
+    color: "#90A4AE",
+    glow: "rgba(144,164,174,0.3)",
+    icon: Factory,
+    year: "2026",
+    liveUrl: "https://new-inox.com/",
+    localImage: newInoxImg,
+  },
+  {
+    id: 2,
+    title: "Extreme Bull",
+    client: "Toro mecánico para eventos",
+    category: "landing",
+    tags: ["React", "TypeScript", "Tailwind"],
+    desc: "Landing page para el alquiler de toro mecánico en eventos: formulario de cotización, redes sociales y botón de WhatsApp integrados, con animación de scroll desde el hero.",
+    color: "#E74C3C",
+    glow: "rgba(231,76,60,0.3)",
+    icon: Zap,
+    year: "2026",
+    liveUrl: "https://extremebull.new-inox.com/",
+    localImage: extremeBullImg,
+  },
+  {
+    id: 3,
     title: "U.E. Lincoln Larrea",
     client: "Institución Educativa",
     category: "web",
@@ -52,10 +88,11 @@ const PROJECTS: Project[] = [
     glow: "rgba(39,174,96,0.3)",
     icon: Globe,
     year: "2025",
-    liveUrl: "https://uelincolnlarrea.com/",
+    liveUrl: "https://uelincolnlarrea.netlify.app/",
+    localImage: lincolnImg,
   },
   {
-    id: 2,
+    id: 4,
     title: "Totem Restobar — Web",
     client: "Restaurante & Bar",
     category: "web",
@@ -69,7 +106,7 @@ const PROJECTS: Project[] = [
     localImage: totemImg,
   },
   {
-    id: 3,
+    id: 5,
     title: "Glow Studio — Estética",
     client: "Centro de Estética",
     category: "landing",
@@ -80,9 +117,10 @@ const PROJECTS: Project[] = [
     icon: Zap,
     year: "2025",
     liveUrl: "https://estetica-simulator.netlify.app/",
+    localImage: glowStudioImg,
   },
   {
-    id: 4,
+    id: 6,
     title: "Totem Restobar — App",
     client: "Restaurante & Bar",
     category: "app",
@@ -95,9 +133,8 @@ const PROJECTS: Project[] = [
     localImage: totemAppImg,
     apkUrl: "/app-release.apk",
   },
-
   {
-    id: 6,
+    id: 7,
     title: "AutoService — Taller Web",
     client: "Taller Automotriz",
     category: "web",
@@ -108,10 +145,10 @@ const PROJECTS: Project[] = [
     icon: Globe,
     year: "2024",
     liveUrl: "https://taller-simulator.netlify.app/",
+    localImage: autoserviceImg,
   },
-
   {
-    id: 7,
+    id: 8,
     title: "GymPro — Sitio Web",
     client: "Gimnasio Fitness",
     category: "web",
@@ -122,6 +159,7 @@ const PROJECTS: Project[] = [
     icon: Globe,
     year: "2025",
     liveUrl: "https://gym-simulator.netlify.app/",
+    localImage: gymproImg,
   },
 ];
 
@@ -135,14 +173,12 @@ const FILTERS: { key: Category; label: string }[] = [
 // ─── Thumbnail con hover overlay (Opción 1) ────────────────────────────────────
 
 function ProjectThumbnail({
-  url,
   localImage,
   title,
   color,
   isClickable,
   isApk = false,
 }: {
-  url?: string;
   localImage?: string;
   title: string;
   color: string;
@@ -151,13 +187,6 @@ function ProjectThumbnail({
 }) {
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState(false);
-
-  // Si hay imagen local la usamos directamente, si no generamos screenshot vía microlink
-  const src = localImage
-    ? localImage
-    : url
-      ? `https://api.microlink.io/?url=${encodeURIComponent(url)}&screenshot=true&meta=false&embed=screenshot.url`
-      : null;
 
   return (
     <div
@@ -172,11 +201,11 @@ function ProjectThumbnail({
         />
       )}
 
-      {/* Screenshot */}
-      {!error && src && (
+      {/* Screenshot local */}
+      {!error && localImage && (
         <img
           loading="lazy"
-          src={src}
+          src={localImage}
           alt={`Preview de ${title}`}
           onLoad={() => setLoaded(true)}
           onError={() => setError(true)}
@@ -264,13 +293,32 @@ function ProjectCard({ project }: { project: Project }) {
     year,
     liveUrl,
     repoUrl,
-    thumbnail,
     localImage,
     apkUrl,
   } = project;
 
   const isClickable = Boolean(liveUrl || apkUrl);
-  const hasPreview = Boolean(liveUrl || thumbnail || localImage || apkUrl);
+  const hasPreview = Boolean(localImage);
+
+  const openProject = () => {
+    if (liveUrl) {
+      window.open(liveUrl, "_blank", "noopener,noreferrer");
+    } else if (apkUrl) {
+      const link = document.createElement("a");
+      link.href = apkUrl;
+      link.download = "app-release.apk";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  };
+
+  const handleKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      openProject();
+    }
+  };
 
   const cardContent = (
     <motion.div
@@ -286,6 +334,10 @@ function ProjectCard({ project }: { project: Project }) {
         backdropFilter: "blur(8px)",
         cursor: isClickable ? "pointer" : "default",
       }}
+      role={isClickable ? "link" : undefined}
+      tabIndex={isClickable ? 0 : undefined}
+      onClick={isClickable ? openProject : undefined}
+      onKeyDown={isClickable ? handleKeyDown : undefined}
       onMouseEnter={(e) => {
         (e.currentTarget as HTMLElement).style.borderColor = `${color}35`;
         (e.currentTarget as HTMLElement).style.boxShadow =
@@ -300,7 +352,6 @@ function ProjectCard({ project }: { project: Project }) {
       {/* ── Thumbnail con overlay ── */}
       {hasPreview && (
         <ProjectThumbnail
-          url={liveUrl || thumbnail}
           localImage={localImage}
           title={title}
           color={color}
@@ -439,33 +490,6 @@ function ProjectCard({ project }: { project: Project }) {
       />
     </motion.div>
   );
-
-  // Si tiene liveUrl → abre en nueva pestaña
-  if (liveUrl) {
-    return (
-      <a
-        href={liveUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        style={{ textDecoration: "none" }}
-      >
-        {cardContent}
-      </a>
-    );
-  }
-
-  // Si tiene apkUrl → descarga directa al hacer clic en la card
-  if (apkUrl) {
-    return (
-      <a
-        href={apkUrl}
-        download="app-release.apk"
-        style={{ textDecoration: "none" }}
-      >
-        {cardContent}
-      </a>
-    );
-  }
 
   return cardContent;
 }
