@@ -110,6 +110,8 @@ export function NosotrosPage() {
               loading="lazy"
               src="/nosotrosImg.jpg"
               alt="DracarySoft equipo de trabajo"
+              width="600"
+              height="400"
               style={{
                 width: "100%",
                 borderRadius: "16px",

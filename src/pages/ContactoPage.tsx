@@ -6,7 +6,6 @@ import {
 } from "react";
 import { motion } from "framer-motion";
 import { MapPin, CheckCircle, AlertCircle } from "lucide-react";
-import emailjs from "@emailjs/browser";
 import Layout from "../components/layout/Layout";
 import FloatingPhoneButton from "../components/ui/FloatingPhoneButton";
 import { SEO } from "../components/seo/SEO";
@@ -30,6 +29,7 @@ export function ContactoPage() {
     e.preventDefault();
     setStatus("loading");
     try {
+      const emailjs = await import("@emailjs/browser");
       await emailjs.send(
         SERVICE_ID,
         TEMPLATE_ID,

@@ -6,7 +6,7 @@ import { SOCIAL_LINKS } from "../../constants/social";
 const LINKS_COL1 = [
   { path: "/servicios", label: "Servicios" },
   { path: "/proyectos", label: "Proyectos" },
-  { path: "/contacto", label: "Contacto" },
+  { path: "/preguntas-frecuentes", label: "Preguntas frecuentes" },
 ];
 const LINKS_COL2 = [
   { path: "/beneficios", label: "Beneficios" },

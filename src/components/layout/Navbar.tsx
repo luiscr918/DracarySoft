@@ -10,6 +10,7 @@ const NAV_LINKS = [
   { path: "/proyectos", label: "Proyectos" },
   { path: "/beneficios", label: "Beneficios" },
   { path: "/nosotros", label: "Nosotros" },
+  { path: "/preguntas-frecuentes", label: "FAQ" },
 ];
 
 // ─── Liquid Glass CSS (inyectado una sola vez) ───────────────────────────────

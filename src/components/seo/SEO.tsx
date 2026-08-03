@@ -5,6 +5,7 @@ interface SEOProps {
   description?: string;
   image?: string;
   url?: string;
+  schema?: Record<string, unknown>;
 }
 
 const SITE_NAME = "DracarySoft";
@@ -13,11 +14,34 @@ const DEFAULT_DESC =
   "Agencia digital especializada en páginas web, aplicaciones web, landing pages y presencia digital para pequeños negocios.";
 const DEFAULT_IMG = "/dracarysAlternativeLogo.svg";
 
+const ORGANIZATION_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "DracarySoft",
+  url: "https://dracarysoft.com",
+  logo: "https://dracarysoft.com/dracarysAlternativeLogo.svg",
+  description: DEFAULT_DESC,
+  email: "dracarysoft@gmail.com",
+  sameAs: [
+    "https://www.instagram.com/dracarysoft/",
+    "https://www.tiktok.com/@dracary.soft",
+    "https://www.facebook.com/profile.php?id=61590437895340",
+    "https://github.com/luiscr918",
+  ],
+  contactPoint: {
+    "@type": "ContactPoint",
+    contactType: "customer service",
+    email: "dracarysoft@gmail.com",
+    availableLanguage: ["Spanish"],
+  },
+};
+
 export function SEO({
   title,
   description = DEFAULT_DESC,
   image = DEFAULT_IMG,
   url,
+  schema,
 }: SEOProps) {
   const fullTitle = `${title} | ${SITE_NAME}`;
   const fullUrl = url ? `${BASE_URL}${url}` : BASE_URL;
@@ -35,6 +59,14 @@ export function SEO({
       <meta name="twitter:title" content={fullTitle} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={image} />
+      <script type="application/ld+json">
+        {JSON.stringify(ORGANIZATION_SCHEMA)}
+      </script>
+      {schema && (
+        <script type="application/ld+json">
+          {JSON.stringify(schema)}
+        </script>
+      )}
     </Helmet>
   );
 }

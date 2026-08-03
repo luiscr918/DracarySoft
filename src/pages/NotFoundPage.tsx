@@ -40,6 +40,26 @@ export function NotFoundPage() {
         >
           Volver al inicio
         </NavLink>
+        <p
+          style={{
+            fontFamily: "'Exo 2', sans-serif",
+            fontSize: "0.9rem",
+            color: "#4A5A7A",
+            marginTop: "1.5rem",
+          }}
+        >
+          También puedes revisar nuestras{" "}
+          <NavLink
+            to="/preguntas-frecuentes"
+            style={{
+              color: "#5DADE2",
+              textDecoration: "underline",
+              textUnderlineOffset: "3px",
+            }}
+          >
+            preguntas frecuentes
+          </NavLink>
+        </p>
       </section>
     </Layout>
   );

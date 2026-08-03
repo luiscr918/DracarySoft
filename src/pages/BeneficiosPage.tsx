@@ -58,6 +58,8 @@ export function BeneficiosPage() {
             loading="lazy"
             src="/dracarysAlternative.svg"
             alt="DracarySoft"
+            width="250"
+            height="250"
             style={{
               height: "250px",
               width: "auto",

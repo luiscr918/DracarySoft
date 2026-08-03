@@ -1,0 +1,26 @@
+# DracarySoft — Agencia digital para pequeños negocios
+
+DracarySoft es una agencia digital especializada en páginas web, aplicaciones web, landing pages y presencia digital para emprendedores y pequeños negocios. Transformamos tu idea en realidad digital con soluciones modernas, accesibles y efectivas.
+
+## Páginas principales
+
+- [Inicio](https://dracarysoft.com/): Página principal con servicios destacados, estadísticas y llamado a la acción para impulsar tu negocio digital.
+- [Servicios](https://dracarysoft.com/servicios): Catálogo completo de soluciones digitales: páginas web, landing pages, tiendas online, aplicaciones web, sistemas a medida, estrategia digital, presencia en Google y mantenimiento web.
+- [Proyectos](https://dracarysoft.com/proyectos): Portafolio de proyectos realizados con filtros por categoría (páginas web, aplicaciones, landing pages).
+- [Beneficios](https://dracarysoft.com/beneficios): Ventajas de tener presencia digital profesional: credibilidad, disponibilidad 24/7, más oportunidades, ahorro de tiempo e imagen moderna.
+- [Nosotros](https://dracarysoft.com/nosotros): Quiénes somos, misión, visión y valores de DracarySoft.
+- [Contacto](https://dracarysoft.com/contacto): Formulario de contacto para solicitar cotización personalizada sin compromiso. Datos de contacto, redes sociales y WhatsApp.
+- [Preguntas frecuentes](https://dracarysoft.com/preguntas-frecuentes): Preguntas frecuentes organizadas por temas: servicios y precios, proceso de trabajo, tecnologías, SEO, diseño responsive, e-commerce y más.
+
+## Recursos para agentes IA
+
+Este sitio ofrece contenido estructurado con JSON-LD (schema.org) incluyendo Organization, FAQPage, Service y BreadcrumbList. Las preguntas frecuentes están diseñadas con formato conversacional para facilitar su extracción por modelos de lenguaje y AI Overviews.
+
+## Contacto
+
+- Email: dracarysoft@gmail.com
+- Instagram: @dracarysoft
+- TikTok: @dracary.soft
+- Facebook: DracarySoft
+- GitHub: @luiscr918
+- WhatsApp: disponible en el botón flotante del sitio

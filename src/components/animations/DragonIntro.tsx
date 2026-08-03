@@ -219,13 +219,14 @@ export default function DragonIntro({ onComplete }: DragonIntroProps) {
           ref={dragonRef}
           src={dragonImg}
           alt="DracarySoft dragon"
+          width="420"
+          height="420"
           fetchPriority="high"
           style={{
             width: "clamp(280px, 38vw, 420px)",
             height: "clamp(280px, 38vw, 420px)",
             objectFit: "contain",
             objectPosition: "center",
-            // Elimina el fondo gris del jpg mezclándolo con el fondo oscuro
             mixBlendMode: "screen",
             filter:
               "drop-shadow(0 0 32px rgba(46,134,171,0.45)) drop-shadow(0 0 16px rgba(192,57,43,0.35))",

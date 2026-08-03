@@ -2,7 +2,6 @@ import { useEffect, useRef } from "react";
 import { NavLink } from "react-router-dom";
 import { motion } from "framer-motion";
 import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
   Globe,
   Smartphone,
@@ -20,8 +19,6 @@ import {
 import Layout from "../components/layout/Layout";
 import FloatingPhoneButton from "../components/ui/FloatingPhoneButton";
 import { SEO } from "../components/seo/SEO";
-
-gsap.registerPlugin(ScrollTrigger);
 
 // ─── Datos ────────────────────────────────────────────────────────────────────
 
@@ -44,6 +41,7 @@ const CATEGORIES = [
           "Gestión sencilla",
         ],
         color: "#2E86AB",
+        price: "Desde $250",
         glow: "rgba(46,134,171,0.25)",
         gradient:
           "linear-gradient(135deg, rgba(46,134,171,0.12), rgba(10,15,30,0.8))",
@@ -60,6 +58,7 @@ const CATEGORIES = [
           "Medición de resultados",
         ],
         color: "#C0392B",
+        price: "Desde $100",
         glow: "rgba(192,57,43,0.25)",
         gradient:
           "linear-gradient(135deg, rgba(192,57,43,0.10), rgba(10,15,30,0.8))",
@@ -76,6 +75,7 @@ const CATEGORIES = [
           "Notificaciones automáticas",
         ],
         color: "#C0392B",
+        price: "Desde $500",
         glow: "rgba(192,57,43,0.25)",
         gradient:
           "linear-gradient(135deg, rgba(192,57,43,0.10), rgba(10,15,30,0.8))",
@@ -92,6 +92,7 @@ const CATEGORIES = [
           "Actualizaciones prácticas",
         ],
         color: "#5DADE2",
+        price: "Desde $800",
         glow: "rgba(93,173,226,0.25)",
         gradient:
           "linear-gradient(135deg, rgba(93,173,226,0.10), rgba(10,15,30,0.8))",
@@ -108,6 +109,7 @@ const CATEGORIES = [
           "Escalable y seguro",
         ],
         color: "#2E86AB",
+        price: "Desde $1000",
         glow: "rgba(46,134,171,0.25)",
         gradient:
           "linear-gradient(135deg, rgba(46,134,171,0.12), rgba(10,15,30,0.8))",
@@ -132,6 +134,7 @@ const CATEGORIES = [
           "Plan de crecimiento",
         ],
         color: "#2E86AB",
+        price: "Cotización",
         glow: "rgba(46,134,171,0.25)",
         gradient:
           "linear-gradient(135deg, rgba(46,134,171,0.12), rgba(10,15,30,0.8))",
@@ -148,6 +151,7 @@ const CATEGORIES = [
           "Gestión de reseñas",
         ],
         color: "#C0392B",
+        price: "Desde $50 + $15/mes",
         glow: "rgba(192,57,43,0.25)",
         gradient:
           "linear-gradient(135deg, rgba(192,57,43,0.10), rgba(10,15,30,0.8))",
@@ -164,6 +168,7 @@ const CATEGORIES = [
           "Capacitación de uso",
         ],
         color: "#5DADE2",
+        price: "Desde $100",
         glow: "rgba(93,173,226,0.25)",
         gradient:
           "linear-gradient(135deg, rgba(93,173,226,0.10), rgba(10,15,30,0.8))",
@@ -188,6 +193,7 @@ const CATEGORIES = [
           "Soporte técnico",
         ],
         color: "#1B4F72",
+        price: "Desde $15/mes",
         glow: "rgba(27,79,114,0.35)",
         gradient:
           "linear-gradient(135deg, rgba(27,79,114,0.15), rgba(10,15,30,0.8))",
@@ -219,6 +225,32 @@ const PROCESS = [
   },
 ];
 
+const SERVICE_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "Servicios digitales DracarySoft",
+  provider: { "@type": "Organization", name: "DracarySoft" },
+  serviceType: "Desarrollo web y presencia digital",
+  description:
+    "Soluciones digitales a medida para emprendedores: páginas web, aplicaciones web, landing pages, tiendas online, sistemas a medida, estrategia digital, presencia en Google y mantenimiento web.",
+  areaServed: { "@type": "Country", name: "Ecuador" },
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Servicios DracarySoft",
+    itemListElement: [
+      { "@type": "Offer", price: "100", priceCurrency: "USD", itemOffered: { "@type": "Service", name: "Landing Pages" } },
+      { "@type": "Offer", price: "250", priceCurrency: "USD", itemOffered: { "@type": "Service", name: "Páginas Web" } },
+      { "@type": "Offer", price: "500", priceCurrency: "USD", itemOffered: { "@type": "Service", name: "Tiendas Online" } },
+      { "@type": "Offer", price: "800", priceCurrency: "USD", itemOffered: { "@type": "Service", name: "Aplicaciones Web" } },
+      { "@type": "Offer", price: "1000", priceCurrency: "USD", itemOffered: { "@type": "Service", name: "Sistemas a Medida" } },
+      { "@type": "Offer", price: "250", priceCurrency: "USD", itemOffered: { "@type": "Service", name: "Estrategia Digital" } },
+      { "@type": "Offer", price: "50", priceCurrency: "USD", itemOffered: { "@type": "Service", name: "Presencia en Google" } },
+      { "@type": "Offer", price: "100", priceCurrency: "USD", itemOffered: { "@type": "Service", name: "Redes Sociales" } },
+      { "@type": "Offer", price: "15", priceCurrency: "USD", itemOffered: { "@type": "Service", name: "Mantenimiento Web" } },
+    ],
+  },
+};
+
 // ─── ServiceCard ──────────────────────────────────────────────────────────────
 
 function ServiceCard({
@@ -228,6 +260,7 @@ function ServiceCard({
   desc,
   features,
   color,
+  price,
   glow,
   gradient,
 }: (typeof CATEGORIES)[0]["services"][0]) {
@@ -278,12 +311,23 @@ function ServiceCard({
           fontSize: "1rem",
           fontWeight: 600,
           color: "#E8EEF8",
-          marginBottom: "0.75rem",
+          marginBottom: "0.35rem",
           lineHeight: 1.3,
         }}
       >
         {title}
       </h3>
+      <p
+        style={{
+          fontFamily: "'Cinzel', serif",
+          fontSize: "0.8rem",
+          fontWeight: 700,
+          color,
+          marginBottom: "0.75rem",
+        }}
+      >
+        {price}
+      </p>
 
       <p
         style={{
@@ -331,46 +375,52 @@ export function ServiciosPage() {
   const processRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const cards = sectionsRef.current?.querySelectorAll(".srv-card");
-    if (cards) {
-      gsap.fromTo(
-        cards,
-        { opacity: 0, y: 60 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.65,
-          stagger: 0.08,
-          ease: "power3.out",
-          scrollTrigger: { trigger: sectionsRef.current, start: "top 80%" },
-        },
-      );
-    }
+    let st: typeof import("gsap/ScrollTrigger") | null = null;
+    (async () => {
+      st = await import("gsap/ScrollTrigger");
+      gsap.registerPlugin(st.ScrollTrigger);
 
-    const steps = processRef.current?.querySelectorAll(".proc-step");
-    if (steps) {
-      gsap.fromTo(
-        steps,
-        { opacity: 0, x: -30 },
-        {
-          opacity: 1,
-          x: 0,
-          duration: 0.6,
-          stagger: 0.12,
-          ease: "power3.out",
-          scrollTrigger: { trigger: processRef.current, start: "top 80%" },
-        },
-      );
-    }
+      const cards = sectionsRef.current?.querySelectorAll(".srv-card");
+      if (cards) {
+        gsap.fromTo(
+          cards,
+          { opacity: 0, y: 60 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.65,
+            stagger: 0.08,
+            ease: "power3.out",
+            scrollTrigger: { trigger: sectionsRef.current, start: "top 80%" },
+          },
+        );
+      }
+
+      const steps = processRef.current?.querySelectorAll(".proc-step");
+      if (steps) {
+        gsap.fromTo(
+          steps,
+          { opacity: 0, x: -30 },
+          {
+            opacity: 1,
+            x: 0,
+            duration: 0.6,
+            stagger: 0.12,
+            ease: "power3.out",
+            scrollTrigger: { trigger: processRef.current, start: "top 80%" },
+          },
+        );
+      }
+    })();
 
     return () => {
-      ScrollTrigger.getAll().forEach((t) => t.kill());
+      if (st) st.ScrollTrigger.getAll().forEach((t: { kill: () => void }) => t.kill());
     };
   }, []);
 
   return (
     <Layout>
-      <SEO title="Servicios" description="Soluciones digitales: páginas web, aplicaciones web, landing pages y presencia digital para emprendedores." url="/servicios" />
+      <SEO title="Servicios" description="Soluciones digitales: páginas web, aplicaciones web, landing pages y presencia digital para emprendedores." url="/servicios" schema={SERVICE_SCHEMA} />
       {/* ── HERO ──────────────────────────────────────────────────────────── */}
       <section className="relative pt-36 pb-20 px-6 overflow-hidden">
         <div className="max-w-3xl mx-auto text-center relative z-10">
@@ -666,6 +716,26 @@ export function ServiciosPage() {
             Consulta gratuita
             <ChevronRight size={14} />
           </NavLink>
+          <p
+            style={{
+              fontFamily: "'Exo 2', sans-serif",
+              fontSize: "0.85rem",
+              color: "#4A5A7A",
+              marginTop: "1.25rem",
+            }}
+          >
+            ¿Dudas? Revisa nuestras{" "}
+            <NavLink
+              to="/preguntas-frecuentes"
+              style={{
+                color: "#5DADE2",
+                textDecoration: "underline",
+                textUnderlineOffset: "3px",
+              }}
+            >
+              preguntas frecuentes
+            </NavLink>
+          </p>
         </div>
       </section>
 

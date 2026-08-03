@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { NavLink } from "react-router-dom";
 import {
   ExternalLink,
@@ -18,8 +17,6 @@ import totemImg from "../assets/imgs/totem-splash.png";
 import totemAppImg from "../assets/imgs/totem-app.jpeg";
 import FloatingPhoneButton from "../components/ui/FloatingPhoneButton";
 import { SEO } from "../components/seo/SEO";
-
-gsap.registerPlugin(ScrollTrigger);
 
 // ─── Tipos y datos ─────────────────────────────────────────────────────────────
 
@@ -492,9 +489,6 @@ export function ProyectosPage() {
         { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" },
       );
     }
-    return () => {
-      ScrollTrigger.getAll().forEach((t) => t.kill());
-    };
   }, []);
 
   return (

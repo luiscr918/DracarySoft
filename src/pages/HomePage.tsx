@@ -2,7 +2,6 @@ import { useEffect, useRef } from "react";
 import { NavLink } from "react-router-dom";
 import { motion } from "framer-motion";
 import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
   Flame,
   Globe,
@@ -16,8 +15,6 @@ import {
 import Layout from "../components/layout/Layout";
 import FloatingPhoneButton from "../components/ui/FloatingPhoneButton";
 import { SEO } from "../components/seo/SEO";
-
-gsap.registerPlugin(ScrollTrigger);
 
 // ─── Datos ────────────────────────────────────────────────────────────────────
 
@@ -67,54 +64,60 @@ export function HomePage() {
   const ctaSectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const cards = servicesRef.current?.querySelectorAll(".service-card");
-    if (cards) {
-      gsap.fromTo(
-        cards,
-        { opacity: 0, y: 50 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.7,
-          stagger: 0.12,
-          ease: "power3.out",
-          scrollTrigger: { trigger: servicesRef.current, start: "top 80%" },
-        },
-      );
-    }
+    let st: typeof import("gsap/ScrollTrigger") | null = null;
+    (async () => {
+      st = await import("gsap/ScrollTrigger");
+      gsap.registerPlugin(st.ScrollTrigger);
 
-    const statItems = statsRef.current?.querySelectorAll(".stat-item");
-    if (statItems) {
-      gsap.fromTo(
-        statItems,
-        { opacity: 0, scale: 0.85 },
-        {
-          opacity: 1,
-          scale: 1,
-          duration: 0.6,
-          stagger: 0.1,
-          ease: "back.out(1.5)",
-          scrollTrigger: { trigger: statsRef.current, start: "top 85%" },
-        },
-      );
-    }
+      const cards = servicesRef.current?.querySelectorAll(".service-card");
+      if (cards) {
+        gsap.fromTo(
+          cards,
+          { opacity: 0, y: 50 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.7,
+            stagger: 0.12,
+            ease: "power3.out",
+            scrollTrigger: { trigger: servicesRef.current, start: "top 80%" },
+          },
+        );
+      }
 
-    if (ctaSectionRef.current) {
-      gsap.fromTo(
-        ctaSectionRef.current,
-        { opacity: 0, y: 30 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          ease: "power3.out",
-          scrollTrigger: { trigger: ctaSectionRef.current, start: "top 85%" },
-        },
-      );
-    }
+      const statItems = statsRef.current?.querySelectorAll(".stat-item");
+      if (statItems) {
+        gsap.fromTo(
+          statItems,
+          { opacity: 0, scale: 0.85 },
+          {
+            opacity: 1,
+            scale: 1,
+            duration: 0.6,
+            stagger: 0.1,
+            ease: "back.out(1.5)",
+            scrollTrigger: { trigger: statsRef.current, start: "top 85%" },
+          },
+        );
+      }
+
+      if (ctaSectionRef.current) {
+        gsap.fromTo(
+          ctaSectionRef.current,
+          { opacity: 0, y: 30 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: "power3.out",
+            scrollTrigger: { trigger: ctaSectionRef.current, start: "top 85%" },
+          },
+        );
+      }
+    })();
 
     return () => {
-      ScrollTrigger.getAll().forEach((t) => t.kill());
+      if (st) st.ScrollTrigger.getAll().forEach((t: { kill: () => void }) => t.kill());
     };
   }, []);
 
@@ -146,6 +149,20 @@ export function HomePage() {
             <Flame size={11} style={{ color: "#C0392B" }} />
             SOLUCIONES DIGITALES PARA EMPRENDEDORES
           </motion.div>
+          <motion.p
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.25 }}
+            style={{
+              fontFamily: "'Cinzel', serif",
+              fontSize: "0.85rem",
+              color: "#5DADE2",
+              fontWeight: 600,
+              marginBottom: "1.5rem",
+            }}
+          >
+            Páginas web desde $100 · Landing pages informativas
+          </motion.p>
           {/* Logo */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
@@ -156,6 +173,9 @@ export function HomePage() {
             <img
               src="/dracarysAlternativeLogo.svg"
               alt="DracarySoft Logo"
+              width="420"
+              height="280"
+              fetchPriority="high"
               className="h-56 md:h-60 object-contain"
             />
           </motion.div>
@@ -514,6 +534,27 @@ export function HomePage() {
             Hablemos
             <ArrowRight size={14} />
           </NavLink>
+
+          <p
+            style={{
+              fontFamily: "'Exo 2', sans-serif",
+              fontSize: "0.85rem",
+              color: "#4A5A7A",
+              marginTop: "1.5rem",
+            }}
+          >
+            ¿Tienes dudas? Revisa nuestras{" "}
+            <NavLink
+              to="/preguntas-frecuentes"
+              style={{
+                color: "#5DADE2",
+                textDecoration: "underline",
+                textUnderlineOffset: "3px",
+              }}
+            >
+              preguntas frecuentes
+            </NavLink>
+          </p>
         </div>
       </section>
       <FloatingPhoneButton />
