@@ -151,7 +151,7 @@ const CATEGORIES = [
           "Gestión de reseñas",
         ],
         color: "#C0392B",
-        price: "Desde $50 + $15/mes",
+        price: "Cotización",
         glow: "rgba(192,57,43,0.25)",
         gradient:
           "linear-gradient(135deg, rgba(192,57,43,0.10), rgba(10,15,30,0.8))",
@@ -168,7 +168,7 @@ const CATEGORIES = [
           "Capacitación de uso",
         ],
         color: "#5DADE2",
-        price: "Desde $100",
+        price: "Cotización",
         glow: "rgba(93,173,226,0.25)",
         gradient:
           "linear-gradient(135deg, rgba(93,173,226,0.10), rgba(10,15,30,0.8))",
@@ -327,6 +327,19 @@ function ServiceCard({
         }}
       >
         {price}
+        {price !== "Cotización" && (
+          <span
+            style={{
+              fontFamily: "'Exo 2', sans-serif",
+              fontSize: "0.62rem",
+              fontWeight: 400,
+              color: "#4A5A7A",
+              marginLeft: "0.5rem",
+            }}
+          >
+            (precio referencial)
+          </span>
+        )}
       </p>
 
       <p
