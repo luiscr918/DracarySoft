@@ -26,7 +26,7 @@ const ORGANIZATION_SCHEMA = {
     "https://www.instagram.com/dracarysoft/",
     "https://www.tiktok.com/@dracary.soft",
     "https://www.facebook.com/profile.php?id=61590437895340",
-    "https://github.com/luiscr918",
+    "https://github.com/dracarysoft",
   ],
   contactPoint: {
     "@type": "ContactPoint",

@@ -11,6 +11,7 @@ DracarySoft es una agencia digital especializada en páginas web, aplicaciones w
 - [Nosotros](https://dracarysoft.com/nosotros): Quiénes somos, misión, visión y valores de DracarySoft.
 - [Contacto](https://dracarysoft.com/contacto): Formulario de contacto para solicitar cotización personalizada sin compromiso. Datos de contacto, redes sociales y WhatsApp.
 - [Preguntas frecuentes](https://dracarysoft.com/preguntas-frecuentes): Preguntas frecuentes organizadas por temas: servicios y precios, proceso de trabajo, tecnologías, SEO, diseño responsive, e-commerce y más.
+- [Política de cookies](https://dracarysoft.com/politica-de-cookies): Explicación clara de qué cookies usa DracarySoft, qué datos recopila y cómo gestionar el consentimiento.
 
 ## Recursos para agentes IA
 
@@ -22,5 +23,5 @@ Este sitio ofrece contenido estructurado con JSON-LD (schema.org) incluyendo Org
 - Instagram: @dracarysoft
 - TikTok: @dracary.soft
 - Facebook: DracarySoft
-- GitHub: @luiscr918
+- GitHub: @dracarysoft
 - WhatsApp: disponible en el botón flotante del sitio

@@ -223,6 +223,51 @@ export default function Footer() {
           >
             <span>Hecho en Ecuador</span>
             <Flame size={12} style={{ color: "#C0392B" }} />
+            <span
+              style={{
+                margin: "0 0.4rem",
+                color: "rgba(42,58,90,0.4)",
+              }}
+            >
+              ·
+            </span>
+            <button
+              onClick={() => {
+                localStorage.removeItem("ds_cookie_consent");
+                window.location.reload();
+              }}
+              className="transition-colors duration-200 hover:text-white"
+              style={{
+                color: "#2A3A5A",
+                background: "none",
+                border: "none",
+                padding: 0,
+                cursor: "pointer",
+                fontSize: "inherit",
+                fontFamily: "inherit",
+              }}
+            >
+              Cookies
+            </button>
+            <span
+              style={{
+                margin: "0 0.4rem",
+                color: "rgba(42,58,90,0.4)",
+              }}
+            >
+              ·
+            </span>
+            <NavLink
+              to="/politica-de-cookies"
+              className="transition-colors duration-200 hover:text-white"
+              style={{
+                color: "#2A3A5A",
+                fontFamily: "'Exo 2', sans-serif",
+                textDecoration: "none",
+              }}
+            >
+              Política de cookies
+            </NavLink>
           </div>
         </div>
       </div>

@@ -1,6 +1,7 @@
 import { lazy, Suspense } from "react";
 import { useIntroPlayed } from "./hooks/useIntroPlayer";
 import { AppRoutes } from "./routers/AppRoutes";
+import CookieConsent from "./components/ui/CookieConsent";
 
 const DragonIntro = lazy(() => import("./components/animations/DragonIntro"));
 
@@ -14,6 +15,7 @@ function App() {
         </Suspense>
       )}
       <AppRoutes />
+      {introPlayed && <CookieConsent />}
     </>
   );
 }

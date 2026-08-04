@@ -25,6 +25,9 @@ const NotFoundPage = lazy(() =>
 const PreguntasFrecuentesPage = lazy(() =>
   import("../pages/PreguntasFrecuentesPage").then((m) => ({ default: m.PreguntasFrecuentesPage })),
 );
+const PoliticaCookiesPage = lazy(() =>
+  import("../pages/PoliticaCookiesPage").then((m) => ({ default: m.PoliticaCookiesPage })),
+);
 
 const PageFallback = () => (
   <div
@@ -52,6 +55,7 @@ export const AppRoutes = () => {
         <Route path="/nosotros" element={<NosotrosPage />} />
         <Route path="/contacto" element={<ContactoPage />} />
         <Route path="/preguntas-frecuentes" element={<PreguntasFrecuentesPage />} />
+        <Route path="/politica-de-cookies" element={<PoliticaCookiesPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </Suspense>

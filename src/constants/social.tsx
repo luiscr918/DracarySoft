@@ -49,9 +49,9 @@ export const SOCIAL_LINKS = [
   },
   {
     icon: GitHubIcon as ComponentType<LucideProps>,
-    href: "https://github.com/luiscr918",
+    href: "https://github.com/dracarysoft",
     label: "GitHub",
-    value: "@luiscr918",
+    value: "@dracarysoft",
   },
   { icon: Mail, href: "mailto:dracarysoft@gmail.com", label: "Email", value: "dracarysoft@gmail.com" },
 ];

@@ -143,7 +143,7 @@ const PROJECTS: Project[] = [
     color: "#1B4F72",
     glow: "rgba(27,79,114,0.3)",
     icon: Globe,
-    year: "2024",
+    year: "2025",
     liveUrl: "https://taller-simulator.netlify.app/",
     localImage: autoserviceImg,
   },

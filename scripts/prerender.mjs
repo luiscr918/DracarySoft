@@ -14,6 +14,7 @@ const ROUTES = [
   "/nosotros",
   "/contacto",
   "/preguntas-frecuentes",
+  "/politica-de-cookies",
   "/404",
 ];
 
