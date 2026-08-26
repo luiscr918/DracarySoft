@@ -23,6 +23,8 @@ import lincolnImg from "../assets/imgs/projects/lincoln.jpg";
 import glowStudioImg from "../assets/imgs/projects/glow-studio.jpg";
 import autoserviceImg from "../assets/imgs/projects/autoservice.jpg";
 import gymproImg from "../assets/imgs/projects/gympro.jpg";
+import cotizifyImg from "../assets/imgs/projects/cotizify.jpg";
+import focusupImg from "../assets/imgs/projects/focusup.jpg";
 import FloatingPhoneButton from "../components/ui/FloatingPhoneButton";
 import { SEO } from "../components/seo/SEO";
 
@@ -79,6 +81,34 @@ const PROJECTS: Project[] = [
   },
   {
     id: 3,
+    title: "Cotizify — SaaS de Cotizaciones",
+    client: "Cotizador B2B Multiempresa",
+    category: "app",
+    tags: ["React", "TypeScript", "AdonisJS", "PostgreSQL"],
+    desc: "SaaS B2B multi-tenant para generar cotizaciones profesionales: catálogo configurable por empresa, motor de reglas de precio sin código y página pública interactiva donde los clientes aceptan la cotización en línea.",
+    color: "#16A085",
+    glow: "rgba(22,160,133,0.3)",
+    icon: Zap,
+    year: "2026",
+    liveUrl: "https://cotizify.dracarysoft.com/",
+    localImage: cotizifyImg,
+  },
+  {
+    id: 4,
+    title: "FocusUp — Técnicas de Estudio",
+    client: "EdTech · Productividad",
+    category: "web",
+    tags: ["React 19", "TypeScript", "Tailwind 4", "React Router 7"],
+    desc: "App web gratuita que reúne las cuatro técnicas de estudio más efectivas: temporizador Pomodoro con estadísticas locales, grabación con cámara y micro para practicar Feynman, método Cornell exportable a PDF y plantillas editables de mapas mentales. Bilingüe español/inglés, con modo día/noche, optimizada para buscadores y sin registro.",
+    color: "#14B8A6",
+    glow: "rgba(20,184,166,0.3)",
+    icon: Zap,
+    year: "2026",
+    liveUrl: "https://focusup.dracarysoft.com/",
+    localImage: focusupImg,
+  },
+  {
+    id: 5,
     title: "U.E. Lincoln Larrea",
     client: "Institución Educativa",
     category: "web",
@@ -92,7 +122,7 @@ const PROJECTS: Project[] = [
     localImage: lincolnImg,
   },
   {
-    id: 4,
+    id: 6,
     title: "Totem Restobar — Web",
     client: "Restaurante & Bar",
     category: "web",
@@ -106,7 +136,7 @@ const PROJECTS: Project[] = [
     localImage: totemImg,
   },
   {
-    id: 5,
+    id: 7,
     title: "Glow Studio — Estética",
     client: "Centro de Estética",
     category: "landing",
@@ -120,7 +150,7 @@ const PROJECTS: Project[] = [
     localImage: glowStudioImg,
   },
   {
-    id: 6,
+    id: 8,
     title: "Totem Restobar — App",
     client: "Restaurante & Bar",
     category: "app",
@@ -134,7 +164,7 @@ const PROJECTS: Project[] = [
     apkUrl: "/app-release.apk",
   },
   {
-    id: 7,
+    id: 9,
     title: "AutoService — Taller Web",
     client: "Taller Automotriz",
     category: "web",
@@ -148,7 +178,7 @@ const PROJECTS: Project[] = [
     localImage: autoserviceImg,
   },
   {
-    id: 8,
+    id: 10,
     title: "GymPro — Sitio Web",
     client: "Gimnasio Fitness",
     category: "web",

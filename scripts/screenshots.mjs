@@ -4,7 +4,14 @@ import path from "path";
 import { fileURLToPath } from "url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const outDir = path.resolve(__dirname, "..", "src", "assets", "imgs", "projects");
+const outDir = path.resolve(
+  __dirname,
+  "..",
+  "src",
+  "assets",
+  "imgs",
+  "projects",
+);
 
 const SITES = [
   { slug: "new-inox", url: "https://new-inox.com/" },
@@ -13,6 +20,8 @@ const SITES = [
   { slug: "glow-studio", url: "https://estetica-simulator.netlify.app/" },
   { slug: "autoservice", url: "https://taller-simulator.netlify.app/" },
   { slug: "gympro", url: "https://gym-simulator.netlify.app/" },
+  { slug: "cotizify", url: "https://cotizify.dracarysoft.com/" },
+  { slug: "focusup", url: "https://focusup.dracarysoft.com/" },
 ];
 
 async function screenshots() {
