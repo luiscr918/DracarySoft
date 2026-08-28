@@ -9,7 +9,7 @@ export function NotFoundPage() {
       <section className="relative min-h-dvh flex flex-col items-center justify-center text-center px-6">
         <h1
           style={{
-            fontFamily: "'Cinzel', serif",
+            fontFamily: "var(--font-display)",
             fontSize: "clamp(4rem, 10vw, 8rem)",
             fontWeight: 900,
             color: "#C0392B",
@@ -21,7 +21,7 @@ export function NotFoundPage() {
         </h1>
         <p
           style={{
-            fontFamily: "'Exo 2', sans-serif",
+            fontFamily: "var(--font-body)",
             fontSize: "1.2rem",
             color: "#8899BB",
             marginBottom: "2rem",
@@ -35,14 +35,14 @@ export function NotFoundPage() {
           style={{
             background: "linear-gradient(135deg, #C0392B, #A93226)",
             color: "#fff",
-            fontFamily: "'Exo 2', sans-serif",
+            fontFamily: "var(--font-body)",
           }}
         >
           Volver al inicio
         </NavLink>
         <p
           style={{
-            fontFamily: "'Exo 2', sans-serif",
+            fontFamily: "var(--font-body)",
             fontSize: "0.9rem",
             color: "#4A5A7A",
             marginTop: "1.5rem",

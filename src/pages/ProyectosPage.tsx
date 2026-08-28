@@ -3,202 +3,15 @@ import type { KeyboardEvent } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { gsap } from "gsap";
 import { NavLink } from "react-router-dom";
-import {
-  ExternalLink,
-  Flame,
-  Globe,
-  Smartphone,
-  Zap,
-  ChevronRight,
-  GitBranchIcon,
-  Download,
-  Factory,
-} from "lucide-react";
+import { ArrowSquareOut as ExternalLink, Flame, CaretRight as ChevronRight, GitBranch as GitBranchIcon, DownloadSimple as Download } from "@phosphor-icons/react";
 import Layout from "../components/layout/Layout";
-import totemImg from "../assets/imgs/totem-splash.png";
-import totemAppImg from "../assets/imgs/totem-app.jpeg";
-import newInoxImg from "../assets/imgs/projects/new-inox.jpg";
-import extremeBullImg from "../assets/imgs/projects/extreme-bull.jpg";
-import lincolnImg from "../assets/imgs/projects/lincoln.jpg";
-import glowStudioImg from "../assets/imgs/projects/glow-studio.jpg";
-import autoserviceImg from "../assets/imgs/projects/autoservice.jpg";
-import gymproImg from "../assets/imgs/projects/gympro.jpg";
-import cotizifyImg from "../assets/imgs/projects/cotizify.jpg";
-import focusupImg from "../assets/imgs/projects/focusup.jpg";
+import { PROJECTS, PROJECT_FILTERS, type Category, type Project } from "../constants/projects";
 import FloatingPhoneButton from "../components/ui/FloatingPhoneButton";
 import { SEO } from "../components/seo/SEO";
+import { CraftCard } from "../components/ui/CraftCard";
+import { BrandIcon } from "../components/ui/BrandIcon";
 
-// ─── Tipos y datos ─────────────────────────────────────────────────────────────
-
-type Category = "todos" | "web" | "app" | "landing";
-
-interface Project {
-  id: number;
-  title: string;
-  client: string;
-  category: Category;
-  tags: string[];
-  desc: string;
-  color: string;
-  glow: string;
-  icon: typeof Globe;
-  year: string;
-  liveUrl?: string;
-  repoUrl?: string;
-  thumbnail?: string;
-  localImage?: string;
-  apkUrl?: string; // descarga directa de APK
-}
-
-const PROJECTS: Project[] = [
-  {
-    id: 1,
-    title: "New Inox — Ingeniería Industrial",
-    client: "Fabricación en acero inoxidable",
-    category: "web",
-    tags: ["React", "TypeScript", "Tailwind", "SEO"],
-    desc: "Sitio web corporativo para New Inox: diseño, fabricación y mantenimiento de equipos en acero inoxidable para los sectores industrial, alimentario, químico, farmacéutico y cervecería. Proyectos personalizados con enfoque en durabilidad, eficiencia y estándares de calidad.",
-    color: "#90A4AE",
-    glow: "rgba(144,164,174,0.3)",
-    icon: Factory,
-    year: "2026",
-    liveUrl: "https://new-inox.com/",
-    localImage: newInoxImg,
-  },
-  {
-    id: 2,
-    title: "Extreme Bull",
-    client: "Toro mecánico para eventos",
-    category: "landing",
-    tags: ["React", "TypeScript", "Tailwind"],
-    desc: "Landing page para el alquiler de toro mecánico en eventos: formulario de cotización, redes sociales y botón de WhatsApp integrados, con animación de scroll desde el hero.",
-    color: "#E74C3C",
-    glow: "rgba(231,76,60,0.3)",
-    icon: Zap,
-    year: "2026",
-    liveUrl: "https://extremebull.new-inox.com/",
-    localImage: extremeBullImg,
-  },
-  {
-    id: 3,
-    title: "Cotizify — SaaS de Cotizaciones",
-    client: "Cotizador B2B Multiempresa",
-    category: "app",
-    tags: ["React", "TypeScript", "AdonisJS", "PostgreSQL"],
-    desc: "SaaS B2B multi-tenant para generar cotizaciones profesionales: catálogo configurable por empresa, motor de reglas de precio sin código y página pública interactiva donde los clientes aceptan la cotización en línea.",
-    color: "#16A085",
-    glow: "rgba(22,160,133,0.3)",
-    icon: Zap,
-    year: "2026",
-    liveUrl: "https://cotizify.dracarysoft.com/",
-    localImage: cotizifyImg,
-  },
-  {
-    id: 4,
-    title: "FocusUp — Técnicas de Estudio",
-    client: "EdTech · Productividad",
-    category: "web",
-    tags: ["React 19", "TypeScript", "Tailwind 4", "React Router 7"],
-    desc: "App web gratuita que reúne las cuatro técnicas de estudio más efectivas: temporizador Pomodoro con estadísticas locales, grabación con cámara y micro para practicar Feynman, método Cornell exportable a PDF y plantillas editables de mapas mentales. Bilingüe español/inglés, con modo día/noche, optimizada para buscadores y sin registro.",
-    color: "#14B8A6",
-    glow: "rgba(20,184,166,0.3)",
-    icon: Zap,
-    year: "2026",
-    liveUrl: "https://focusup.dracarysoft.com/",
-    localImage: focusupImg,
-  },
-  {
-    id: 5,
-    title: "U.E. Lincoln Larrea",
-    client: "Institución Educativa",
-    category: "web",
-    tags: ["React", "SEO", "Responsive"],
-    desc: "Sitio web institucional para la Unidad Educativa Lincoln Larrea con información académica, noticias, galería de eventos y contacto para padres de familia.",
-    color: "#27AE60",
-    glow: "rgba(39,174,96,0.3)",
-    icon: Globe,
-    year: "2025",
-    liveUrl: "https://uelincolnlarrea.netlify.app/",
-    localImage: lincolnImg,
-  },
-  {
-    id: 6,
-    title: "Totem Restobar — Web",
-    client: "Restaurante & Bar",
-    category: "web",
-    tags: ["Flutter Web", "Dart", "Firebase"],
-    desc: "Sitio web para restaurante con menú interactivo, sistema de reservas en línea y galería de platos. Diseño elegante y atractivo.",
-    color: "#C0392B",
-    glow: "rgba(192,57,43,0.3)",
-    icon: Globe,
-    year: "2025",
-    liveUrl: "https://totemsimulator.netlify.app/",
-    localImage: totemImg,
-  },
-  {
-    id: 7,
-    title: "Glow Studio — Estética",
-    client: "Centro de Estética",
-    category: "landing",
-    tags: ["Angular", "Framer Motion", "GSAP"],
-    desc: "Landing page para centro de estética con catálogo de servicios, reserva de citas en línea y galería de resultados. Animaciones premium.",
-    color: "#5DADE2",
-    glow: "rgba(93,173,226,0.3)",
-    icon: Zap,
-    year: "2025",
-    liveUrl: "https://estetica-simulator.netlify.app/",
-    localImage: glowStudioImg,
-  },
-  {
-    id: 8,
-    title: "Totem Restobar — App",
-    client: "Restaurante & Bar",
-    category: "app",
-    tags: ["Flutter", "Dart", "Firebase"],
-    desc: "Aplicación móvil para restaurante con menú digital, pedidos en línea, seguimiento en tiempo real y sistema de fidelización de clientes.",
-    color: "#C0392B",
-    glow: "rgba(192,57,43,0.3)",
-    icon: Smartphone,
-    year: "2025",
-    localImage: totemAppImg,
-    apkUrl: "/app-release.apk",
-  },
-  {
-    id: 9,
-    title: "AutoService — Taller Web",
-    client: "Taller Automotriz",
-    category: "web",
-    tags: ["React", "TypeScript", "SEO", "Firebase"],
-    desc: "Sitio web para taller automotriz con catálogo de servicios, agendamiento de citas, testimonios de clientes y optimización SEO local.",
-    color: "#1B4F72",
-    glow: "rgba(27,79,114,0.3)",
-    icon: Globe,
-    year: "2025",
-    liveUrl: "https://taller-simulator.netlify.app/",
-    localImage: autoserviceImg,
-  },
-  {
-    id: 10,
-    title: "GymPro — Sitio Web",
-    client: "Gimnasio Fitness",
-    category: "web",
-    tags: ["Angular", "TypeScript", "Tailwind", "Firebase"],
-    desc: "Sitio web para gimnasio con planes de membresía, horarios de clases, galería y formulario de contacto. Diseño moderno y carga ultra rápida.",
-    color: "#2E86AB",
-    glow: "rgba(46,134,171,0.3)",
-    icon: Globe,
-    year: "2025",
-    liveUrl: "https://gym-simulator.netlify.app/",
-    localImage: gymproImg,
-  },
-];
-
-const FILTERS: { key: Category; label: string }[] = [
-  { key: "todos", label: "Todos" },
-  { key: "web", label: "Páginas Web" },
-  { key: "app", label: "Aplicaciones" },
-  { key: "landing", label: "Landing Pages" },
-];
+const FILTERS = PROJECT_FILTERS;
 
 // ─── Thumbnail con hover overlay (Opción 1) ────────────────────────────────────
 
@@ -252,7 +65,7 @@ function ProjectThumbnail({
         >
           <span
             style={{
-              fontFamily: "'Exo 2', sans-serif",
+              fontFamily: "var(--font-body)",
               fontSize: "0.7rem",
               color: "#2A3A5A",
             }}
@@ -277,7 +90,7 @@ function ProjectThumbnail({
           )}
           <span
             style={{
-              fontFamily: "'Exo 2', sans-serif",
+              fontFamily: "var(--font-body)",
               fontSize: "0.78rem",
               color: "#fff",
               fontWeight: 600,
@@ -294,7 +107,7 @@ function ProjectThumbnail({
         <div
           className="absolute top-2 right-2 px-2 py-0.5 rounded-md"
           style={{
-            fontFamily: "'Exo 2', sans-serif",
+            fontFamily: "var(--font-body)",
             fontSize: "0.6rem",
             background: "rgba(0,0,0,0.55)",
             color: "#4A6A8A",
@@ -357,167 +170,157 @@ function ProjectCard({ project }: { project: Project }) {
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.9 }}
       transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-      className="group relative p-7 rounded-2xl transition-all duration-300 hover:-translate-y-2"
-      style={{
-        background: "rgba(10,15,30,0.75)",
-        border: "1px solid rgba(46,134,171,0.1)",
-        backdropFilter: "blur(8px)",
-        cursor: isClickable ? "pointer" : "default",
-      }}
-      role={isClickable ? "link" : undefined}
-      tabIndex={isClickable ? 0 : undefined}
-      onClick={isClickable ? openProject : undefined}
-      onKeyDown={isClickable ? handleKeyDown : undefined}
-      onMouseEnter={(e) => {
-        (e.currentTarget as HTMLElement).style.borderColor = `${color}35`;
-        (e.currentTarget as HTMLElement).style.boxShadow =
-          `0 20px 48px ${glow}`;
-      }}
-      onMouseLeave={(e) => {
-        (e.currentTarget as HTMLElement).style.borderColor =
-          "rgba(46,134,171,0.1)";
-        (e.currentTarget as HTMLElement).style.boxShadow = "none";
-      }}
+      className="h-full"
     >
-      {/* ── Thumbnail con overlay ── */}
-      {hasPreview && (
-        <ProjectThumbnail
-          localImage={localImage}
-          title={title}
-          color={color}
-          isClickable={isClickable}
-          isApk={Boolean(apkUrl)}
-        />
-      )}
-
-      {/* Header */}
-      <div className="flex items-start justify-between mb-5">
-        <div
-          className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:scale-110"
-          style={{ background: `${color}18`, border: `1px solid ${color}30` }}
-        >
-          <Icon size={22} style={{ color }} />
-        </div>
-        <div className="flex items-center gap-2">
-          {liveUrl && (
-            <a
-              href={liveUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={(e) => e.stopPropagation()}
-              className="w-8 h-8 flex items-center justify-center rounded-lg transition-all duration-200 hover:scale-110"
-              style={{
-                background: "rgba(46,134,171,0.1)",
-                border: "1px solid rgba(46,134,171,0.2)",
-                color: "#4A5A7A",
-              }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = "#5DADE2")}
-              onMouseLeave={(e) => (e.currentTarget.style.color = "#4A5A7A")}
-            >
-              <ExternalLink size={13} />
-            </a>
-          )}
-          {apkUrl && (
-            <a
-              href={apkUrl}
-              download="app-release.apk"
-              onClick={(e) => e.stopPropagation()}
-              className="w-8 h-8 flex items-center justify-center rounded-lg transition-all duration-200 hover:scale-110"
-              style={{
-                background: "rgba(192,57,43,0.1)",
-                border: "1px solid rgba(192,57,43,0.2)",
-                color: "#4A5A7A",
-              }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = "#C0392B")}
-              onMouseLeave={(e) => (e.currentTarget.style.color = "#4A5A7A")}
-              title="Descargar APK"
-            >
-              <Download size={13} />
-            </a>
-          )}
-          {repoUrl && (
-            <a
-              href={repoUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={(e) => e.stopPropagation()}
-              className="w-8 h-8 flex items-center justify-center rounded-lg transition-all duration-200 hover:scale-110"
-              style={{
-                background: "rgba(46,134,171,0.1)",
-                border: "1px solid rgba(46,134,171,0.2)",
-                color: "#4A5A7A",
-              }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = "#5DADE2")}
-              onMouseLeave={(e) => (e.currentTarget.style.color = "#4A5A7A")}
-            >
-              <GitBranchIcon size={13} />
-            </a>
-          )}
-        </div>
-      </div>
-
-      {/* Info */}
-      <div className="mb-1">
-        <span
-          style={{
-            fontFamily: "'Exo 2', sans-serif",
-            fontSize: "0.7rem",
-            color,
-            letterSpacing: "0.12em",
-          }}
-        >
-          {client.toUpperCase()} · {year}
-        </span>
-      </div>
-      <h3
-        style={{
-          fontFamily: "'Cinzel', serif",
-          fontSize: "1.05rem",
-          fontWeight: 600,
-          color: "#E8EEF8",
-          marginBottom: "0.6rem",
-          lineHeight: 1.3,
-        }}
+      <CraftCard
+        glow={glow}
+        className={`p-7 h-full ${isClickable ? "cursor-pointer" : ""}`}
+        role={isClickable ? "link" : undefined}
+        tabIndex={isClickable ? 0 : undefined}
+        onClick={isClickable ? openProject : undefined}
+        onKeyDown={isClickable ? handleKeyDown : undefined}
       >
-        {title}
-      </h3>
-      <p
-        style={{
-          fontFamily: "'Exo 2', sans-serif",
-          fontSize: "0.82rem",
-          color: "#4A5A7A",
-          lineHeight: 1.75,
-          marginBottom: "1.25rem",
-        }}
-      >
-        {desc}
-      </p>
+        {/* ── Thumbnail con overlay ── */}
+        {hasPreview && (
+          <ProjectThumbnail
+            localImage={localImage}
+            title={title}
+            color={color}
+            isClickable={isClickable}
+            isApk={Boolean(apkUrl)}
+          />
+        )}
 
-      {/* Tags */}
-      <div className="flex flex-wrap gap-2">
-        {tags.map((tag) => (
+        {/* Header */}
+        <div className="flex items-start justify-between mb-5">
+          <BrandIcon
+            icon={Icon}
+            from={color}
+            to="#FFFFFF"
+            size={24}
+            className="transition-transform duration-300 group-hover:scale-110"
+          />
+          <div className="flex items-center gap-2">
+            {liveUrl && (
+              <a
+                href={liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+                className="w-8 h-8 flex items-center justify-center rounded-lg transition-all duration-200 hover:scale-110"
+                style={{
+                  background: "rgba(46,134,171,0.1)",
+                  border: "1px solid rgba(46,134,171,0.2)",
+                  color: "#4A5A7A",
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.color = "#5DADE2")}
+                onMouseLeave={(e) => (e.currentTarget.style.color = "#4A5A7A")}
+              >
+                <ExternalLink size={13} />
+              </a>
+            )}
+            {apkUrl && (
+              <a
+                href={apkUrl}
+                download="app-release.apk"
+                onClick={(e) => e.stopPropagation()}
+                className="w-8 h-8 flex items-center justify-center rounded-lg transition-all duration-200 hover:scale-110"
+                style={{
+                  background: "rgba(192,57,43,0.1)",
+                  border: "1px solid rgba(192,57,43,0.2)",
+                  color: "#4A5A7A",
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.color = "#C0392B")}
+                onMouseLeave={(e) => (e.currentTarget.style.color = "#4A5A7A")}
+                title="Descargar APK"
+              >
+                <Download size={13} />
+              </a>
+            )}
+            {repoUrl && (
+              <a
+                href={repoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+                className="w-8 h-8 flex items-center justify-center rounded-lg transition-all duration-200 hover:scale-110"
+                style={{
+                  background: "rgba(46,134,171,0.1)",
+                  border: "1px solid rgba(46,134,171,0.2)",
+                  color: "#4A5A7A",
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.color = "#5DADE2")}
+                onMouseLeave={(e) => (e.currentTarget.style.color = "#4A5A7A")}
+              >
+                <GitBranchIcon size={13} />
+              </a>
+            )}
+          </div>
+        </div>
+
+        {/* Info */}
+        <div className="mb-1">
           <span
-            key={tag}
-            className="px-2.5 py-1 rounded-md text-xs"
             style={{
-              fontFamily: "'Exo 2', sans-serif",
-              background: "rgba(46,134,171,0.08)",
-              border: "1px solid rgba(46,134,171,0.15)",
-              color: "#4A6A8A",
+              fontFamily: "var(--font-body)",
+              fontSize: "0.7rem",
+              color,
+              letterSpacing: "0.12em",
             }}
           >
-            {tag}
+            {client.toUpperCase()} · {year}
           </span>
-        ))}
-      </div>
+        </div>
+        <h3
+          style={{
+            fontFamily: "var(--font-display)",
+            fontSize: "1.05rem",
+            fontWeight: 600,
+            color: "var(--color-text-soft)",
+            marginBottom: "0.6rem",
+            lineHeight: 1.3,
+          }}
+        >
+          {title}
+        </h3>
+        <p
+          style={{
+            fontFamily: "var(--font-body)",
+            fontSize: "0.82rem",
+            color: "var(--color-muted)",
+            lineHeight: 1.75,
+            marginBottom: "1.25rem",
+          }}
+        >
+          {desc}
+        </p>
 
-      {/* Línea bottom hover */}
-      <div
-        className="absolute bottom-0 left-6 right-6 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-        style={{
-          background: `linear-gradient(90deg, transparent, ${color}50, transparent)`,
-        }}
-      />
+        {/* Tags */}
+        <div className="flex flex-wrap gap-2">
+          {tags.map((tag) => (
+            <span
+              key={tag}
+              className="px-2.5 py-1 rounded-md text-xs"
+              style={{
+                fontFamily: "var(--font-body)",
+                background: "rgba(46,134,171,0.08)",
+                border: "1px solid rgba(46,134,171,0.15)",
+                color: "#4A6A8A",
+              }}
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+
+        {/* Línea bottom hover */}
+        <span
+          className="pointer-events-none absolute bottom-0 left-7 right-7 h-px opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+          style={{
+            background: `linear-gradient(90deg, transparent, ${color}, transparent)`,
+          }}
+        />
+      </CraftCard>
     </motion.div>
   );
 
@@ -568,7 +371,7 @@ export function ProyectosPage() {
         >
           <p
             style={{
-              fontFamily: "'Cinzel', serif",
+              fontFamily: "var(--font-display)",
               fontSize: "0.7rem",
               color: "#C0392B",
               letterSpacing: "0.3em",
@@ -579,7 +382,7 @@ export function ProyectosPage() {
           </p>
           <h1
             style={{
-              fontFamily: "'Cinzel', serif",
+              fontFamily: "var(--font-display)",
               fontSize: "clamp(2.2rem, 5vw, 3.8rem)",
               fontWeight: 700,
               color: "#F0F4FF",
@@ -600,7 +403,7 @@ export function ProyectosPage() {
           </h1>
           <p
             style={{
-              fontFamily: "'Exo 2', sans-serif",
+              fontFamily: "var(--font-body)",
               fontSize: "1.05rem",
               color: "#4A5A7A",
               lineHeight: 1.8,
@@ -623,7 +426,7 @@ export function ProyectosPage() {
                 aria-pressed={activeFilter === key}
                 className="px-5 py-2 rounded-full text-sm font-medium transition-all duration-300"
                 style={{
-                  fontFamily: "'Exo 2', sans-serif",
+                  fontFamily: "var(--font-body)",
                   background:
                     activeFilter === key
                       ? "linear-gradient(135deg, #C0392B, #A93226)"
@@ -647,7 +450,7 @@ export function ProyectosPage() {
           <p
             className="text-center mt-4"
             style={{
-              fontFamily: "'Exo 2', sans-serif",
+              fontFamily: "var(--font-body)",
               fontSize: "0.75rem",
               color: "#2A3A5A",
             }}
@@ -679,7 +482,7 @@ export function ProyectosPage() {
             >
               <p
                 style={{
-                  fontFamily: "'Exo 2', sans-serif",
+                  fontFamily: "var(--font-body)",
                   color: "#2A3A5A",
                   fontSize: "1rem",
                 }}
@@ -717,7 +520,7 @@ export function ProyectosPage() {
 
           <h2
             style={{
-              fontFamily: "'Cinzel', serif",
+              fontFamily: "var(--font-display)",
               fontSize: "clamp(1.4rem, 3vw, 2rem)",
               fontWeight: 700,
               color: "#F0F4FF",
@@ -728,7 +531,7 @@ export function ProyectosPage() {
           </h2>
           <p
             style={{
-              fontFamily: "'Exo 2', sans-serif",
+              fontFamily: "var(--font-body)",
               fontSize: "0.95rem",
               color: "#4A5A7A",
               marginBottom: "2rem",
@@ -742,7 +545,7 @@ export function ProyectosPage() {
             to="/contacto"
             className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full font-semibold text-sm transition-all duration-300 hover:scale-105"
             style={{
-              fontFamily: "'Exo 2', sans-serif",
+              fontFamily: "var(--font-body)",
               background: "linear-gradient(135deg, #C0392B, #A93226)",
               color: "#fff",
               boxShadow: "0 6px 24px rgba(192,57,43,0.4)",

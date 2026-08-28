@@ -29,3 +29,4 @@ dist-ssr
 .env.*.local
 # Local AI tools / Agent skills
 .agents/
+.claude/

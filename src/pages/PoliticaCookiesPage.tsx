@@ -1,8 +1,10 @@
 import { motion } from "framer-motion";
-import { Cookie, ShieldCheck, Info, Settings, Eye } from "lucide-react";
+import { Cookie, ShieldCheck, Info, Gear as Settings, Eye } from "@phosphor-icons/react";
 import Layout from "../components/layout/Layout";
 import FloatingPhoneButton from "../components/ui/FloatingPhoneButton";
 import { SEO } from "../components/seo/SEO";
+import { CraftCard } from "../components/ui/CraftCard";
+import { BrandIcon } from "../components/ui/BrandIcon";
 
 const SECTIONS = [
   {
@@ -53,7 +55,7 @@ export function PoliticaCookiesPage() {
         <div className="max-w-3xl mx-auto relative z-10 text-center">
           <p
             style={{
-              fontFamily: "'Cinzel', serif",
+              fontFamily: "var(--font-display)",
               fontSize: "0.7rem",
               color: "#C0392B",
               letterSpacing: "0.3em",
@@ -64,7 +66,7 @@ export function PoliticaCookiesPage() {
           </p>
           <h1
             style={{
-              fontFamily: "'Cinzel', serif",
+              fontFamily: "var(--font-display)",
               fontSize: "clamp(2.2rem, 5vw, 3.4rem)",
               fontWeight: 700,
               color: "#F0F4FF",
@@ -76,7 +78,7 @@ export function PoliticaCookiesPage() {
           </h1>
           <p
             style={{
-              fontFamily: "'Exo 2', sans-serif",
+              fontFamily: "var(--font-body)",
               fontSize: "1.02rem",
               color: "#8899BB",
               lineHeight: 1.8,
@@ -100,57 +102,44 @@ export function PoliticaCookiesPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              className="flex gap-5 p-7 rounded-2xl"
-              style={{
-                background: "rgba(10,15,30,0.8)",
-                border: "1px solid rgba(46,134,171,0.12)",
-                backdropFilter: "blur(10px)",
-              }}
             >
-              <div
-                className="w-11 h-11 rounded-xl flex items-center justify-center shrink-0"
-                style={{
-                  background: "rgba(46,134,171,0.12)",
-                  border: "1px solid rgba(46,134,171,0.2)",
-                  color: "#5DADE2",
-                }}
-              >
-                <Icon size={19} />
-              </div>
-              <div>
-                <div className="flex items-baseline gap-3 mb-2">
-                  <span
+              <CraftCard className="flex gap-5 p-7 items-start">
+                <BrandIcon icon={Icon} from="#5DADE2" to="#FFFFFF" size={20} className="shrink-0 mt-1" />
+                <div>
+                  <div className="flex items-baseline gap-3 mb-2">
+                    <span
+                      style={{
+                        fontFamily: "var(--font-body)",
+                        fontSize: "0.75rem",
+                        color: "#2A3A5A",
+                        letterSpacing: "0.15em",
+                      }}
+                    >
+                      0{i + 1}
+                    </span>
+                    <h2
+                      style={{
+                        fontFamily: "var(--font-display)",
+                        fontSize: "1.1rem",
+                        fontWeight: 700,
+                        color: "var(--color-text-soft)",
+                      }}
+                    >
+                      {title}
+                    </h2>
+                  </div>
+                  <p
                     style={{
-                      fontFamily: "'Cinzel', serif",
-                      fontSize: "0.75rem",
-                      color: "#2A3A5A",
-                      letterSpacing: "0.15em",
+                      fontFamily: "var(--font-body)",
+                      fontSize: "0.92rem",
+                      color: "var(--color-muted)",
+                      lineHeight: 1.8,
                     }}
                   >
-                    0{i + 1}
-                  </span>
-                  <h2
-                    style={{
-                      fontFamily: "'Cinzel', serif",
-                      fontSize: "1.1rem",
-                      fontWeight: 700,
-                      color: "#F0F4FF",
-                    }}
-                  >
-                    {title}
-                  </h2>
+                    {desc}
+                  </p>
                 </div>
-                <p
-                  style={{
-                    fontFamily: "'Exo 2', sans-serif",
-                    fontSize: "0.92rem",
-                    color: "#8899BB",
-                    lineHeight: 1.8,
-                  }}
-                >
-                  {desc}
-                </p>
-              </div>
+              </CraftCard>
             </motion.div>
           ))}
         </div>

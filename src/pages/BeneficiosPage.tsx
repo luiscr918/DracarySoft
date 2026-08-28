@@ -1,8 +1,10 @@
 import { motion } from "framer-motion";
-import { Globe, ShieldCheck, Clock, TrendingUp, Sparkles } from "lucide-react";
+import { Globe, ShieldCheck, Clock, TrendUp as TrendingUp, Sparkle as Sparkles } from "@phosphor-icons/react";
 import Layout from "../components/layout/Layout";
 import FloatingPhoneButton from "../components/ui/FloatingPhoneButton";
 import { SEO } from "../components/seo/SEO";
+import { CraftCard } from "../components/ui/CraftCard";
+import { BrandIcon } from "../components/ui/BrandIcon";
 
 const BENEFITS = [
   {
@@ -45,7 +47,7 @@ export function BeneficiosPage() {
         <div className="max-w-5xl mx-auto relative z-10 text-center">
           <p
             style={{
-              fontFamily: "'Cinzel', serif",
+              fontFamily: "var(--font-display)",
               fontSize: "0.75rem",
               color: "#C0392B",
               letterSpacing: "0.28em",
@@ -69,7 +71,7 @@ export function BeneficiosPage() {
           />
           <h1
             style={{
-              fontFamily: "'Cinzel', serif",
+              fontFamily: "var(--font-display)",
               fontSize: "clamp(2.2rem, 5vw, 4rem)",
               fontWeight: 700,
               color: "#F0F4FF",
@@ -81,7 +83,7 @@ export function BeneficiosPage() {
           </h1>
           <p
             style={{
-              fontFamily: "'Exo 2', sans-serif",
+              fontFamily: "var(--font-body)",
               fontSize: "1.05rem",
               color: "#8899BB",
               lineHeight: 1.8,
@@ -105,45 +107,42 @@ export function BeneficiosPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              className="rounded-3xl p-8"
-              style={{
-                background: "rgba(10,15,30,0.8)",
-                border: "1px solid rgba(46,134,171,0.12)",
-                backdropFilter: "blur(10px)",
-              }}
+              className="h-full"
             >
-              <div
-                className="w-14 h-14 rounded-2xl flex items-center justify-center mb-5"
-                style={{
-                  background: `${color}20`,
-                  border: `1px solid ${color}30`,
-                  color,
-                }}
-              >
-                <Icon size={22} />
-              </div>
-              <h3
-                style={{
-                  fontFamily: "'Cinzel', serif",
-                  fontSize: "1.1rem",
-                  fontWeight: 700,
-                  color: "#F0F4FF",
-                  marginBottom: "0.75rem",
-                  lineHeight: 1.25,
-                }}
-              >
-                {title}
-              </h3>
-              <p
-                style={{
-                  fontFamily: "'Exo 2', sans-serif",
-                  fontSize: "0.95rem",
-                  color: "#8899BB",
-                  lineHeight: 1.8,
-                }}
-              >
-                {desc}
-              </p>
+              <CraftCard className="p-8 h-full">
+                <div className="relative mb-5 flex h-14 w-14 items-center justify-center">
+                  <span
+                    className="absolute inset-0 rounded-2xl"
+                    style={{
+                      background: `radial-gradient(circle, ${color}40, transparent 70%)`,
+                      filter: "blur(10px)",
+                    }}
+                  />
+                  <BrandIcon icon={Icon} from={color} to="#FFFFFF" size={24} className="relative" />
+                </div>
+                <h3
+                  style={{
+                    fontFamily: "var(--font-display)",
+                    fontSize: "1.15rem",
+                    fontWeight: 700,
+                    color: "var(--color-text-soft)",
+                    marginBottom: "0.75rem",
+                    lineHeight: 1.25,
+                  }}
+                >
+                  {title}
+                </h3>
+                <p
+                  style={{
+                    fontFamily: "var(--font-body)",
+                    fontSize: "0.92rem",
+                    color: "var(--color-muted)",
+                    lineHeight: 1.8,
+                  }}
+                >
+                  {desc}
+                </p>
+              </CraftCard>
             </motion.div>
           ))}
         </div>

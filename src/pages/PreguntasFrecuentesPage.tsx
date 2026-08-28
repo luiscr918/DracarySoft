@@ -1,6 +1,7 @@
 import Layout from "../components/layout/Layout";
 import FloatingPhoneButton from "../components/ui/FloatingPhoneButton";
 import { SEO } from "../components/seo/SEO";
+import { CraftCard } from "../components/ui/CraftCard";
 
 const FAQ_DATA = [
   {
@@ -224,7 +225,7 @@ export function PreguntasFrecuentesPage() {
         <div className="max-w-4xl mx-auto relative z-10 text-center">
           <p
             style={{
-              fontFamily: "'Cinzel', serif",
+              fontFamily: "var(--font-display)",
               fontSize: "0.75rem",
               color: "#C0392B",
               letterSpacing: "0.28em",
@@ -235,7 +236,7 @@ export function PreguntasFrecuentesPage() {
           </p>
           <h1
             style={{
-              fontFamily: "'Cinzel', serif",
+              fontFamily: "var(--font-display)",
               fontSize: "clamp(2.2rem, 5vw, 3.8rem)",
               fontWeight: 700,
               color: "#F0F4FF",
@@ -256,7 +257,7 @@ export function PreguntasFrecuentesPage() {
           </h1>
           <p
             style={{
-              fontFamily: "'Exo 2', sans-serif",
+              fontFamily: "var(--font-body)",
               fontSize: "1.05rem",
               color: "#8899BB",
               lineHeight: 1.8,
@@ -283,7 +284,7 @@ export function PreguntasFrecuentesPage() {
                 />
                 <h2
                   style={{
-                    fontFamily: "'Cinzel', serif",
+                    fontFamily: "var(--font-display)",
                     fontSize: "clamp(1.3rem, 2.5vw, 1.8rem)",
                     fontWeight: 700,
                     color: "#F0F4FF",
@@ -310,7 +311,7 @@ export function PreguntasFrecuentesPage() {
                     >
                       <span
                         style={{
-                          fontFamily: "'Exo 2', sans-serif",
+                          fontFamily: "var(--font-body)",
                           fontSize: "0.95rem",
                           color: "#E8EEF8",
                           fontWeight: 500,
@@ -334,7 +335,7 @@ export function PreguntasFrecuentesPage() {
                     <div
                       className="px-6 pb-5"
                       style={{
-                        fontFamily: "'Exo 2', sans-serif",
+                        fontFamily: "var(--font-body)",
                         fontSize: "0.9rem",
                         color: "#8899BB",
                         lineHeight: 1.8,
@@ -351,49 +352,44 @@ export function PreguntasFrecuentesPage() {
       </section>
 
       <section className="pb-24 px-6">
-        <div
-          className="max-w-2xl mx-auto text-center p-10 rounded-3xl relative overflow-hidden"
-          style={{
-            background:
-              "linear-gradient(135deg, rgba(27,79,114,0.2), rgba(192,57,43,0.1))",
-            border: "1px solid rgba(46,134,171,0.2)",
-          }}
-        >
-          <h2
-            style={{
-              fontFamily: "'Cinzel', serif",
-              fontSize: "clamp(1.4rem, 3vw, 2rem)",
-              fontWeight: 700,
-              color: "#F0F4FF",
-              marginBottom: "0.75rem",
-            }}
-          >
-            ¿No encontraste tu respuesta?
-          </h2>
-          <p
-            style={{
-              fontFamily: "'Exo 2', sans-serif",
-              fontSize: "0.95rem",
-              color: "#4A5A7A",
-              marginBottom: "2rem",
-              lineHeight: 1.7,
-            }}
-          >
-            Escríbenos directamente y te respondemos en menos de 24 horas sin compromiso.
-          </p>
-          <a
-            href="/contacto"
-            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full font-semibold text-sm transition-all duration-300 hover:scale-105"
-            style={{
-              fontFamily: "'Exo 2', sans-serif",
-              background: "linear-gradient(135deg, #C0392B, #A93226)",
-              color: "#fff",
-              boxShadow: "0 6px 24px rgba(192,57,43,0.4)",
-              textDecoration: "none",
-            }}
-          >
-            Solicitar cotización
-          </a>
+        <div className="max-w-2xl mx-auto">
+          <CraftCard className="p-10 text-center">
+            <h2
+              style={{
+                fontFamily: "var(--font-display)",
+                fontSize: "clamp(1.4rem, 3vw, 2rem)",
+                fontWeight: 700,
+                color: "var(--color-text-soft)",
+                marginBottom: "0.75rem",
+              }}
+            >
+              ¿No encontraste tu respuesta?
+            </h2>
+            <p
+              style={{
+                fontFamily: "var(--font-body)",
+                fontSize: "0.95rem",
+                color: "var(--color-muted)",
+                marginBottom: "2rem",
+                lineHeight: 1.7,
+              }}
+            >
+              Escríbenos directamente y te respondemos en menos de 24 horas sin compromiso.
+            </p>
+            <a
+              href="/contacto"
+              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full font-semibold text-sm transition-all duration-300 hover:scale-105"
+              style={{
+                fontFamily: "var(--font-body)",
+                background: "linear-gradient(135deg, #C0392B, #A93226)",
+                color: "#fff",
+                boxShadow: "0 6px 24px rgba(192,57,43,0.4)",
+                textDecoration: "none",
+              }}
+            >
+              Solicitar cotización
+            </a>
+          </CraftCard>
         </div>
       </section>
       <FloatingPhoneButton />

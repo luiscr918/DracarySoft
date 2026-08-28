@@ -4,21 +4,23 @@ import { motion } from "framer-motion";
 import { gsap } from "gsap";
 import {
   Globe,
-  Smartphone,
-  Zap,
-  TrendingUp,
+  DeviceMobile as Smartphone,
+  Lightning as Zap,
+  TrendUp as TrendingUp,
   ShoppingCart,
-  Settings,
+  Gear as Settings,
   Flame,
-  CheckCircle2,
-  ChevronRight,
+  CheckCircle as CheckCircle2,
+  CaretRight as ChevronRight,
   Cpu,
   MapPin,
   Users,
-} from "lucide-react";
+} from "@phosphor-icons/react";
 import Layout from "../components/layout/Layout";
 import FloatingPhoneButton from "../components/ui/FloatingPhoneButton";
 import { SEO } from "../components/seo/SEO";
+import { CraftCard } from "../components/ui/CraftCard";
+import { BrandIcon } from "../components/ui/BrandIcon";
 
 // ─── Datos ────────────────────────────────────────────────────────────────────
 
@@ -262,40 +264,23 @@ function ServiceCard({
   color,
   price,
   glow,
-  gradient,
 }: (typeof CATEGORIES)[0]["services"][0]) {
   return (
-    <div
-      className="srv-card group relative p-7 rounded-2xl transition-all duration-300 hover:-translate-y-2"
-      style={{
-        background: gradient,
-        border: "1px solid rgba(46,134,171,0.1)",
-        backdropFilter: "blur(8px)",
-      }}
-      onMouseEnter={(e) => {
-        (e.currentTarget as HTMLElement).style.borderColor = `${color}35`;
-        (e.currentTarget as HTMLElement).style.boxShadow =
-          `0 20px 48px ${glow}`;
-      }}
-      onMouseLeave={(e) => {
-        (e.currentTarget as HTMLElement).style.borderColor =
-          "rgba(46,134,171,0.1)";
-        (e.currentTarget as HTMLElement).style.boxShadow = "none";
-      }}
-    >
-      <div
-        className="w-12 h-12 rounded-xl flex items-center justify-center mb-5 transition-transform duration-300 group-hover:scale-110"
-        style={{
-          background: `${color}18`,
-          border: `1px solid ${color}30`,
-        }}
-      >
-        <Icon size={22} style={{ color }} />
+    <CraftCard glow={glow} className="p-7 h-full">
+      <div className="relative mb-5 flex h-12 w-12 items-center justify-center">
+        <span
+          className="absolute inset-0 rounded-xl"
+          style={{
+            background: `radial-gradient(circle, ${glow}, transparent 70%)`,
+            filter: "blur(10px)",
+          }}
+        />
+        <BrandIcon icon={Icon} from={color} to="#FFFFFF" size={24} className="relative" />
       </div>
 
       <p
         style={{
-          fontFamily: "'Exo 2', sans-serif",
+          fontFamily: "var(--font-body)",
           fontSize: "0.7rem",
           color,
           letterSpacing: "0.15em",
@@ -307,10 +292,10 @@ function ServiceCard({
 
       <h3
         style={{
-          fontFamily: "'Cinzel', serif",
-          fontSize: "1rem",
-          fontWeight: 600,
-          color: "#E8EEF8",
+          fontFamily: "var(--font-display)",
+          fontSize: "1.15rem",
+          fontWeight: 700,
+          color: "var(--color-text-soft)",
           marginBottom: "0.35rem",
           lineHeight: 1.3,
         }}
@@ -319,8 +304,8 @@ function ServiceCard({
       </h3>
       <p
         style={{
-          fontFamily: "'Cinzel', serif",
-          fontSize: "0.8rem",
+          fontFamily: "var(--font-body)",
+          fontSize: "0.82rem",
           fontWeight: 700,
           color,
           marginBottom: "0.75rem",
@@ -330,10 +315,10 @@ function ServiceCard({
         {price !== "Cotización" && (
           <span
             style={{
-              fontFamily: "'Exo 2', sans-serif",
+              fontFamily: "var(--font-body)",
               fontSize: "0.62rem",
               fontWeight: 400,
-              color: "#4A5A7A",
+              color: "var(--color-muted)",
               marginLeft: "0.5rem",
             }}
           >
@@ -344,9 +329,9 @@ function ServiceCard({
 
       <p
         style={{
-          fontFamily: "'Exo 2', sans-serif",
+          fontFamily: "var(--font-body)",
           fontSize: "0.83rem",
-          color: "#4A5A7A",
+          color: "var(--color-muted)",
           lineHeight: 1.75,
           marginBottom: "1.25rem",
         }}
@@ -357,12 +342,12 @@ function ServiceCard({
       <ul className="space-y-1.5">
         {features.map((f) => (
           <li key={f} className="flex items-center gap-2">
-            <CheckCircle2 size={13} style={{ color, flexShrink: 0 }} />
+            <BrandIcon icon={CheckCircle2} from={color} to="#FFFFFF" size={13} className="shrink-0" />
             <span
               style={{
-                fontFamily: "'Exo 2', sans-serif",
+                fontFamily: "var(--font-body)",
                 fontSize: "0.78rem",
-                color: "#6677AA",
+                color: "var(--color-text-dim)",
               }}
             >
               {f}
@@ -371,13 +356,13 @@ function ServiceCard({
         ))}
       </ul>
 
-      <div
-        className="absolute bottom-0 left-6 right-6 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+      <span
+        className="pointer-events-none absolute bottom-0 left-7 right-7 h-px opacity-0 transition-opacity duration-300 group-hover:opacity-100"
         style={{
-          background: `linear-gradient(90deg, transparent, ${color}50, transparent)`,
+          background: `linear-gradient(90deg, transparent, ${color}, transparent)`,
         }}
       />
-    </div>
+    </CraftCard>
   );
 }
 
@@ -442,7 +427,7 @@ export function ServiciosPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             style={{
-              fontFamily: "'Cinzel', serif",
+              fontFamily: "var(--font-display)",
               fontSize: "0.7rem",
               color: "#C0392B",
               letterSpacing: "0.3em",
@@ -457,7 +442,7 @@ export function ServiciosPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             style={{
-              fontFamily: "'Cinzel', serif",
+              fontFamily: "var(--font-display)",
               fontSize: "clamp(2.2rem, 5vw, 3.8rem)",
               fontWeight: 700,
               color: "#F0F4FF",
@@ -483,7 +468,7 @@ export function ServiciosPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.25 }}
             style={{
-              fontFamily: "'Exo 2', sans-serif",
+              fontFamily: "var(--font-body)",
               fontSize: "1.05rem",
               color: "#4A5A7A",
               lineHeight: 1.8,
@@ -512,7 +497,7 @@ export function ServiciosPage() {
               <div>
                 <p
                   style={{
-                    fontFamily: "'Cinzel', serif",
+                    fontFamily: "var(--font-display)",
                     fontSize: "0.65rem",
                     color,
                     letterSpacing: "0.35em",
@@ -523,7 +508,7 @@ export function ServiciosPage() {
                 </p>
                 <h2
                   style={{
-                    fontFamily: "'Cinzel', serif",
+                    fontFamily: "var(--font-display)",
                     fontSize: "clamp(1.3rem, 2.5vw, 1.9rem)",
                     fontWeight: 700,
                     color: "#F0F4FF",
@@ -535,7 +520,7 @@ export function ServiciosPage() {
                 </h2>
                 <p
                   style={{
-                    fontFamily: "'Exo 2', sans-serif",
+                    fontFamily: "var(--font-body)",
                     fontSize: "0.88rem",
                     color: "#4A5A7A",
                     lineHeight: 1.6,
@@ -581,7 +566,7 @@ export function ServiciosPage() {
           <div className="text-center mb-14">
             <p
               style={{
-                fontFamily: "'Cinzel', serif",
+                fontFamily: "var(--font-display)",
                 fontSize: "0.7rem",
                 color: "#C0392B",
                 letterSpacing: "0.3em",
@@ -592,7 +577,7 @@ export function ServiciosPage() {
             </p>
             <h2
               style={{
-                fontFamily: "'Cinzel', serif",
+                fontFamily: "var(--font-display)",
                 fontSize: "clamp(1.6rem, 3.5vw, 2.4rem)",
                 fontWeight: 700,
                 color: "#F0F4FF",
@@ -615,30 +600,24 @@ export function ServiciosPage() {
                     }}
                   />
                 )}
-                <div
-                  className="relative z-10 p-5 rounded-2xl"
-                  style={{
-                    background: "rgba(10,15,30,0.6)",
-                    border: "1px solid rgba(46,134,171,0.1)",
-                  }}
-                >
+                <CraftCard className="relative z-10 p-5">
                   <div
-                    className="text-3xl font-black mb-3"
+                    className="text-3xl font-extrabold mb-3"
                     style={{
-                      fontFamily: "'Cinzel', serif",
-                      background:
-                        "linear-gradient(135deg, rgba(46,134,171,0.5), rgba(192,57,43,0.4))",
-                      WebkitBackgroundClip: "text",
-                      WebkitTextFillColor: "transparent",
+                      fontFamily: "var(--font-display)",
+                      color: "transparent",
+                      WebkitTextStroke: "1.5px rgba(93,173,226,0.6)",
+                      letterSpacing: "-0.03em",
                     }}
                   >
                     {step}
                   </div>
                   <h4
                     style={{
-                      fontFamily: "'Cinzel', serif",
-                      fontSize: "0.9rem",
-                      color: "#E8EEF8",
+                      fontFamily: "var(--font-display)",
+                      fontSize: "0.95rem",
+                      fontWeight: 700,
+                      color: "var(--color-text-soft)",
                       marginBottom: "0.5rem",
                     }}
                   >
@@ -646,15 +625,15 @@ export function ServiciosPage() {
                   </h4>
                   <p
                     style={{
-                      fontFamily: "'Exo 2', sans-serif",
+                      fontFamily: "var(--font-body)",
                       fontSize: "0.8rem",
-                      color: "#4A5A7A",
+                      color: "var(--color-muted)",
                       lineHeight: 1.6,
                     }}
                   >
                     {desc}
                   </p>
-                </div>
+                </CraftCard>
               </div>
             ))}
           </div>
@@ -687,7 +666,7 @@ export function ServiciosPage() {
 
           <h2
             style={{
-              fontFamily: "'Cinzel', serif",
+              fontFamily: "var(--font-display)",
               fontSize: "clamp(1.4rem, 3vw, 2rem)",
               fontWeight: 700,
               color: "#F0F4FF",
@@ -698,7 +677,7 @@ export function ServiciosPage() {
           </h2>
           <p
             style={{
-              fontFamily: "'Exo 2', sans-serif",
+              fontFamily: "var(--font-body)",
               fontSize: "0.95rem",
               color: "#4A5A7A",
               marginBottom: "2rem",
@@ -712,7 +691,7 @@ export function ServiciosPage() {
             to="/contacto"
             className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full font-semibold text-sm transition-all duration-300 hover:scale-105"
             style={{
-              fontFamily: "'Exo 2', sans-serif",
+              fontFamily: "var(--font-body)",
               background: "linear-gradient(135deg, #C0392B, #A93226)",
               color: "#fff",
               boxShadow: "0 6px 24px rgba(192,57,43,0.4)",
@@ -731,7 +710,7 @@ export function ServiciosPage() {
           </NavLink>
           <p
             style={{
-              fontFamily: "'Exo 2', sans-serif",
+              fontFamily: "var(--font-body)",
               fontSize: "0.85rem",
               color: "#4A5A7A",
               marginTop: "1.25rem",

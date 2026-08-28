@@ -9,3 +9,116 @@
 @import "@fontsource/exo-2/600.css";
 @import "@fontsource/exo-2/700.css";
 @import "@fontsource/exo-2/400-italic.css";
+@import "@fontsource/sora/400.css";
+@import "@fontsource/sora/500.css";
+@import "@fontsource/sora/600.css";
+@import "@fontsource/sora/700.css";
+@import "@fontsource/sora/800.css";
+
+/* ─── Sistema de diseño DracarySoft ───────────────────────────────────────────
+   Tokens centralizados para mantener coherencia visual en todo el sitio.
+   Los colores usan valores rgba donde se necesita transparencia para el glass.
+   ─────────────────────────────────────────────────────────────────────────── */
+@theme {
+  /* Base / superficies */
+  --color-ink: #050b14;
+  --color-ink-soft: #0a0f1e;
+  --color-surface: #0d1226;
+  --color-line: rgba(46, 134, 171, 0.14);
+  --color-line-strong: rgba(46, 134, 171, 0.28);
+
+  /* Acentos (identidad Dracarys: azul + fuego) */
+  --color-accent: #2e86ab;
+  --color-accent-light: #5dade2;
+  --color-accent-deep: #1b4f72;
+  --color-fire: #c0392b;
+  --color-fire-dark: #a93226;
+  --color-fire-deep: #922b21;
+
+  /* Texto */
+  --color-text: #f0f4ff;
+  --color-text-soft: #e8eef8;
+  --color-text-dim: #8899bb;
+  --color-muted: #4a5a7a;
+  --color-muted-deep: #2a3a5a;
+
+  /* Tipografía */
+  --font-display: "Sora", system-ui, sans-serif;
+  --font-body: "Exo 2", sans-serif;
+
+  /* Radios */
+  --radius-card: 1.25rem;
+  --radius-pill: 100px;
+
+  /* Sombras */
+  --shadow-glow: 0 16px 40px rgba(46, 134, 171, 0.16);
+  --shadow-soft: 0 16px 40px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  --shadow-pill: inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    0 10px 30px rgba(0, 0, 0, 0.22);
+}
+
+/* ─── Utilidades reutilizables ──────────────────────────────────────────────── */
+@utility container-x {
+  width: 100%;
+  max-width: 80rem;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+  @media (min-width: 1024px) {
+    padding-inline: 2rem;
+  }
+}
+
+@utility glass {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+  backdrop-filter: blur(18px) saturate(150%);
+  -webkit-backdrop-filter: blur(18px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.07),
+    0 20px 50px rgba(0, 0, 0, 0.35);
+}
+
+@utility eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-accent-light);
+}
+
+@utility text-gradient {
+  background: linear-gradient(
+    135deg,
+    var(--color-accent-light) 0%,
+    var(--color-accent) 45%,
+    var(--color-fire) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ─── Marquee (cinta infinita) ──────────────────────────────────────────────── */
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@utility marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll var(--marquee-duration, 32s) linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none !important;
+  }
+}

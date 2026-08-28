@@ -1,8 +1,10 @@
 import { motion } from "framer-motion";
-import { Target, Sparkles, ShieldCheck } from "lucide-react";
+import { Target, Sparkle as Sparkles, ShieldCheck } from "@phosphor-icons/react";
 import Layout from "../components/layout/Layout";
 import FloatingPhoneButton from "../components/ui/FloatingPhoneButton";
 import { SEO } from "../components/seo/SEO";
+import { CraftCard } from "../components/ui/CraftCard";
+import { BrandIcon } from "../components/ui/BrandIcon";
 
 const GitHubIcon = (props: { size?: number }) => (
   <svg
@@ -102,7 +104,7 @@ export function NosotrosPage() {
         <div className="max-w-5xl mx-auto relative z-10 text-center">
           <p
             style={{
-              fontFamily: "'Cinzel', serif",
+              fontFamily: "var(--font-display)",
               fontSize: "0.7rem",
               color: "#C0392B",
               letterSpacing: "0.3em",
@@ -113,7 +115,7 @@ export function NosotrosPage() {
           </p>
           <h1
             style={{
-              fontFamily: "'Cinzel', serif",
+              fontFamily: "var(--font-display)",
               fontSize: "clamp(2.2rem, 5vw, 4rem)",
               fontWeight: 700,
               color: "#F0F4FF",
@@ -125,7 +127,7 @@ export function NosotrosPage() {
           </h1>
           <p
             style={{
-              fontFamily: "'Exo 2', sans-serif",
+              fontFamily: "var(--font-body)",
               fontSize: "1.05rem",
               color: "#8899BB",
               lineHeight: 1.8,
@@ -149,7 +151,7 @@ export function NosotrosPage() {
             />
             <span
               style={{
-                fontFamily: "'Exo 2', sans-serif",
+                fontFamily: "var(--font-body)",
                 fontSize: "0.72rem",
                 color: "#2A3A5A",
                 letterSpacing: "0.18em",
@@ -186,7 +188,7 @@ export function NosotrosPage() {
           >
             <h2
               style={{
-                fontFamily: "'Cinzel', serif",
+                fontFamily: "var(--font-display)",
                 fontSize: "clamp(1.8rem, 3vw, 2.6rem)",
                 fontWeight: 700,
                 color: "#F0F4FF",
@@ -197,7 +199,7 @@ export function NosotrosPage() {
             </h2>
             <p
               style={{
-                fontFamily: "'Exo 2', sans-serif",
+                fontFamily: "var(--font-body)",
                 fontSize: "1rem",
                 color: "#8899BB",
                 lineHeight: 1.9,
@@ -218,7 +220,7 @@ export function NosotrosPage() {
                     key={pill}
                     className="px-4 py-1.5 rounded-full text-xs"
                     style={{
-                      fontFamily: "'Exo 2', sans-serif",
+                      fontFamily: "var(--font-body)",
                       background: "rgba(192,57,43,0.08)",
                       border: "1px solid rgba(192,57,43,0.18)",
                       color: "#C0392B",
@@ -240,7 +242,7 @@ export function NosotrosPage() {
           <div className="text-center mb-12">
             <p
               style={{
-                fontFamily: "'Cinzel', serif",
+                fontFamily: "var(--font-display)",
                 fontSize: "0.7rem",
                 color: "#C0392B",
                 letterSpacing: "0.28em",
@@ -251,7 +253,7 @@ export function NosotrosPage() {
             </p>
             <h2
               style={{
-                fontFamily: "'Cinzel', serif",
+                fontFamily: "var(--font-display)",
                 fontSize: "clamp(2rem, 4vw, 3rem)",
                 fontWeight: 700,
                 color: "#F0F4FF",
@@ -269,99 +271,78 @@ export function NosotrosPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                className="group relative p-8 rounded-3xl text-center transition-all duration-300 hover:-translate-y-2"
-                style={{
-                  background: "rgba(10,15,30,0.8)",
-                  border: "1px solid rgba(46,134,171,0.12)",
-                  backdropFilter: "blur(10px)",
-                }}
-                onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLElement).style.borderColor = `${color}35`;
-                  (e.currentTarget as HTMLElement).style.boxShadow =
-                    `0 24px 56px ${glow}`;
-                }}
-                onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLElement).style.borderColor =
-                    "rgba(46,134,171,0.12)";
-                  (e.currentTarget as HTMLElement).style.boxShadow = "none";
-                }}
+                className="group h-full transition-transform duration-300 hover:-translate-y-2"
               >
-                <div
-                  className="w-28 h-28 md:w-32 md:h-32 mx-auto mb-6 rounded-full p-1 transition-transform duration-300 group-hover:scale-105"
-                  style={{
-                    background: `linear-gradient(135deg, ${color}, transparent)`,
-                    boxShadow: `0 0 0 1px ${color}40, 0 12px 36px ${glow}`,
-                  }}
-                >
-                  <img
-                    loading="lazy"
-                    src={avatar}
-                    alt={`Foto de ${name}`}
-                    width="460"
-                    height="460"
-                    className="w-full h-full rounded-full object-cover"
-                    style={{ background: "#0A0F1E" }}
-                  />
-                </div>
+                <CraftCard glow={glow} className="h-full p-8 text-center">
+                  <div
+                    className="w-28 h-28 md:w-32 md:h-32 mx-auto mb-6 rounded-full p-1 transition-transform duration-300 group-hover:scale-105"
+                    style={{
+                      background: `linear-gradient(135deg, ${color}, transparent)`,
+                      boxShadow: `0 0 0 1px ${color}40, 0 12px 36px ${glow}`,
+                    }}
+                  >
+                    <img
+                      loading="lazy"
+                      src={avatar}
+                      alt={`Foto de ${name}`}
+                      width="460"
+                      height="460"
+                      className="w-full h-full rounded-full object-cover"
+                      style={{ background: "#0A0F1E" }}
+                    />
+                  </div>
 
-                <h3
-                  style={{
-                    fontFamily: "'Cinzel', serif",
-                    fontSize: "1.35rem",
-                    fontWeight: 700,
-                    color: "#F0F4FF",
-                    marginBottom: "0.4rem",
-                  }}
-                >
-                  {name}
-                </h3>
-                <p
-                  style={{
-                    fontFamily: "'Exo 2', sans-serif",
-                    fontSize: "0.78rem",
-                    color,
-                    letterSpacing: "0.05em",
-                    marginBottom: "1rem",
-                  }}
-                >
-                  {role}
-                </p>
-                <p
-                  style={{
-                    fontFamily: "'Exo 2', sans-serif",
-                    fontSize: "0.92rem",
-                    color: "#8899BB",
-                    lineHeight: 1.75,
-                    marginBottom: "1.5rem",
-                  }}
-                >
-                  {bio}
-                </p>
+                  <h3
+                    style={{
+                      fontFamily: "var(--font-display)",
+                      fontSize: "1.35rem",
+                      fontWeight: 700,
+                      color: "var(--color-text-soft)",
+                      marginBottom: "0.4rem",
+                    }}
+                  >
+                    {name}
+                  </h3>
+                  <p
+                    style={{
+                      fontFamily: "var(--font-body)",
+                      fontSize: "0.78rem",
+                      color,
+                      letterSpacing: "0.05em",
+                      marginBottom: "1rem",
+                    }}
+                  >
+                    {role}
+                  </p>
+                  <p
+                    style={{
+                      fontFamily: "var(--font-body)",
+                      fontSize: "0.92rem",
+                      color: "var(--color-muted)",
+                      lineHeight: 1.75,
+                      marginBottom: "1.5rem",
+                    }}
+                  >
+                    {bio}
+                  </p>
 
-                <a
-                  href={github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={`Ver perfil de GitHub de ${name}`}
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold transition-all duration-300 hover:scale-105"
-                  style={{
-                    fontFamily: "'Exo 2', sans-serif",
-                    background: "rgba(46,134,171,0.1)",
-                    border: `1px solid ${color}40`,
-                    color: "#E8EEF8",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.background = `${color}22`;
-                    e.currentTarget.style.boxShadow = `0 4px 16px ${glow}`;
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.background = "rgba(46,134,171,0.1)";
-                    e.currentTarget.style.boxShadow = "none";
-                  }}
-                >
-                  <GitHubIcon size={14} />
-                  GitHub
-                </a>
+                  <a
+                    href={github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`Ver perfil de GitHub de ${name}`}
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold transition-all duration-300 hover:scale-105"
+                    style={{
+                      fontFamily: "var(--font-body)",
+                      background: "rgba(46,134,171,0.1)",
+                      border: `1px solid ${color}40`,
+                      color: "#E8EEF8",
+                    }}
+                  >
+                    <GitHubIcon size={14} />
+                    GitHub
+                  </a>
+                </CraftCard>
               </motion.div>
             ))}
           </div>
@@ -371,13 +352,7 @@ export function NosotrosPage() {
       {/* ── MISIÓN · VISIÓN · VALORES ─────────────────────────────────────── */}
       <section className="relative py-14 px-6">
         <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-0 md:gap-6 rounded-3xl overflow-hidden"
-            style={{
-              background: "rgba(10,15,30,0.8)",
-              border: "1px solid rgba(46,134,171,0.12)",
-              backdropFilter: "blur(10px)",
-            }}
-          >
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {VALUES.map(({ icon: Icon, title, desc, color }, i) => (
               <motion.div
                 key={title}
@@ -385,57 +360,43 @@ export function NosotrosPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.5, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                className="relative p-8"
-                style={{
-                  borderRight:
-                    i < VALUES.length - 1
-                      ? "1px solid rgba(46,134,171,0.08)"
-                      : "none",
-                }}
               >
-                <div className="flex items-center gap-4 mb-5">
-                  <div
-                    className="w-11 h-11 rounded-2xl flex items-center justify-center shrink-0"
-                    style={{
-                      background: `${color}20`,
-                      border: `1px solid ${color}30`,
-                      color,
-                    }}
-                  >
-                    <Icon size={19} />
+                <CraftCard className="h-full p-8">
+                  <div className="flex items-center gap-4 mb-5">
+                    <BrandIcon icon={Icon} from={color} to="#FFFFFF" size={22} />
+                    <span
+                      style={{
+                        fontFamily: "var(--font-body)",
+                        fontSize: "0.8rem",
+                        color: "#2A3A5A",
+                        letterSpacing: "0.15em",
+                      }}
+                    >
+                      0{i + 1}
+                    </span>
                   </div>
-                  <span
+                  <h3
                     style={{
-                      fontFamily: "'Cinzel', serif",
-                      fontSize: "0.8rem",
-                      color: "#2A3A5A",
-                      letterSpacing: "0.15em",
+                      fontFamily: "var(--font-display)",
+                      fontSize: "1.15rem",
+                      fontWeight: 700,
+                      color: "var(--color-text-soft)",
+                      marginBottom: "0.75rem",
                     }}
                   >
-                    0{i + 1}
-                  </span>
-                </div>
-                <h3
-                  style={{
-                    fontFamily: "'Cinzel', serif",
-                    fontSize: "1.15rem",
-                    fontWeight: 700,
-                    color: "#F0F4FF",
-                    marginBottom: "0.75rem",
-                  }}
-                >
-                  {title}
-                </h3>
-                <p
-                  style={{
-                    fontFamily: "'Exo 2', sans-serif",
-                    fontSize: "0.92rem",
-                    color: "#8899BB",
-                    lineHeight: 1.75,
-                  }}
-                >
-                  {desc}
-                </p>
+                    {title}
+                  </h3>
+                  <p
+                    style={{
+                      fontFamily: "var(--font-body)",
+                      fontSize: "0.92rem",
+                      color: "var(--color-muted)",
+                      lineHeight: 1.75,
+                    }}
+                  >
+                    {desc}
+                  </p>
+                </CraftCard>
               </motion.div>
             ))}
           </div>

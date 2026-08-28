@@ -3,6 +3,9 @@ import { useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import { AmbientOrbs } from "../animations/AmbientOrbs";
+import { ScrollProgress } from "../animations/ScrollProgress";
+import { Grain } from "../ui/Grain";
 import bgVideo from "../../assets/vids/bg1.mp4";
 import bgImage from "../../assets/imgs/fonditoDracarys.jpg";
 
@@ -38,6 +41,8 @@ export default function Layout({ children }: LayoutProps) {
         position: "relative",
       }}
     >
+      <ScrollProgress />
+
       {/* ── FONDO MÓVIL: imagen estática ───────────────────────────────── */}
       <div
         style={{
@@ -66,7 +71,7 @@ export default function Layout({ children }: LayoutProps) {
           width: "100%",
           height: "100%",
           objectFit: "cover",
-          zIndex: 1,
+          zIndex: 0,
           opacity: 0.8,
           pointerEvents: "none",
           display: window.innerWidth >= 768 ? "block" : "none",
@@ -82,13 +87,17 @@ export default function Layout({ children }: LayoutProps) {
           inset: 0,
           background:
             "linear-gradient(to bottom, rgba(5,11,20,0.55) 0%, rgba(5,11,20,0.35) 50%, rgba(5,11,20,0.45) 100%)",
-          zIndex: 2,
+          zIndex: 1,
           pointerEvents: "none",
         }}
       />
 
+      {/* ── ORBES AMBIENTALES (profundidad sobre el video) ─────────────── */}
+      <AmbientOrbs />
+
       {/* ── CONTENIDO ──────────────────────────────────────────────────── */}
-      <div style={{ position: "relative", zIndex: 3 }}>
+      <Grain opacity={0.05} />
+      <div style={{ position: "relative", zIndex: 10 }}>
         <Navbar />
 
         <AnimatePresence mode="wait">

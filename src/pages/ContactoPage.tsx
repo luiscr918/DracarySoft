@@ -5,11 +5,13 @@ import {
   type MouseEvent,
 } from "react";
 import { motion } from "framer-motion";
-import { MapPin, CheckCircle, AlertCircle } from "lucide-react";
+import { MapPin, CheckCircle, WarningCircle as AlertCircle } from "@phosphor-icons/react";
 import Layout from "../components/layout/Layout";
 import FloatingPhoneButton from "../components/ui/FloatingPhoneButton";
 import { SEO } from "../components/seo/SEO";
 import { SOCIAL_LINKS } from "../constants/social";
+import { CraftCard } from "../components/ui/CraftCard";
+import { BrandIcon } from "../components/ui/BrandIcon";
 
 const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
 const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
@@ -91,7 +93,7 @@ export function ContactoPage() {
         <div className="max-w-5xl mx-auto relative z-10 text-center">
           <p
             style={{
-              fontFamily: "'Cinzel', serif",
+              fontFamily: "var(--font-display)",
               fontSize: "0.75rem",
               color: "#C0392B",
               letterSpacing: "0.28em",
@@ -102,7 +104,7 @@ export function ContactoPage() {
           </p>
           <h1
             style={{
-              fontFamily: "'Cinzel', serif",
+              fontFamily: "var(--font-display)",
               fontSize: "clamp(2.2rem, 5vw, 4rem)",
               fontWeight: 700,
               color: "#F0F4FF",
@@ -114,7 +116,7 @@ export function ContactoPage() {
           </h1>
           <p
             style={{
-              fontFamily: "'Exo 2', sans-serif",
+              fontFamily: "var(--font-body)",
               fontSize: "1.05rem",
               color: "#8899BB",
               lineHeight: 1.8,
@@ -138,18 +140,13 @@ export function ContactoPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
             onSubmit={handleSubmit}
-            className="rounded-3xl p-8"
-            style={{
-              background: "rgba(10,15,30,0.9)",
-              border: "1px solid rgba(46,134,171,0.12)",
-              backdropFilter: "blur(10px)",
-            }}
           >
-            <div className="grid gap-6">
+            <CraftCard className="p-8">
+              <div className="grid gap-6">
               <label className="flex flex-col gap-2 text-left">
                 <span
                   style={{
-                    fontFamily: "'Exo 2', sans-serif",
+                    fontFamily: "var(--font-body)",
                     color: "#8899BB",
                     fontSize: "0.9rem",
                   }}
@@ -171,7 +168,7 @@ export function ContactoPage() {
               <label className="flex flex-col gap-2 text-left">
                 <span
                   style={{
-                    fontFamily: "'Exo 2', sans-serif",
+                    fontFamily: "var(--font-body)",
                     color: "#8899BB",
                     fontSize: "0.9rem",
                   }}
@@ -193,7 +190,7 @@ export function ContactoPage() {
               <label className="flex flex-col gap-2 text-left">
                 <span
                   style={{
-                    fontFamily: "'Exo 2', sans-serif",
+                    fontFamily: "var(--font-body)",
                     color: "#8899BB",
                     fontSize: "0.9rem",
                   }}
@@ -219,7 +216,7 @@ export function ContactoPage() {
                 style={{
                   background: "linear-gradient(135deg, #C0392B, #A93226)",
                   color: "#fff",
-                  fontFamily: "'Exo 2', sans-serif",
+                  fontFamily: "var(--font-body)",
                 }}
               >
                 {status === "loading" ? "Enviando..." : "Solicitar cotización"}
@@ -230,7 +227,7 @@ export function ContactoPage() {
                   <CheckCircle size={18} color="#5DADE2" />
                   <p
                     style={{
-                      fontFamily: "'Exo 2', sans-serif",
+                      fontFamily: "var(--font-body)",
                       color: "#5DADE2",
                     }}
                   >
@@ -244,7 +241,7 @@ export function ContactoPage() {
                   <AlertCircle size={18} color="#C0392B" />
                   <p
                     style={{
-                      fontFamily: "'Exo 2', sans-serif",
+                      fontFamily: "var(--font-body)",
                       color: "#C0392B",
                     }}
                   >
@@ -253,6 +250,7 @@ export function ContactoPage() {
                 </div>
               )}
             </div>
+            </CraftCard>
           </motion.form>
 
           {/* Datos de contacto */}
@@ -260,16 +258,11 @@ export function ContactoPage() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-            className="rounded-3xl p-8"
-            style={{
-              background: "rgba(10,15,30,0.9)",
-              border: "1px solid rgba(46,134,171,0.12)",
-              backdropFilter: "blur(10px)",
-            }}
           >
-            <h2
+            <CraftCard className="p-8">
+              <h2
               style={{
-                fontFamily: "'Cinzel', serif",
+                fontFamily: "var(--font-display)",
                 fontSize: "1.8rem",
                 fontWeight: 700,
                 color: "#F0F4FF",
@@ -280,7 +273,7 @@ export function ContactoPage() {
             </h2>
             <p
               style={{
-                fontFamily: "'Exo 2', sans-serif",
+                fontFamily: "var(--font-body)",
                 fontSize: "0.95rem",
                 color: "#8899BB",
                 lineHeight: 1.7,
@@ -292,18 +285,13 @@ export function ContactoPage() {
             </p>
 
 <div className="space-y-6">
-              {CONTACT_INFO.map(({ icon: Icon, color, bg, label, value, href }) => (
+              {CONTACT_INFO.map(({ icon: Icon, color, label, value, href }) => (
                 <div key={label} className="flex items-start gap-4">
-                  <div
-                    className="w-12 h-12 rounded-2xl flex items-center justify-center"
-                    style={{ background: bg, color }}
-                  >
-                    <Icon size={20} />
-                  </div>
+                  <BrandIcon icon={Icon} from={color} to="#FFFFFF" size={22} />
                   <div>
                     <h3
                       style={{
-                        fontFamily: "'Cinzel', serif",
+                        fontFamily: "var(--font-display)",
                         fontSize: "1rem",
                         color: "#F0F4FF",
                         marginBottom: "0.35rem",
@@ -318,7 +306,7 @@ export function ContactoPage() {
                       onMouseEnter={handleLinkEnter}
                       onMouseLeave={handleLinkLeave}
                       style={{
-                        fontFamily: "'Exo 2', sans-serif",
+                        fontFamily: "var(--font-body)",
                         color: "#00E5FF",
                         lineHeight: 1.7,
                         textShadow: "0 0 8px rgba(0,229,255,0.4)",
@@ -332,6 +320,7 @@ export function ContactoPage() {
                 </div>
               ))}
             </div>
+            </CraftCard>
           </motion.div>
         </div>
       </section>

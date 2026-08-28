@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Flame } from "lucide-react";
+import { List as Menu, X, Flame } from "@phosphor-icons/react";
 import logoImg from "/dracarysAlternativeLogo.svg";
 
 const NAV_LINKS = [

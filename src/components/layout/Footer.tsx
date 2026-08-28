@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { Flame } from "lucide-react";
+import { Flame } from "@phosphor-icons/react";
 import logoImg from "/dracarysAlternativeLogo.svg";
 import { SOCIAL_LINKS } from "../../constants/social";
 

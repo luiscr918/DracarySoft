@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
 const STORAGE_KEY = "ds_cookie_consent";
@@ -25,13 +25,11 @@ function grantConsent() {
 }
 
 export default function CookieConsent() {
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    if (localStorage.getItem(STORAGE_KEY) === null) {
-      setVisible(true);
-    }
-  }, []);
+  const [visible, setVisible] = useState(
+    () =>
+      typeof window !== "undefined" &&
+      localStorage.getItem(STORAGE_KEY) === null,
+  );
 
   const accept = () => {
     localStorage.setItem(STORAGE_KEY, "accepted");
