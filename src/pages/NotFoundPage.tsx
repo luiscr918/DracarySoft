@@ -34,7 +34,7 @@ export function NotFoundPage() {
           className="inline-flex items-center gap-2 rounded-full px-6 py-3 font-semibold transition-all duration-300 hover:scale-105 active:scale-95"
           style={{
             background: "linear-gradient(135deg, #C0392B, #A93226)",
-            color: "#fff",
+            color: "var(--color-text)",
             fontFamily: "var(--font-body)",
           }}
         >

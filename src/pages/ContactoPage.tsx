@@ -160,7 +160,7 @@ export function ContactoPage() {
                   value={form.name}
                   onChange={handleChange}
                   placeholder="Tu nombre"
-                  className="rounded-2xl px-4 py-3 bg-[#0A0F1E] border border-[#1B2540] outline-none text-white"
+                  className="rounded-2xl px-4 py-3 bg-[#0A0F1E] border border-[#1B2540] outline-none text-text"
                   style={{ fontFamily: "'Exo 2', sans-serif" }}
                 />
               </label>
@@ -182,7 +182,7 @@ export function ContactoPage() {
                   value={form.email}
                   onChange={handleChange}
                   placeholder="tucorreo@ejemplo.com"
-                  className="rounded-2xl px-4 py-3 bg-[#0A0F1E] border border-[#1B2540] outline-none text-white"
+                  className="rounded-2xl px-4 py-3 bg-[#0A0F1E] border border-[#1B2540] outline-none text-text"
                   style={{ fontFamily: "'Exo 2', sans-serif" }}
                 />
               </label>
@@ -204,7 +204,7 @@ export function ContactoPage() {
                   value={form.message}
                   onChange={handleChange}
                   placeholder="Cuéntanos sobre tu proyecto y qué necesitas"
-                  className="rounded-3xl px-4 py-4 bg-[#0A0F1E] border border-[#1B2540] outline-none text-white resize-none"
+                  className="rounded-3xl px-4 py-4 bg-[#0A0F1E] border border-[#1B2540] outline-none text-text resize-none"
                   style={{ fontFamily: "'Exo 2', sans-serif" }}
                 />
               </label>
@@ -215,7 +215,7 @@ export function ContactoPage() {
                 className="inline-flex items-center justify-center rounded-full px-6 py-3 font-semibold transition-all duration-300 hover:scale-105 active:scale-95 disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100"
                 style={{
                   background: "linear-gradient(135deg, #C0392B, #A93226)",
-                  color: "#fff",
+                  color: "var(--color-text)",
                   fontFamily: "var(--font-body)",
                 }}
               >
@@ -287,7 +287,7 @@ export function ContactoPage() {
 <div className="space-y-6">
               {CONTACT_INFO.map(({ icon: Icon, color, label, value, href }) => (
                 <div key={label} className="flex items-start gap-4">
-                  <BrandIcon icon={Icon} from={color} to="#FFFFFF" size={22} />
+                  <BrandIcon icon={Icon} from={color} to="var(--color-text)" size={22} />
                   <div>
                     <h3
                       style={{

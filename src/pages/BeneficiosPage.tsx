@@ -118,7 +118,7 @@ export function BeneficiosPage() {
                       filter: "blur(10px)",
                     }}
                   />
-                  <BrandIcon icon={Icon} from={color} to="#FFFFFF" size={24} className="relative" />
+                  <BrandIcon icon={Icon} from={color} to="var(--color-text)" size={24} className="relative" />
                 </div>
                 <h3
                   style={{

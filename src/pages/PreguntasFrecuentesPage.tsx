@@ -382,7 +382,7 @@ export function PreguntasFrecuentesPage() {
               style={{
                 fontFamily: "var(--font-body)",
                 background: "linear-gradient(135deg, #C0392B, #A93226)",
-                color: "#fff",
+                color: "var(--color-text)",
                 boxShadow: "0 6px 24px rgba(192,57,43,0.4)",
                 textDecoration: "none",
               }}

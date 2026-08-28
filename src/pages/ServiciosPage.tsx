@@ -275,7 +275,7 @@ function ServiceCard({
             filter: "blur(10px)",
           }}
         />
-        <BrandIcon icon={Icon} from={color} to="#FFFFFF" size={24} className="relative" />
+        <BrandIcon icon={Icon} from={color} to="var(--color-text)" size={24} className="relative" />
       </div>
 
       <p
@@ -342,7 +342,7 @@ function ServiceCard({
       <ul className="space-y-1.5">
         {features.map((f) => (
           <li key={f} className="flex items-center gap-2">
-            <BrandIcon icon={CheckCircle2} from={color} to="#FFFFFF" size={13} className="shrink-0" />
+            <BrandIcon icon={CheckCircle2} from={color} to="var(--color-text)" size={13} className="shrink-0" />
             <span
               style={{
                 fontFamily: "var(--font-body)",
@@ -693,7 +693,7 @@ export function ServiciosPage() {
             style={{
               fontFamily: "var(--font-body)",
               background: "linear-gradient(135deg, #C0392B, #A93226)",
-              color: "#fff",
+              color: "var(--color-text)",
               boxShadow: "0 6px 24px rgba(192,57,43,0.4)",
             }}
             onMouseEnter={(e) =>

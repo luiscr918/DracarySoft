@@ -84,15 +84,15 @@ function ProjectThumbnail({
           }}
         >
           {isApk ? (
-            <Download size={22} color="#fff" />
+            <Download size={22} color="var(--color-text)" />
           ) : (
-            <ExternalLink size={22} color="#fff" />
+            <ExternalLink size={22} color="var(--color-text)" />
           )}
           <span
             style={{
               fontFamily: "var(--font-body)",
               fontSize: "0.78rem",
-              color: "#fff",
+              color: "var(--color-text)",
               fontWeight: 600,
               letterSpacing: "0.05em",
             }}
@@ -196,7 +196,7 @@ function ProjectCard({ project }: { project: Project }) {
           <BrandIcon
             icon={Icon}
             from={color}
-            to="#FFFFFF"
+            to="var(--color-text)"
             size={24}
             className="transition-transform duration-300 group-hover:scale-110"
           />
@@ -431,7 +431,7 @@ export function ProyectosPage() {
                     activeFilter === key
                       ? "linear-gradient(135deg, #C0392B, #A93226)"
                       : "rgba(10,15,30,0.6)",
-                  color: activeFilter === key ? "#fff" : "#4A5A7A",
+                  color: activeFilter === key ? "var(--color-text)" : "#4A5A7A",
                   border:
                     activeFilter === key
                       ? "1px solid transparent"
@@ -547,7 +547,7 @@ export function ProyectosPage() {
             style={{
               fontFamily: "var(--font-body)",
               background: "linear-gradient(135deg, #C0392B, #A93226)",
-              color: "#fff",
+              color: "var(--color-text)",
               boxShadow: "0 6px 24px rgba(192,57,43,0.4)",
             }}
             onMouseEnter={(e) =>

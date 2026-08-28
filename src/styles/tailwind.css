@@ -50,13 +50,104 @@
   --radius-card: 1.25rem;
   --radius-pill: 100px;
 
-  /* Sombras */
+  /* Sombras (tintadas al tono de fondo, nunca negro puro) */
   --shadow-glow: 0 16px 40px rgba(46, 134, 171, 0.16);
-  --shadow-soft: 0 16px 40px rgba(0, 0, 0, 0.28),
+  --shadow-soft: 0 16px 40px rgba(5, 11, 20, 0.45),
     inset 0 1px 0 rgba(255, 255, 255, 0.06);
   --shadow-pill: inset 0 1px 0 rgba(255, 255, 255, 0.18),
-    0 10px 30px rgba(0, 0, 0, 0.22);
+    0 10px 30px rgba(5, 11, 20, 0.4);
+
+  /* Easing — curvas personalizadas para un motion intencional (emil-design-eng) */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
 }
+
+/* ─── Base: tipografía, foco y movimiento reducido ──────────────────────────── */
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Jerarquía: tracking negativo en display + equilibrio óptico (apple-design) */
+  h1, h2, h3, h4 {
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Anillo de foco visible (accesibilidad obligatoria) */
+  :focus-visible {
+    outline: 2px solid var(--color-accent-light);
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+
+  /* Movimiento reducido: colapsa transforms/animaciones a cross-fade */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *, *::before, *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* ─── Componentes: micro-interacciones táctiles ─────────────────────────────── */
+@layer components {
+  .btn {
+    transition: transform 160ms var(--ease-out), background-color 200ms ease,
+      box-shadow 200ms ease, border-color 200ms ease;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+  }
+
+  .btn:active {
+    transform: translateY(1px) scale(0.98);
+  }
+
+  /* Feedback de presión en cualquier botón/enlace (Emil Kowalski) */
+  button, a {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    button, a {
+      transition: transform 160ms var(--ease-out);
+    }
+    button:active, a:active {
+      transform: scale(0.985);
+    }
+  }
+
+  .nums {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum";
+  }
+}
+
 
 /* ─── Utilidades reutilizables ──────────────────────────────────────────────── */
 @utility container-x {

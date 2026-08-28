@@ -152,7 +152,7 @@ export default function Footer() {
                 <li key={link.path}>
                   <NavLink
                     to={link.path}
-                    className="text-sm transition-colors duration-200 hover:text-white"
+                    className="text-sm transition-colors duration-200 hover:text-text-soft"
                     style={{
                       color: "#4A5A7A",
                       fontFamily: "'Exo 2', sans-serif",
@@ -183,7 +183,7 @@ export default function Footer() {
                 <li key={link.path}>
                   <NavLink
                     to={link.path}
-                    className="text-sm transition-colors duration-200 hover:text-white"
+                    className="text-sm transition-colors duration-200 hover:text-text-soft"
                     style={{
                       color: "#4A5A7A",
                       fontFamily: "'Exo 2', sans-serif",
@@ -236,7 +236,7 @@ export default function Footer() {
                 localStorage.removeItem("ds_cookie_consent");
                 window.location.reload();
               }}
-              className="transition-colors duration-200 hover:text-white"
+              className="transition-colors duration-200 hover:text-text-soft"
               style={{
                 color: "#2A3A5A",
                 background: "none",
@@ -259,7 +259,7 @@ export default function Footer() {
             </span>
             <NavLink
               to="/politica-de-cookies"
-              className="transition-colors duration-200 hover:text-white"
+              className="transition-colors duration-200 hover:text-text-soft"
               style={{
                 color: "#2A3A5A",
                 fontFamily: "'Exo 2', sans-serif",

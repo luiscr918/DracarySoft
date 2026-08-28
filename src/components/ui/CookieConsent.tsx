@@ -98,7 +98,7 @@ export default function CookieConsent() {
               href="/politica-de-cookies"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block mb-4 transition-colors duration-200 hover:text-white"
+              className="inline-block mb-4 transition-colors duration-200 hover:text-text-soft"
               style={{
                 fontFamily: "'Exo 2', sans-serif",
                 fontSize: "0.78rem",
@@ -117,7 +117,7 @@ export default function CookieConsent() {
                 style={{
                   fontFamily: "'Exo 2', sans-serif",
                   background: "linear-gradient(135deg, #C0392B, #A93226)",
-                  color: "#fff",
+                  color: "var(--color-text)",
                   boxShadow: "0 4px 16px rgba(192,57,43,0.35)",
                 }}
               >

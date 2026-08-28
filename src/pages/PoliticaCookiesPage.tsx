@@ -104,7 +104,7 @@ export function PoliticaCookiesPage() {
               transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
             >
               <CraftCard className="flex gap-5 p-7 items-start">
-                <BrandIcon icon={Icon} from="#5DADE2" to="#FFFFFF" size={20} className="shrink-0 mt-1" />
+                <BrandIcon icon={Icon} from="#5DADE2" to="var(--color-text)" size={20} className="shrink-0 mt-1" />
                 <div>
                   <div className="flex items-baseline gap-3 mb-2">
                     <span

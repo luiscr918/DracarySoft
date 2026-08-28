@@ -363,7 +363,7 @@ export function NosotrosPage() {
               >
                 <CraftCard className="h-full p-8">
                   <div className="flex items-center gap-4 mb-5">
-                    <BrandIcon icon={Icon} from={color} to="#FFFFFF" size={22} />
+                    <BrandIcon icon={Icon} from={color} to="var(--color-text)" size={22} />
                     <span
                       style={{
                         fontFamily: "var(--font-body)",

@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import {
   Flame,
   Globe,
@@ -116,27 +116,24 @@ const PROCESS: { n: string; title: string; desc: string; icon: LucideIcon }[] = 
 
 const PLANS = [
   {
-    name: "Landing Page",
-    price: "Desde $4,000",
-    unit: "MXN",
+    name: "Landing Pages",
+    price: "Desde $100",
     desc: "El embudo de ventas perfecto para redes sociales.",
     features: ["Optimización estricta móvil", "Formularios de captación", "Botón flotante a WhatsApp"],
     glow: "rgba(46,134,171,0.3)",
     featured: false,
   },
   {
-    name: "Sitio Empresarial",
-    price: "Desde $7,000",
-    unit: "MXN",
+    name: "Páginas Web",
+    price: "Desde $250",
     desc: "Tu oficina principal en Google, con autoridad.",
     features: ["Diseño totalmente responsivo", "Catálogo de servicios", "Código optimizado SEO Local"],
     glow: "rgba(192,57,43,0.3)",
     featured: true,
   },
   {
-    name: "Tienda en Línea",
-    price: "Desde $10,000",
-    unit: "MXN",
+    name: "Tiendas Online",
+    price: "Desde $500",
     desc: "Tu negocio operando 24/7 con pagos seguros.",
     features: ["Pasarelas Stripe / PayPal", "Correos de compra automáticos", "Panel para tus productos"],
     glow: "rgba(93,173,226,0.3)",
@@ -166,7 +163,7 @@ function SpotlightCard({ project }: { project: Project }) {
               className="w-full h-full flex items-center justify-center"
               style={{ background: `${color}12`, border: `1px solid ${color}22` }}
             >
-              <BrandIcon icon={Icon} from={color} to="#FFFFFF" size={30} />
+              <BrandIcon icon={Icon} from={color} to="var(--color-text)" size={30} />
             </div>
           )}
           {liveUrl && (
@@ -180,7 +177,7 @@ function SpotlightCard({ project }: { project: Project }) {
                   fontFamily: "var(--font-body)",
                   fontSize: "0.8rem",
                   fontWeight: 600,
-                  color: "#fff",
+                  color: "var(--color-text)",
                 }}
               >
                 Ver proyecto <ArrowRight size={14} />
@@ -227,6 +224,7 @@ function SpotlightCard({ project }: { project: Project }) {
 // ─── Componente principal ──────────────────────────────────────────────────────
 
 export function HomePage() {
+  const reduce = useReducedMotion();
   const scrollToNext = () => {
     const el = document.getElementById("confianza");
     if (el) el.scrollIntoView({ behavior: "smooth" });
@@ -347,7 +345,7 @@ export function HomePage() {
                   style={{
                     fontFamily: "var(--font-body)",
                     background: "linear-gradient(135deg, #C0392B, #A93226)",
-                    color: "#fff",
+                    color: "var(--color-text)",
                     boxShadow:
                       "0 12px 30px rgba(192,57,43,0.28), inset 0 1px 0 rgba(255,255,255,0.18)",
                     letterSpacing: "0.04em",
@@ -397,7 +395,7 @@ export function HomePage() {
                 EXPLORAR
               </span>
               <motion.span
-                animate={{ y: [0, 8, 0] }}
+                animate={reduce ? undefined : { y: [0, 8, 0] }}
                 transition={{ repeat: Infinity, duration: 1.6, ease: "easeInOut" }}
               >
                 <ChevronDown size={18} />
@@ -513,7 +511,7 @@ export function HomePage() {
                         filter: "blur(10px)",
                       }}
                     />
-                    <BrandIcon icon={Icon} from={color} to="#FFFFFF" size={26} className="relative" />
+                    <BrandIcon icon={Icon} from={color} to="var(--color-text)" size={26} className="relative" />
                   </div>
                   <h3
                     style={{
@@ -597,7 +595,7 @@ export function HomePage() {
                     >
                       {n}
                     </span>
-                    <BrandIcon icon={Icon} from="var(--color-fire)" to="#FFFFFF" size={24} className="mt-1" />
+                    <BrandIcon icon={Icon} from="var(--color-fire)" to="var(--color-text)" size={24} className="mt-1" />
                   </div>
                   <h3
                     style={{
@@ -746,16 +744,6 @@ export function HomePage() {
                     >
                       {plan.price}
                     </span>
-                    <span
-                      style={{
-                        fontFamily: "var(--font-body)",
-                        fontSize: "0.8rem",
-                        color: "var(--color-muted)",
-                        marginLeft: "0.35rem",
-                      }}
-                    >
-                      {plan.unit}
-                    </span>
                   </div>
                   <ul className="space-y-3 mb-8 flex-1">
                     {plan.features.map((f) => (
@@ -767,7 +755,7 @@ export function HomePage() {
                         <BrandIcon
                           icon={Sparkles}
                           from={plan.featured ? "#C0392B" : "#5DADE2"}
-                          to="#FFFFFF"
+                          to="var(--color-text)"
                           size={15}
                           className="mt-1 shrink-0"
                         />
@@ -784,7 +772,7 @@ export function HomePage() {
                         background: plan.featured
                           ? "linear-gradient(135deg, #C0392B, #A93226)"
                           : "rgba(46,134,171,0.12)",
-                        color: plan.featured ? "#fff" : "var(--color-accent-light)",
+                        color: plan.featured ? "var(--color-text)" : "var(--color-accent-light)",
                         border: plan.featured
                           ? "none"
                           : "1px solid rgba(93,173,226,0.3)",
@@ -810,7 +798,7 @@ export function HomePage() {
         <div className="container-x">
           <Reveal>
             <div
-              className="max-w-2xl mx-auto text-center p-10 md:p-14 rounded-[var(--radius-card)] relative overflow-hidden"
+              className="max-w-2xl mx-auto text-center p-10 md:p-14 rounded-card relative overflow-hidden"
               style={{
                 background:
                   "linear-gradient(135deg, rgba(27,79,114,0.2), rgba(192,57,43,0.1))",
@@ -859,7 +847,7 @@ export function HomePage() {
                   style={{
                     fontFamily: "var(--font-body)",
                     background: "linear-gradient(135deg, #C0392B, #A93226)",
-                    color: "#fff",
+                    color: "var(--color-text)",
                     boxShadow:
                       "0 12px 30px rgba(192,57,43,0.28), inset 0 1px 0 rgba(255,255,255,0.18)",
                     letterSpacing: "0.04em",

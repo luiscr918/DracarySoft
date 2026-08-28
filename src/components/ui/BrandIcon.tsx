@@ -13,7 +13,7 @@ interface BrandIconProps {
 export function BrandIcon({
   icon: Icon,
   from = "#5DADE2",
-  to = "#FFFFFF",
+  to = "var(--color-text)",
   size = 24,
   weight = "regular",
   className,

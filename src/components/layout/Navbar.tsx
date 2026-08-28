@@ -270,7 +270,7 @@ export default function Navbar() {
                 className="liquid-glass-cta hidden md:flex items-center gap-2 px-5 py-2 rounded-full text-sm font-semibold transition-all duration-300 hover:scale-105 active:scale-95"
                 style={{
                   fontFamily: "'Cinzel', serif",
-                  color: "#fff",
+                  color: "var(--color-text)",
                 }}
               >
                 <Flame size={14} />
@@ -340,7 +340,7 @@ export default function Navbar() {
                   className="liquid-glass-cta flex items-center justify-center gap-2 w-full py-3 rounded-full font-semibold text-sm"
                   style={{
                     fontFamily: "'Cinzel', serif",
-                    color: "#fff",
+                    color: "var(--color-text)",
                   }}
                 >
                   <Flame size={14} />
