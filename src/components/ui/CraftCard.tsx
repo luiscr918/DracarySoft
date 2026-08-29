@@ -37,9 +37,11 @@ export function CraftCard({
   className,
   glow,
   hover = true,
+  ...rest
 }: CraftCardProps) {
   return (
     <div
+      {...rest}
       className={`glass group relative overflow-hidden rounded-[var(--radius-card)] ${
         hover ? "transition-all duration-300 hover:-translate-y-1" : ""
       } ${className ?? ""}`}
