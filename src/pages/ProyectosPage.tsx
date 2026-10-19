@@ -1,11 +1,22 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import type { KeyboardEvent } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { gsap } from "gsap";
 import { NavLink } from "react-router-dom";
-import { ArrowSquareOut as ExternalLink, Flame, CaretRight as ChevronRight, GitBranch as GitBranchIcon, DownloadSimple as Download } from "@phosphor-icons/react";
+import {
+  ArrowSquareOut as ExternalLink,
+  Flame,
+  CaretRight as ChevronRight,
+  GitBranch as GitBranchIcon,
+  DownloadSimple as Download,
+} from "@phosphor-icons/react";
 import Layout from "../components/layout/Layout";
-import { PROJECTS, PROJECT_FILTERS, type Category, type Project } from "../constants/projects";
+import {
+  PROJECTS,
+  PROJECT_FILTERS,
+  type Category,
+  type Project,
+} from "../constants/projects";
 import FloatingPhoneButton from "../components/ui/FloatingPhoneButton";
 import { SEO } from "../components/seo/SEO";
 import { CraftCard } from "../components/ui/CraftCard";
@@ -13,7 +24,14 @@ import { BrandIcon } from "../components/ui/BrandIcon";
 
 const FILTERS = PROJECT_FILTERS;
 
-// ─── Thumbnail con hover overlay (Opción 1) ────────────────────────────────────
+// Grises con mejor contraste sobre fondo oscuro
+const TEXT_SOFT = "#8A9BBF";
+const TEXT_DIM = "#6F82A8";
+
+const ICON_BTN =
+  "w-8 h-8 flex items-center justify-center rounded-lg transition-all duration-200 hover:scale-110";
+
+// ─── Thumbnail con hover overlay ───────────────────────────────────────────────
 
 function ProjectThumbnail({
   localImage,
@@ -49,7 +67,7 @@ function ProjectThumbnail({
         <img
           loading="lazy"
           src={localImage}
-          alt={`Preview de ${title}`}
+          alt={`Vista previa de ${title}`}
           onLoad={() => setLoaded(true)}
           onError={() => setError(true)}
           className="w-full h-full object-cover object-top rounded-xl transition-transform duration-500 group-hover:scale-105"
@@ -67,7 +85,7 @@ function ProjectThumbnail({
             style={{
               fontFamily: "var(--font-body)",
               fontSize: "0.7rem",
-              color: "#2A3A5A",
+              color: TEXT_DIM,
             }}
           >
             Preview no disponible
@@ -78,7 +96,7 @@ function ProjectThumbnail({
       {/* Overlay hover — solo si la card es clickeable */}
       {isClickable && loaded && (
         <div
-          className="absolute inset-0 rounded-xl flex flex-col items-center justify-center gap-2 opacity-0 group-hover:opacity-100 transition-all duration-300"
+          className="absolute inset-0 rounded-xl flex flex-col items-center justify-center gap-2 opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-all duration-300"
           style={{
             background: `linear-gradient(135deg, ${color}cc, rgba(0,0,0,0.75))`,
           }}
@@ -102,7 +120,7 @@ function ProjectThumbnail({
         </div>
       )}
 
-      {/* Badge "Solo vista previa" si no tiene link */}
+      {/* Badge "Vista previa" si no tiene link */}
       {!isClickable && (
         <div
           className="absolute top-2 right-2 px-2 py-0.5 rounded-md"
@@ -110,7 +128,7 @@ function ProjectThumbnail({
             fontFamily: "var(--font-body)",
             fontSize: "0.6rem",
             background: "rgba(0,0,0,0.55)",
-            color: "#4A6A8A",
+            color: TEXT_SOFT,
             border: "1px solid rgba(46,134,171,0.2)",
             backdropFilter: "blur(4px)",
           }}
@@ -124,7 +142,13 @@ function ProjectThumbnail({
 
 // ─── Card de proyecto ──────────────────────────────────────────────────────────
 
-function ProjectCard({ project }: { project: Project }) {
+function ProjectCard({
+  project,
+  reduceMotion,
+}: {
+  project: Project;
+  reduceMotion: boolean;
+}) {
   const {
     icon: Icon,
     title,
@@ -157,19 +181,24 @@ function ProjectCard({ project }: { project: Project }) {
   };
 
   const handleKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
+    // Evita disparar la card cuando el foco está en un enlace interno
+    if (e.target !== e.currentTarget) return;
     if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
       openProject();
     }
   };
 
-  const cardContent = (
+  return (
     <motion.div
-      layout
-      initial={{ opacity: 0, scale: 0.94 }}
+      layout={!reduceMotion}
+      initial={reduceMotion ? false : { opacity: 0, scale: 0.94 }}
       animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.9 }}
-      transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+      exit={reduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.9 }}
+      transition={{
+        duration: reduceMotion ? 0 : 0.35,
+        ease: [0.16, 1, 0.3, 1],
+      }}
       className="h-full"
     >
       <CraftCard
@@ -177,17 +206,18 @@ function ProjectCard({ project }: { project: Project }) {
         className={`p-7 h-full ${isClickable ? "cursor-pointer" : ""}`}
         role={isClickable ? "link" : undefined}
         tabIndex={isClickable ? 0 : undefined}
+        aria-label={isClickable ? `Abrir ${title}` : undefined}
         onClick={isClickable ? openProject : undefined}
         onKeyDown={isClickable ? handleKeyDown : undefined}
       >
-        {/* ── Thumbnail con overlay ── */}
+        {/* Thumbnail con overlay */}
         {hasPreview && (
           <ProjectThumbnail
             localImage={localImage}
             title={title}
             color={color}
             isClickable={isClickable}
-            isApk={Boolean(apkUrl)}
+            isApk={Boolean(apkUrl) && !liveUrl}
           />
         )}
 
@@ -206,15 +236,14 @@ function ProjectCard({ project }: { project: Project }) {
                 href={liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label={`Ver ${title} en vivo`}
+                title="Ver proyecto"
                 onClick={(e) => e.stopPropagation()}
-                className="w-8 h-8 flex items-center justify-center rounded-lg transition-all duration-200 hover:scale-110"
+                className={`${ICON_BTN} text-[#8A9BBF] hover:text-[#5DADE2]`}
                 style={{
                   background: "rgba(46,134,171,0.1)",
                   border: "1px solid rgba(46,134,171,0.2)",
-                  color: "#4A5A7A",
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = "#5DADE2")}
-                onMouseLeave={(e) => (e.currentTarget.style.color = "#4A5A7A")}
               >
                 <ExternalLink size={13} />
               </a>
@@ -223,16 +252,14 @@ function ProjectCard({ project }: { project: Project }) {
               <a
                 href={apkUrl}
                 download="app-release.apk"
+                aria-label={`Descargar APK de ${title}`}
+                title="Descargar APK"
                 onClick={(e) => e.stopPropagation()}
-                className="w-8 h-8 flex items-center justify-center rounded-lg transition-all duration-200 hover:scale-110"
+                className={`${ICON_BTN} text-[#8A9BBF] hover:text-[#C0392B]`}
                 style={{
                   background: "rgba(192,57,43,0.1)",
                   border: "1px solid rgba(192,57,43,0.2)",
-                  color: "#4A5A7A",
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = "#C0392B")}
-                onMouseLeave={(e) => (e.currentTarget.style.color = "#4A5A7A")}
-                title="Descargar APK"
               >
                 <Download size={13} />
               </a>
@@ -242,15 +269,14 @@ function ProjectCard({ project }: { project: Project }) {
                 href={repoUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label={`Ver repositorio de ${title}`}
+                title="Ver repositorio"
                 onClick={(e) => e.stopPropagation()}
-                className="w-8 h-8 flex items-center justify-center rounded-lg transition-all duration-200 hover:scale-110"
+                className={`${ICON_BTN} text-[#8A9BBF] hover:text-[#5DADE2]`}
                 style={{
                   background: "rgba(46,134,171,0.1)",
                   border: "1px solid rgba(46,134,171,0.2)",
-                  color: "#4A5A7A",
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = "#5DADE2")}
-                onMouseLeave={(e) => (e.currentTarget.style.color = "#4A5A7A")}
               >
                 <GitBranchIcon size={13} />
               </a>
@@ -305,7 +331,7 @@ function ProjectCard({ project }: { project: Project }) {
                 fontFamily: "var(--font-body)",
                 background: "rgba(46,134,171,0.08)",
                 border: "1px solid rgba(46,134,171,0.15)",
-                color: "#4A6A8A",
+                color: "#8FA6C4",
               }}
             >
               {tag}
@@ -323,8 +349,6 @@ function ProjectCard({ project }: { project: Project }) {
       </CraftCard>
     </motion.div>
   );
-
-  return cardContent;
 }
 
 // ─── Componente principal ──────────────────────────────────────────────────────
@@ -332,21 +356,40 @@ function ProjectCard({ project }: { project: Project }) {
 export function ProyectosPage() {
   const [activeFilter, setActiveFilter] = useState<Category>("todos");
   const headerRef = useRef<HTMLDivElement>(null);
+  const reduceMotion = Boolean(useReducedMotion());
 
-  const filtered =
-    activeFilter === "todos"
-      ? PROJECTS
-      : PROJECTS.filter((p) => p.category === activeFilter);
+  const filtered = useMemo(
+    () =>
+      activeFilter === "todos"
+        ? PROJECTS
+        : PROJECTS.filter((p) => p.category === activeFilter),
+    [activeFilter],
+  );
+
+  // Contador por categoría para los botones de filtro
+  const counts = useMemo(() => {
+    const map: Record<string, number> = { todos: PROJECTS.length };
+    PROJECTS.forEach((p) => {
+      map[p.category] = (map[p.category] ?? 0) + 1;
+    });
+    return map;
+  }, []);
 
   useEffect(() => {
-    if (headerRef.current) {
-      gsap.fromTo(
-        headerRef.current,
-        { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" },
-      );
+    if (!headerRef.current) return;
+    if (reduceMotion) {
+      gsap.set(headerRef.current, { opacity: 1, y: 0 });
+      return;
     }
-  }, []);
+    const tween = gsap.fromTo(
+      headerRef.current,
+      { opacity: 0, y: 30 },
+      { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" },
+    );
+    return () => {
+      tween.kill();
+    };
+  }, [reduceMotion]);
 
   return (
     <Layout>
@@ -355,6 +398,7 @@ export function ProyectosPage() {
         description="Portafolio de proyectos digitales: páginas web, aplicaciones web y landing pages creadas por DracarySoft."
         url="/proyectos"
       />
+
       {/* ── HERO ──────────────────────────────────────────────────────────── */}
       <section className="relative pt-36 pb-16 px-6 overflow-hidden">
         <div
@@ -405,7 +449,7 @@ export function ProyectosPage() {
             style={{
               fontFamily: "var(--font-body)",
               fontSize: "1.05rem",
-              color: "#4A5A7A",
+              color: TEXT_SOFT,
               lineHeight: 1.8,
             }}
           >
@@ -418,41 +462,53 @@ export function ProyectosPage() {
       {/* ── FILTROS ────────────────────────────────────────────────────────── */}
       <section className="px-6 pb-10">
         <div className="max-w-6xl mx-auto">
-          <div className="flex flex-wrap justify-center gap-2">
-            {FILTERS.map(({ key, label }) => (
-              <button
-                key={key}
-                onClick={() => setActiveFilter(key)}
-                aria-pressed={activeFilter === key}
-                className="px-5 py-2 rounded-full text-sm font-medium transition-all duration-300"
-                style={{
-                  fontFamily: "var(--font-body)",
-                  background:
-                    activeFilter === key
+          <div
+            className="flex flex-wrap justify-center gap-2"
+            role="group"
+            aria-label="Filtrar proyectos por categoría"
+          >
+            {FILTERS.map(({ key, label }) => {
+              const isActive = activeFilter === key;
+              return (
+                <button
+                  key={key}
+                  type="button"
+                  onClick={() => setActiveFilter(key)}
+                  aria-pressed={isActive}
+                  className="px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 hover:-translate-y-0.5"
+                  style={{
+                    fontFamily: "var(--font-body)",
+                    background: isActive
                       ? "linear-gradient(135deg, #C0392B, #A93226)"
                       : "rgba(10,15,30,0.6)",
-                  color: activeFilter === key ? "var(--color-text)" : "#4A5A7A",
-                  border:
-                    activeFilter === key
+                    color: isActive ? "var(--color-text)" : TEXT_SOFT,
+                    border: isActive
                       ? "1px solid transparent"
                       : "1px solid rgba(46,134,171,0.15)",
-                  boxShadow:
-                    activeFilter === key
+                    boxShadow: isActive
                       ? "0 4px 16px rgba(192,57,43,0.35)"
                       : "none",
-                }}
-              >
-                {label}
-              </button>
-            ))}
+                  }}
+                >
+                  {label}
+                  <span
+                    className="ml-2 text-xs"
+                    style={{ opacity: isActive ? 0.85 : 0.6 }}
+                  >
+                    {counts[key] ?? 0}
+                  </span>
+                </button>
+              );
+            })}
           </div>
 
           <p
             className="text-center mt-4"
+            aria-live="polite"
             style={{
               fontFamily: "var(--font-body)",
               fontSize: "0.75rem",
-              color: "#2A3A5A",
+              color: TEXT_DIM,
             }}
           >
             {filtered.length} proyecto{filtered.length !== 1 ? "s" : ""}
@@ -463,16 +519,17 @@ export function ProyectosPage() {
       {/* ── GRID ───────────────────────────────────────────────────────────── */}
       <section className="px-6 pb-20">
         <div className="max-w-6xl mx-auto">
-          <AnimatePresence mode="popLayout">
-            <motion.div
-              layout
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-            >
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <AnimatePresence>
               {filtered.map((project) => (
-                <ProjectCard key={project.id} project={project} />
+                <ProjectCard
+                  key={project.id}
+                  project={project}
+                  reduceMotion={reduceMotion}
+                />
               ))}
-            </motion.div>
-          </AnimatePresence>
+            </AnimatePresence>
+          </div>
 
           {filtered.length === 0 && (
             <motion.div
@@ -483,7 +540,7 @@ export function ProyectosPage() {
               <p
                 style={{
                   fontFamily: "var(--font-body)",
-                  color: "#2A3A5A",
+                  color: TEXT_DIM,
                   fontSize: "1rem",
                 }}
               >
@@ -533,7 +590,7 @@ export function ProyectosPage() {
             style={{
               fontFamily: "var(--font-body)",
               fontSize: "0.95rem",
-              color: "#4A5A7A",
+              color: TEXT_SOFT,
               marginBottom: "2rem",
               lineHeight: 1.7,
             }}
@@ -543,27 +600,19 @@ export function ProyectosPage() {
           </p>
           <NavLink
             to="/contacto"
-            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full font-semibold text-sm transition-all duration-300 hover:scale-105"
+            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full font-semibold text-sm transition-all duration-300 hover:scale-105 shadow-[0_6px_24px_rgba(192,57,43,0.4)] hover:shadow-[0_8px_32px_rgba(192,57,43,0.65)]"
             style={{
               fontFamily: "var(--font-body)",
               background: "linear-gradient(135deg, #C0392B, #A93226)",
               color: "var(--color-text)",
-              boxShadow: "0 6px 24px rgba(192,57,43,0.4)",
             }}
-            onMouseEnter={(e) =>
-              (e.currentTarget.style.boxShadow =
-                "0 8px 32px rgba(192,57,43,0.65)")
-            }
-            onMouseLeave={(e) =>
-              (e.currentTarget.style.boxShadow =
-                "0 6px 24px rgba(192,57,43,0.4)")
-            }
           >
             Iniciar mi proyecto
             <ChevronRight size={14} />
           </NavLink>
         </div>
       </section>
+
       <FloatingPhoneButton />
     </Layout>
   );
