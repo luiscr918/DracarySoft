@@ -30,9 +30,10 @@ export interface Project {
   thumbnail?: string;
   localImage?: string;
   apkUrl?: string;
+  hidden?: boolean; // true = no se muestra en el portafolio
 }
 
-export const PROJECTS: Project[] = [
+const ALL_PROJECTS: Project[] = [
   {
     id: 1,
     title: "New Inox — Ingeniería Industrial",
@@ -88,6 +89,7 @@ export const PROJECTS: Project[] = [
     year: "2026",
     liveUrl: "https://cotizify.dracarysoft.com/",
     localImage: cotizifyImg,
+    hidden: true, // dado de baja temporalmente; quita esta línea para volver a mostrarlo
   },
   {
     id: 4,
@@ -188,6 +190,9 @@ export const PROJECTS: Project[] = [
     localImage: gymproImg,
   },
 ];
+
+// Solo se exportan los proyectos visibles (los que no tienen hidden: true)
+export const PROJECTS: Project[] = ALL_PROJECTS.filter((p) => !p.hidden);
 
 export const PROJECT_FILTERS: { key: Category; label: string }[] = [
   { key: "todos", label: "Todos" },
