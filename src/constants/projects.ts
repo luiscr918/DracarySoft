@@ -1,8 +1,9 @@
 import type { LucideIcon } from "lucide-react";
-import { Factory, Globe, Smartphone, Zap } from "lucide-react";
+import { Factory, Globe, Smartphone, Zap, Leaf } from "lucide-react";
 import totemImg from "../assets/imgs/totem-splash.png";
 import totemAppImg from "../assets/imgs/totem-app.jpeg";
 import newInoxImg from "../assets/imgs/projects/new-inox.jpg";
+import ecovasoImg from "../assets/imgs/projects/ecovaso.jpg";
 import extremeBullImg from "../assets/imgs/projects/extreme-bull.jpg";
 import lincolnImg from "../assets/imgs/projects/lincoln.jpg";
 import glowStudioImg from "../assets/imgs/projects/glow-studio.jpg";
@@ -29,9 +30,10 @@ export interface Project {
   thumbnail?: string;
   localImage?: string;
   apkUrl?: string;
+  hidden?: boolean; // true = no se muestra en el portafolio
 }
 
-export const PROJECTS: Project[] = [
+const ALL_PROJECTS: Project[] = [
   {
     id: 1,
     title: "New Inox — Ingeniería Industrial",
@@ -45,6 +47,20 @@ export const PROJECTS: Project[] = [
     year: "2026",
     liveUrl: "https://new-inox.com/",
     localImage: newInoxImg,
+  },
+  {
+    id: 11,
+    title: "EcoVaso — Vasos y Empaques Personalizados",
+    client: "Fabricación de empaques ecológicos",
+    category: "web",
+    tags: ["React", "TypeScript", "Tailwind", "Catálogo", "Visor 3D", "SEO"],
+    desc: "Sitio web corporativo para EcoVaso, fabricante quiteño de vasos, tarrinas y servilletas personalizadas. Incluye catálogo con configurador de pedido y cotización por WhatsApp, experiencia 3D de productos, galería de más de 60 marcas, sección de novedades por temporada y storytelling de marca desde 2007.",
+    color: "#98BF5E",
+    glow: "rgba(152,191,94,0.3)",
+    icon: Leaf,
+    year: "2026",
+    liveUrl: "https://ecovaso.com.ec",
+    localImage: ecovasoImg,
   },
   {
     id: 2,
@@ -73,6 +89,7 @@ export const PROJECTS: Project[] = [
     year: "2026",
     liveUrl: "https://cotizify.dracarysoft.com/",
     localImage: cotizifyImg,
+    hidden: true, // dado de baja temporalmente; quita esta línea para volver a mostrarlo
   },
   {
     id: 4,
@@ -173,6 +190,9 @@ export const PROJECTS: Project[] = [
     localImage: gymproImg,
   },
 ];
+
+// Solo se exportan los proyectos visibles (los que no tienen hidden: true)
+export const PROJECTS: Project[] = ALL_PROJECTS.filter((p) => !p.hidden);
 
 export const PROJECT_FILTERS: { key: Category; label: string }[] = [
   { key: "todos", label: "Todos" },
