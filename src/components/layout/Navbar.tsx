@@ -152,6 +152,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
+  const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
 
   useEffect(() => {
     injectStyles();
@@ -172,9 +173,13 @@ export default function Navbar() {
     <>
       <motion.nav
         aria-label="Navegación principal"
-        initial={{ y: -80, opacity: 0 }}
+        initial={isMobile ? { y: 0, opacity: 1 } : { y: -80, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+        transition={
+          isMobile
+            ? { duration: 0 }
+            : { duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.1 }
+        }
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           scrolled ? "liquid-glass-nav" : ""
         }`}

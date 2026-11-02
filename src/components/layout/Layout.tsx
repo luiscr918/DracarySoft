@@ -21,6 +21,7 @@ export default function Layout({ children }: LayoutProps) {
   const location = useLocation();
   const videoRef = useRef<HTMLVideoElement>(null);
   const isReduced = prefersReducedMotion();
+  const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "instant" });
@@ -103,10 +104,14 @@ export default function Layout({ children }: LayoutProps) {
         <AnimatePresence mode="wait">
           <motion.main
             key={location.pathname}
-            initial={isReduced ? { opacity: 1 } : { opacity: 0, y: 16 }}
+            initial={isReduced || isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={isReduced ? { opacity: 1 } : { opacity: 0, y: -8 }}
-            transition={isReduced ? { duration: 0 } : { duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+            exit={isReduced || isMobile ? { opacity: 1 } : { opacity: 0, y: -8 }}
+            transition={
+              isReduced || isMobile
+                ? { duration: 0 }
+                : { duration: 0.35, ease: [0.16, 1, 0.3, 1] }
+            }
           >
             {children}
           </motion.main>
